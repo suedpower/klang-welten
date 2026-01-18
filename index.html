@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Klang-Welten</title>
+  <style>
+    :root {
+      --gold-soft: #d4af37;
+    }
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url('klangschalen.jpg') center/cover no-repeat;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+    }
+    h1, h2, h3, h4, .text-line {
+      position: absolute;
+      top: 40%; /* Alle Zeilen starten auf gleicher Höhe */
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: var(--gold-soft);
+      transition: opacity 3s ease;
+      font-size: clamp(1.8rem, 4vw, 3.2rem);
+      letter-spacing: 0.05em;
+      text-shadow:
+        -1px -1px 0 #000, 
+        1px -1px 0 #000, 
+        -1px 1px 0 #000, 
+        1px 1px 0 #000,
+        0 0 10px var(--gold-soft), 
+        0 0 30px rgba(212, 175, 55, 0.4);
+      opacity: 0;
+    }
+    #line1 { opacity: 1; }
+    #line2 { }
+    #line3 { }
+    #line4 { }
+    @keyframes breathe {
+      0% { opacity: 1; }
+      50% { opacity: 0.85; }
+      100% { opacity: 1; }
+    }
+    #bg-music {
+      display: none;
+    }
+    .music-btn {
+      position: absolute;
+      bottom: 5%;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      border: 2px solid var(--gold-soft);
+      background: rgba(212, 175, 55, 0.2);
+      color: var(--gold-soft);
+      cursor: pointer;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+      transition: all 0.3s ease;
+    }
+    .music-btn:hover {
+      background: rgba(212, 175, 55, 0.35);
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.7);
+      transform: translateX(-50%) scale(1.05);
+    }
+
+    .whatsapp-btn {
+      position: absolute;
+      bottom: 12%;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.7rem 1.4rem;
+      font-size: 1.05rem;
+      border: 2px solid var(--gold-soft);
+      background: rgba(0, 0, 0, 0.45);
+      color: var(--gold-soft);
+      text-decoration: none;
+      border-radius: 14px;
+      box-shadow: 0 0 18px rgba(212, 175, 55, 0.6);
+      transition: all 0.3s ease;
+      letter-spacing: 0.05em;
+    }
+
+    .whatsapp-btn:hover {
+      background: rgba(212, 175, 55, 0.25);
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.8);
+      transform: translateX(-50%) scale(1.07);
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="line1">Bist Du im Einklang mit Dir selbst?</h1>
+  <h2 id="line2" class="text-line">Möchtest Du mehr über die Wirkungsweise der Klangschalen erfahren?</h2>
+  <h3 id="line3" class="text-line">Dann lade ich Dich herzlich ein,<br>die Welt der Klangschalen in einer persönlichen Klangmassage zu erleben.</h3>
+  <h4 id="line4" class="text-line">Du erreichst mich unter +491722706598</h4>
+
+  <audio id="bg-music" loop>
+    <source src="meditation.mp3" type="audio/mpeg">
+  </audio>
+  <button class="music-btn" onclick="startMusic()">Musik starten</button>
+
+  <!-- WhatsApp Kontakt Button -->
+  <a href="https://wa.me/491722706598?text=Hallo%2C%20ich%20interessiere%20mich%20f%C3%BCr%20eine%20Klangmassage.%0A%0ABitte%20trage%20hier%20ein%3A%0AName%3A%20%0ATelefonnummer%3A%20%0AAdresse%3A%20" 
+     target="_blank" 
+     class="whatsapp-btn" id="whatsappBtn" style="opacity:0;">💬 Termin anfragen via WhatsApp</a>
+
+  <script>
+    const line1 = document.getElementById('line1');
+    const line2 = document.getElementById('line2');
+    const line3 = document.getElementById('line3');
+    const line4 = document.getElementById('line4');
+    const music = document.getElementById('bg-music');
+
+    function startMusic() {
+      music.volume = 0;
+      music.play();
+      let v = 0;
+      const fade = setInterval(() => {
+        if(v < 0.4){ v += 0.01; music.volume = v; }
+        else { clearInterval(fade); }
+      }, 200);
+      document.querySelector('.music-btn').style.display = 'none';
+    }
+
+    // Sequenz der Texte
+    // ALLE Zeilen initial unsichtbar
+    line1.style.opacity = 0;
+    line2.style.opacity = 0;
+    line3.style.opacity = 0;
+    line4.style.opacity = 0;
+
+    // Ablauf STARTEN nach Seitenladen
+    setTimeout(() => { line1.style.opacity = 1; }, 500);
+
+    // Zeile 1 aus -> Zeile 2 ein
+    setTimeout(() => { line1.style.opacity = 0; }, 6500);
+    setTimeout(() => { line2.style.opacity = 1; }, 7000);
+
+    // Zeile 2 aus -> Zeile 3 ein
+    setTimeout(() => { line2.style.opacity = 0; }, 14000);
+    setTimeout(() => { line3.style.opacity = 1; }, 14500);
+
+    // Zeile 3 aus -> Zeile 4 ein
+    setTimeout(() => { line3.style.opacity = 0; }, 21500);
+    setTimeout(() => { line4.style.opacity = 1; }, 22000);
+    // WhatsApp Button erst nach letzter Zeile einblenden
+    setTimeout(() => { document.getElementById('whatsappBtn').style.opacity = 1; }, 24500);
+
+    setTimeout(() => { line1.style.opacity = 0; }, 7000);
+    setTimeout(() => { line2.style.opacity = 1; }, 7500);
+    setTimeout(() => { line2.style.opacity = 0; }, 15000);
+    setTimeout(() => { line3.style.opacity = 1; }, 15500);
+    setTimeout(() => { line3.style.opacity = 0; }, 23000);
+    setTimeout(() => { line4.style.opacity = 1; }, 23500);
+  </script>
+</body>
+</html>
