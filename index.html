@@ -12,10 +12,7 @@
     font-family: 'Arial', sans-serif;
     background: url('klangschalen.jpg') no-repeat center center fixed;
     background-size: cover;
-  }
-
-  audio {
-    display: none;
+    cursor: pointer; /* zeigt dem Nutzer, dass Klick möglich ist */
   }
 
   .text-container {
@@ -56,7 +53,7 @@
 </head>
 <body>
 
-<audio id="bg-music" src="meditation.mp3" autoplay loop></audio>
+<audio id="bg-music" src="meditation.mp3" loop></audio>
 
 <div class="text-container" id="line1">Bist Du im Einklang mit Dir selbst?</div>
 <div class="text-container" id="line2">Möchtest Du mehr über die Wirkungsweise der Klangschalen erfahren?</div>
@@ -67,33 +64,42 @@
    class="whatsapp-button" id="whatsappBtn" target="_blank">Termin anfragen via WhatsApp</a>
 
 <script>
-  const lines = [
-    document.getElementById('line1'),
-    document.getElementById('line2'),
-    document.getElementById('line3'),
-    document.getElementById('line4')
-  ];
-  const whatsappBtn = document.getElementById('whatsappBtn');
-  let current = 0;
-  const displayTime = 4000; // Zeit jede Zeile sichtbar (ms)
-  const fadeTime = 2000; // Dauer fade-in/out (ms)
+const bgMusic = document.getElementById('bg-music');
+let musicStarted = false;
 
-  function showLine(index) {
-    if (index > 0) {
-      lines[index - 1].classList.remove('visible'); // Alte Zeile ausblenden
-    }
-    if (index < lines.length) {
-      lines[index].classList.add('visible'); // Neue Zeile einblenden
-      setTimeout(() => showLine(index + 1), displayTime);
-    } else {
-      // Letzte Zeile ausgeblendet -> WhatsApp-Button einblenden
-      setTimeout(() => whatsappBtn.classList.add('visible'), fadeTime);
-    }
+// Musik startet bei erstem Klick / Touch
+document.body.addEventListener('click', () => {
+  if (!musicStarted) {
+    bgMusic.play();
+    musicStarted = true;
   }
+});
 
-  window.onload = () => {
-    showLine(0);
-  };
+// Textzeilen fade-in / fade-out
+const lines = [
+  document.getElementById('line1'),
+  document.getElementById('line2'),
+  document.getElementById('line3'),
+  document.getElementById('line4')
+];
+const whatsappBtn = document.getElementById('whatsappBtn');
+let displayTime = 4000; // Zeit jede Zeile sichtbar (ms)
+let fadeTime = 2000; // Dauer fade-in/out (ms)
+
+function showLine(index) {
+  if (index > 0) lines[index - 1].classList.remove('visible');
+  if (index < lines.length) {
+    lines[index].classList.add('visible');
+    setTimeout(() => showLine(index + 1), displayTime);
+  } else {
+    setTimeout(() => whatsappBtn.classList.add('visible'), fadeTime);
+  }
+}
+
+// Erst beim Laden der Seite starten
+window.onload = () => {
+  showLine(0);
+};
 </script>
 
 </body>
