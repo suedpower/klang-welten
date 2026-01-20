@@ -26,18 +26,42 @@
       align-items: center;
     }
 
+    /* Start Button */
+    #startButton {
+      font-size: 1.8em;
+      padding: 18px 36px;
+      border-radius: 40px;
+      border: 2px solid white;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      cursor: pointer;
+      transition: opacity 2s ease, transform 2s ease;
+      backdrop-filter: blur(4px);
+    }
+
+    #startButton:hover {
+      transform: scale(1.05);
+    }
+
+    #startButton.fadeOut {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Textzeilen */
     .line {
       opacity: 0;
       font-size: 2.2em;
       max-width: 80%;
-      transition: opacity 2s ease-in-out;
-      margin: 20px 0;
+      margin: 22px 0;
+      transition: opacity 2.5s ease-in-out;
+      text-shadow: 0 0 6px #000;
     }
 
     #contact {
       opacity: 0;
-      transition: opacity 2s ease-in-out;
       margin-top: 50px;
+      transition: opacity 2.5s ease-in-out;
     }
 
     #phone {
@@ -47,8 +71,30 @@
 
     #name {
       font-size: 1.2em;
-      letter-spacing: 1px;
       opacity: 0.85;
+      letter-spacing: 1px;
+    }
+
+    /* WhatsApp Button */
+    #whatsapp {
+      opacity: 0;
+      margin-top: 30px;
+      transition: opacity 2.5s ease-in-out;
+    }
+
+    #whatsapp a {
+      display: inline-block;
+      padding: 16px 32px;
+      border-radius: 40px;
+      background: #25D366;
+      color: white;
+      text-decoration: none;
+      font-size: 1.2em;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+
+    #whatsapp a:hover {
+      transform: scale(1.05);
     }
   </style>
 </head>
@@ -57,50 +103,78 @@
 
   <div class="overlay">
 
-    <div class="line">Komm zur Ruhe</div>
-    <div class="line">Spüre den Klang</div>
-    <div class="line">Lass den Alltag los</div>
-    <div class="line">Finde deine innere Balance</div>
+    <!-- Start -->
+    <button id="startButton">✨ Lass es klingen …</button>
 
+    <!-- Texte -->
+    <div class="line">Bist du im Einklang mit dir selbst?</div>
+    <div class="line">Möchtest du mehr über die Wirkungsweise der Klangschalen erfahren?</div>
+    <div class="line">Dann melde dich bei mir – ich begleite dich achtsam in die Welt der Klänge</div>
+    <div class="line">Erlebe tiefe Entspannung und neue Balance</div>
+
+    <!-- Kontakt -->
     <div id="contact">
-      <div id="phone">📞 0176 12345678</div>
+      <div id="phone">📞 +49&nbsp;172&nbsp;2706598</div>
       <div id="name">Anja</div>
+    </div>
+
+    <!-- WhatsApp -->
+    <div id="whatsapp">
+      <a href="https://wa.me/491722706598?text=Hallo%20Anja,%0Aich%20möchte%20gerne%20einen%20Termin%20für%20eine%20Klangschalen-Anwendung%20anfragen.%0A%0AName:%0ATelefon:%0AAdresse:"
+         target="_blank">
+        💬 Termin anfragen via WhatsApp
+      </a>
     </div>
 
   </div>
 
-  <!-- Hintergrundmusik -->
+  <!-- Musik -->
   <audio id="bg-music" loop>
     <source src="meditation.mp3" type="audio/mpeg">
   </audio>
 
   <script>
+    const startButton = document.getElementById("startButton");
+    const music = document.getElementById("bg-music");
     const lines = document.querySelectorAll(".line");
     const contact = document.getElementById("contact");
-    const music = document.getElementById("bg-music");
+    const whatsapp = document.getElementById("whatsapp");
 
-    let displayTime = 9000; // 9 Sekunden sichtbar
-    let fadeTime = 2000;
+    const displayDelay = 9000; // maximal meditativ
 
-    function showLines() {
-      lines.forEach((line, index) => {
-        setTimeout(() => {
-          line.style.opacity = 1;
-        }, index * displayTime);
-      });
+    startButton.addEventListener("click", () => {
+      music.volume = 0;
+      music.play();
 
-      // Kontakt nach der 4. Zeile
+      let vol = 0;
+      const fade = setInterval(() => {
+        if (vol < 1) {
+          vol += 0.02;
+          music.volume = vol;
+        } else {
+          clearInterval(fade);
+        }
+      }, 200);
+
+      startButton.classList.add("fadeOut");
+
       setTimeout(() => {
-        contact.style.opacity = 1;
-      }, lines.length * displayTime);
-    }
+        lines.forEach((line, index) => {
+          setTimeout(() => {
+            line.style.opacity = 1;
+          }, index * displayDelay);
+        });
 
-    // Musik starten nach Nutzerinteraktion (Browser-Regel)
-    document.addEventListener("click", () => {
-      music.play().catch(() => {});
-    }, { once: true });
+        setTimeout(() => {
+          contact.style.opacity = 1;
+        }, lines.length * displayDelay);
 
-    showLines();
+        setTimeout(() => {
+          whatsapp.style.opacity = 1;
+        }, (lines.length + 1) * displayDelay);
+
+      }, 3000);
+    });
   </script>
 
 </body>
