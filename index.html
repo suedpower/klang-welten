@@ -1,106 +1,107 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Klang-Welten</title>
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    font-family: 'Arial', sans-serif;
-    background: url('klangschalen.jpg') no-repeat center center fixed;
-    background-size: cover;
-    cursor: pointer; /* zeigt dem Nutzer, dass Klick möglich ist */
-  }
+  <meta charset="UTF-8">
+  <title>Klangwelten – Meditation</title>
 
-  .text-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: gold;
-    font-size: 2.5em;
-    font-weight: bold;
-    text-shadow: 2px 2px 4px black;
-    opacity: 0;
-    transition: opacity 2s ease-in-out;
-  }
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url("klangschalen.jpg") no-repeat center center fixed;
+      background-size: cover;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
 
-  .whatsapp-button {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 15px 30px;
-    font-size: 1.5em;
-    color: white;
-    background-color: #25D366;
-    border-radius: 25px;
-    text-decoration: none;
-    opacity: 0;
-    transition: opacity 2s ease-in-out;
-    position: absolute;
-    top: 65%;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
 
-  .visible {
-    opacity: 1;
-  }
-</style>
+    .line {
+      opacity: 0;
+      font-size: 2.2em;
+      max-width: 80%;
+      transition: opacity 2s ease-in-out;
+      margin: 20px 0;
+    }
+
+    #contact {
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+      margin-top: 50px;
+    }
+
+    #phone {
+      font-size: 1.6em;
+      margin-bottom: 10px;
+    }
+
+    #name {
+      font-size: 1.2em;
+      letter-spacing: 1px;
+      opacity: 0.85;
+    }
+  </style>
 </head>
+
 <body>
 
-<audio id="bg-music" src="meditation.mp3" loop></audio>
+  <div class="overlay">
 
-<div class="text-container" id="line1">Bist Du im Einklang mit Dir selbst?</div>
-<div class="text-container" id="line2">Möchtest Du mehr über die Wirkungsweise der Klangschalen erfahren?</div>
-<div class="text-container" id="line3">Dann melde Dich bei mir, ich freue mich darauf, Dich mit einer Klangschalenmassage / Therapie in die Welt der Klangschalen einzuführen.</div>
-<div class="text-container" id="line4">Du erreichst mich unter +491722706598</div>
+    <div class="line">Komm zur Ruhe</div>
+    <div class="line">Spüre den Klang</div>
+    <div class="line">Lass den Alltag los</div>
+    <div class="line">Finde deine innere Balance</div>
 
-<a href="https://wa.me/491722706598?text=Hallo,%20ich%20möchte%20einen%20Termin%20für%20eine%20Klangschalenmassage%20anfragen." 
-   class="whatsapp-button" id="whatsappBtn" target="_blank">Termin anfragen via WhatsApp</a>
+    <div id="contact">
+      <div id="phone">📞 0176 12345678</div>
+      <div id="name">Anja</div>
+    </div>
 
-<script>
-const bgMusic = document.getElementById('bg-music');
-let musicStarted = false;
+  </div>
 
-// Musik startet bei erstem Klick / Touch
-document.body.addEventListener('click', () => {
-  if (!musicStarted) {
-    bgMusic.play();
-    musicStarted = true;
-  }
-});
+  <!-- Hintergrundmusik -->
+  <audio id="bg-music" loop>
+    <source src="meditation.mp3" type="audio/mpeg">
+  </audio>
 
-// Textzeilen fade-in / fade-out
-const lines = [
-  document.getElementById('line1'),
-  document.getElementById('line2'),
-  document.getElementById('line3'),
-  document.getElementById('line4')
-];
-const whatsappBtn = document.getElementById('whatsappBtn');
-let displayTime = 4000; // Zeit jede Zeile sichtbar (ms)
-let fadeTime = 2000; // Dauer fade-in/out (ms)
+  <script>
+    const lines = document.querySelectorAll(".line");
+    const contact = document.getElementById("contact");
+    const music = document.getElementById("bg-music");
 
-function showLine(index) {
-  if (index > 0) lines[index - 1].classList.remove('visible');
-  if (index < lines.length) {
-    lines[index].classList.add('visible');
-    setTimeout(() => showLine(index + 1), displayTime);
-  } else {
-    setTimeout(() => whatsappBtn.classList.add('visible'), fadeTime);
-  }
-}
+    let displayTime = 9000; // 9 Sekunden sichtbar
+    let fadeTime = 2000;
 
-// Erst beim Laden der Seite starten
-window.onload = () => {
-  showLine(0);
-};
-</script>
+    function showLines() {
+      lines.forEach((line, index) => {
+        setTimeout(() => {
+          line.style.opacity = 1;
+        }, index * displayTime);
+      });
+
+      // Kontakt nach der 4. Zeile
+      setTimeout(() => {
+        contact.style.opacity = 1;
+      }, lines.length * displayTime);
+    }
+
+    // Musik starten nach Nutzerinteraktion (Browser-Regel)
+    document.addEventListener("click", () => {
+      music.play().catch(() => {});
+    }, { once: true });
+
+    showLines();
+  </script>
 
 </body>
 </html>
