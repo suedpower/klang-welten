@@ -12,22 +12,21 @@
       background: url("klangschalen.jpg") no-repeat center center fixed;
       background-size: cover;
       font-family: "Helvetica Neue", Arial, sans-serif;
-      color: #f5f1e8;
       text-align: center;
       overflow: hidden;
       animation: breath 18s ease-in-out infinite;
     }
 
     @keyframes breath {
-      0% { background-size: 100%; }
-      50% { background-size: 104%; }
+      0%   { background-size: 100%; }
+      50%  { background-size: 104%; }
       100% { background-size: 100%; }
     }
 
     .overlay {
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.45);
+      background: rgba(0,0,0,0.45);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -35,38 +34,54 @@
       padding: 20px;
     }
 
-    /* Start Button */
+    /* GOLDENE SCHRIFT + SCHWARZE KONTUR */
+    .line,
+    #phone,
+    #name,
+    #location,
+    #startButton {
+      color: #f1e3b0;
+      text-shadow:
+        -1px -1px 2px #000,
+         1px -1px 2px #000,
+        -1px  1px 2px #000,
+         1px  1px 2px #000,
+         0 0 12px rgba(241,227,176,0.4);
+    }
+
+    /* START BUTTON */
     #startButton {
       font-size: 1.6em;
       padding: 16px 34px;
       border-radius: 50px;
-      border: 1px solid #e6d8a8;
+      border: 1px solid #f1e3b0;
       background: rgba(255,255,255,0.08);
-      color: #f3e7c2;
       cursor: pointer;
-      transition: opacity 2s ease, transform 2s ease;
       backdrop-filter: blur(6px);
+      transition: opacity 2s ease;
+      animation: pulse 6s ease-in-out infinite;
     }
 
-    #startButton:hover {
-      transform: scale(1.05);
+    @keyframes pulse {
+      0%   { transform: scale(1);    opacity: 0.85; }
+      50%  { transform: scale(1.04); opacity: 1; }
+      100% { transform: scale(1);    opacity: 0.85; }
     }
 
     #startButton.fadeOut {
       opacity: 0;
       pointer-events: none;
+      animation: none;
     }
 
-    /* Textzeilen */
+    /* TEXTE */
     .line {
       opacity: 0;
       font-size: 2.1em;
       max-width: 900px;
       margin: 24px 0;
-      transition: opacity 3s ease-in-out, transform 3s ease-in-out;
-      text-shadow: 0 0 10px rgba(0,0,0,0.8);
-      transform: translateY(10px);
-      color: #f6f0da;
+      transition: opacity 3s ease, transform 3s ease;
+      transform: translateY(12px);
     }
 
     .line.show {
@@ -74,17 +89,16 @@
       transform: translateY(0);
     }
 
-    /* Kontakt */
+    /* KONTAKT */
     #contact {
       opacity: 0;
       margin-top: 50px;
-      transition: opacity 3s ease-in-out;
-      color: #f3ebc9;
+      transition: opacity 3s ease;
     }
 
     #phone {
       font-size: 1.4em;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     #name {
@@ -100,7 +114,7 @@
     }
 
     #location a {
-      color: #e6d8a8;
+      color: #f1e3b0;
       text-decoration: none;
     }
 
@@ -108,11 +122,11 @@
       text-decoration: underline;
     }
 
-    /* WhatsApp */
+    /* WHATSAPP */
     #whatsapp {
       opacity: 0;
       margin-top: 28px;
-      transition: opacity 3s ease-in-out;
+      transition: opacity 3s ease;
     }
 
     #whatsapp a {
@@ -126,7 +140,7 @@
       box-shadow: 0 0 25px rgba(0,0,0,0.5);
     }
 
-    /* Mobile Optimierung */
+    /* MOBILE */
     @media (max-width: 600px) {
       .line {
         font-size: 1.5em;
@@ -145,16 +159,16 @@
 
   <div class="overlay">
 
-    <!-- Start -->
-    <button id="startButton">✨ Lass es klingen …</button>
+    <!-- START -->
+    <button id="startButton">✨ Spüre den Klang</button>
 
-    <!-- Texte -->
+    <!-- TEXTE -->
     <div class="line">Bist du im Einklang mit dir selbst?</div>
     <div class="line">Möchtest du mehr über die Wirkungsweise der Klangschalen erfahren?</div>
     <div class="line">Dann melde dich bei mir – ich begleite dich achtsam in die Welt der Klänge</div>
     <div class="line">Erlebe tiefe Entspannung und neue Balance</div>
 
-    <!-- Kontakt -->
+    <!-- KONTAKT -->
     <div id="contact">
       <div id="phone">📞 +49&nbsp;160&nbsp;3429752</div>
       <div id="name">Anja</div>
@@ -167,7 +181,7 @@
       </div>
     </div>
 
-    <!-- WhatsApp -->
+    <!-- WHATSAPP -->
     <div id="whatsapp">
       <a href="https://wa.me/491603429752?text=Hallo%20Anja,%0Aich%20möchte%20gerne%20einen%20Termin%20für%20eine%20Klangschalen-Anwendung%20anfragen."
          target="_blank">
@@ -177,7 +191,7 @@
 
   </div>
 
-  <!-- Musik -->
+  <!-- MUSIK -->
   <audio id="bg-music" loop>
     <source src="meditation.mp3" type="audio/mpeg">
   </audio>
@@ -208,10 +222,10 @@
       startButton.classList.add("fadeOut");
 
       setTimeout(() => {
-        lines.forEach((line, index) => {
+        lines.forEach((line, i) => {
           setTimeout(() => {
             line.classList.add("show");
-          }, index * displayDelay);
+          }, i * displayDelay);
         });
 
         setTimeout(() => {
