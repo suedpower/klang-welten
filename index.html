@@ -3,7 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Klangwelten – Meditation</title>
+
+  <title>Klangwelten – Klangschalen & Meditation in Tengen</title>
+
+  <meta name="description"
+        content="Klangschalen-Meditation und Klangreisen in 78250 Tengen. Tief entspannen, zur Ruhe kommen und neue Balance finden – mit Anja.">
+  <meta name="keywords"
+        content="Klangschalen, Meditation, Klangreise, Entspannung, Achtsamkeit, Tengen, Klangwelten">
+  <meta name="robots" content="index, follow">
 
   <style>
     body {
@@ -34,7 +41,7 @@
       padding: 20px;
     }
 
-    /* GOLDENE SCHRIFT + SCHWARZE KONTUR */
+    /* GOLDENE SCHRIFT */
     .line,
     #phone,
     #name,
@@ -58,8 +65,8 @@
       background: rgba(255,255,255,0.08);
       cursor: pointer;
       backdrop-filter: blur(6px);
-      transition: opacity 2s ease;
       animation: pulse 6s ease-in-out infinite;
+      transition: opacity 2s ease;
     }
 
     @keyframes pulse {
@@ -68,7 +75,7 @@
       100% { transform: scale(1);    opacity: 0.85; }
     }
 
-    #startButton.fadeOut {
+    #startButton.hidden {
       opacity: 0;
       pointer-events: none;
       animation: none;
@@ -89,26 +96,22 @@
       transform: translateY(0);
     }
 
-    /* KONTAKT */
-    #contact {
+    .line.hide {
       opacity: 0;
-      margin-top: 50px;
+    }
+
+    /* KONTAKT */
+    #contact, #whatsapp {
+      opacity: 0;
+      margin-top: 40px;
       transition: opacity 3s ease;
     }
 
-    #phone {
-      font-size: 1.4em;
-      margin-bottom: 6px;
-    }
-
-    #name {
-      font-size: 1.15em;
-      letter-spacing: 1px;
-      opacity: 0.9;
-    }
+    #phone { font-size: 1.4em; }
+    #name  { font-size: 1.15em; opacity: 0.9; }
 
     #location {
-      margin-top: 12px;
+      margin-top: 10px;
       font-size: 0.95em;
       opacity: 0.85;
     }
@@ -116,17 +119,6 @@
     #location a {
       color: #f1e3b0;
       text-decoration: none;
-    }
-
-    #location a:hover {
-      text-decoration: underline;
-    }
-
-    /* WHATSAPP */
-    #whatsapp {
-      opacity: 0;
-      margin-top: 28px;
-      transition: opacity 3s ease;
     }
 
     #whatsapp a {
@@ -142,102 +134,86 @@
 
     /* MOBILE */
     @media (max-width: 600px) {
-      .line {
-        font-size: 1.5em;
-        margin: 18px 0;
-      }
-
-      #startButton {
-        font-size: 1.3em;
-        padding: 14px 26px;
-      }
+      .line { font-size: 1.5em; }
+      #startButton { font-size: 1.3em; }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="overlay">
+<div class="overlay">
 
-    <!-- START -->
-    <button id="startButton">✨ Spüre den Klang</button>
+  <button id="startButton">✨ Spüre den Klang</button>
 
-    <!-- TEXTE -->
-    <div class="line">Bist du im Einklang mit dir selbst?</div>
-    <div class="line">Möchtest du mehr über die Wirkungsweise der Klangschalen erfahren?</div>
-    <div class="line">Dann melde dich bei mir – ich begleite dich achtsam in die Welt der Klänge</div>
-    <div class="line">Erlebe tiefe Entspannung und neue Balance</div>
+  <div class="line">Bist du im Einklang mit dir selbst?</div>
+  <div class="line">Möchtest du mehr über die Wirkungsweise der Klangschalen erfahren?</div>
+  <div class="line">Ich begleite dich achtsam in die Welt der Klänge</div>
+  <div class="line">Erlebe tiefe Entspannung und neue Balance</div>
 
-    <!-- KONTAKT -->
-    <div id="contact">
-      <div id="phone">📞 +49&nbsp;160&nbsp;3429752</div>
-      <div id="name">Anja</div>
-
-      <div id="location">
-        📍 78250 Tengen<br>
-        <a href="https://www.google.com/maps/search/?api=1&query=78250+Tengen" target="_blank">
-          Standort auf Google Maps öffnen
-        </a>
-      </div>
-    </div>
-
-    <!-- WHATSAPP -->
-    <div id="whatsapp">
-      <a href="https://wa.me/491603429752?text=Hallo%20Anja,%0Aich%20möchte%20gerne%20einen%20Termin%20für%20eine%20Klangschalen-Anwendung%20anfragen."
-         target="_blank">
-        💬 Termin anfragen via WhatsApp
+  <div id="contact">
+    <div id="phone">📞 +49&nbsp;160&nbsp;3429752</div>
+    <div id="name">Anja</div>
+    <div id="location">
+      📍 78250 Tengen<br>
+      <a href="https://www.google.com/maps/search/?api=1&query=78250+Tengen" target="_blank">
+        Standort auf Google Maps öffnen
       </a>
     </div>
-
   </div>
 
-  <!-- MUSIK -->
-  <audio id="bg-music" loop>
-    <source src="meditation.mp3" type="audio/mpeg">
-  </audio>
+  <div id="whatsapp">
+    <a href="https://wa.me/491603429752" target="_blank">
+      💬 Termin anfragen via WhatsApp
+    </a>
+  </div>
 
-  <script>
-    const startButton = document.getElementById("startButton");
-    const music = document.getElementById("bg-music");
-    const lines = document.querySelectorAll(".line");
-    const contact = document.getElementById("contact");
-    const whatsapp = document.getElementById("whatsapp");
+</div>
 
-    const displayDelay = 9000;
+<audio id="bg-music" loop>
+  <source src="meditation.mp3" type="audio/mpeg">
+</audio>
 
-    startButton.addEventListener("click", () => {
-      music.volume = 0;
-      music.play();
+<script>
+  const button = document.getElementById("startButton");
+  const music = document.getElementById("bg-music");
+  const lines = document.querySelectorAll(".line");
+  const contact = document.getElementById("contact");
+  const whatsapp = document.getElementById("whatsapp");
 
-      let vol = 0;
-      const fade = setInterval(() => {
-        if (vol < 1) {
-          vol += 0.02;
-          music.volume = vol;
-        } else {
-          clearInterval(fade);
-        }
-      }, 200);
+  const delay = 9000;
+  const fadeOutTime = 6000;
 
-      startButton.classList.add("fadeOut");
+  function startLoop() {
+    lines.forEach(l => l.classList.remove("show", "hide"));
+    contact.style.opacity = 0;
+    whatsapp.style.opacity = 0;
 
-      setTimeout(() => {
-        lines.forEach((line, i) => {
-          setTimeout(() => {
-            line.classList.add("show");
-          }, i * displayDelay);
-        });
-
-        setTimeout(() => {
-          contact.style.opacity = 1;
-        }, lines.length * displayDelay);
-
-        setTimeout(() => {
-          whatsapp.style.opacity = 1;
-        }, (lines.length + 1) * displayDelay);
-      }, 3000);
+    lines.forEach((line, i) => {
+      setTimeout(() => line.classList.add("show"), i * delay);
+      setTimeout(() => line.classList.add("hide"), i * delay + fadeOutTime);
     });
-  </script>
+
+    setTimeout(() => contact.style.opacity = 1, lines.length * delay);
+    setTimeout(() => whatsapp.style.opacity = 1, (lines.length + 1) * delay);
+
+    setTimeout(startLoop, (lines.length + 2) * delay);
+  }
+
+  button.addEventListener("click", () => {
+    music.volume = 0;
+    music.play();
+    let v = 0;
+    const fade = setInterval(() => {
+      v += 0.02;
+      music.volume = Math.min(v, 1);
+      if (v >= 1) clearInterval(fade);
+    }, 200);
+
+    button.classList.add("hidden");
+    startLoop();
+  });
+</script>
 
 </body>
 </html>
