@@ -2,6 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Klangwelten – Meditation</title>
 
   <style>
@@ -11,9 +12,16 @@
       background: url("klangschalen.jpg") no-repeat center center fixed;
       background-size: cover;
       font-family: "Helvetica Neue", Arial, sans-serif;
-      color: white;
+      color: #f5f1e8;
       text-align: center;
       overflow: hidden;
+      animation: breath 18s ease-in-out infinite;
+    }
+
+    @keyframes breath {
+      0% { background-size: 100%; }
+      50% { background-size: 104%; }
+      100% { background-size: 100%; }
     }
 
     .overlay {
@@ -24,19 +32,20 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      padding: 20px;
     }
 
     /* Start Button */
     #startButton {
-      font-size: 1.8em;
-      padding: 18px 36px;
-      border-radius: 40px;
-      border: 2px solid white;
-      background: rgba(255,255,255,0.1);
-      color: white;
+      font-size: 1.6em;
+      padding: 16px 34px;
+      border-radius: 50px;
+      border: 1px solid #e6d8a8;
+      background: rgba(255,255,255,0.08);
+      color: #f3e7c2;
       cursor: pointer;
       transition: opacity 2s ease, transform 2s ease;
-      backdrop-filter: blur(4px);
+      backdrop-filter: blur(6px);
     }
 
     #startButton:hover {
@@ -51,50 +60,83 @@
     /* Textzeilen */
     .line {
       opacity: 0;
-      font-size: 2.2em;
-      max-width: 80%;
-      margin: 22px 0;
-      transition: opacity 2.5s ease-in-out;
-      text-shadow: 0 0 6px #000;
+      font-size: 2.1em;
+      max-width: 900px;
+      margin: 24px 0;
+      transition: opacity 3s ease-in-out, transform 3s ease-in-out;
+      text-shadow: 0 0 10px rgba(0,0,0,0.8);
+      transform: translateY(10px);
+      color: #f6f0da;
     }
 
+    .line.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Kontakt */
     #contact {
       opacity: 0;
       margin-top: 50px;
-      transition: opacity 2.5s ease-in-out;
+      transition: opacity 3s ease-in-out;
+      color: #f3ebc9;
     }
 
     #phone {
-      font-size: 1.6em;
-      margin-bottom: 10px;
+      font-size: 1.4em;
+      margin-bottom: 8px;
     }
 
     #name {
-      font-size: 1.2em;
-      opacity: 0.85;
+      font-size: 1.15em;
       letter-spacing: 1px;
+      opacity: 0.9;
     }
 
-    /* WhatsApp Button */
+    #location {
+      margin-top: 12px;
+      font-size: 0.95em;
+      opacity: 0.85;
+    }
+
+    #location a {
+      color: #e6d8a8;
+      text-decoration: none;
+    }
+
+    #location a:hover {
+      text-decoration: underline;
+    }
+
+    /* WhatsApp */
     #whatsapp {
       opacity: 0;
-      margin-top: 30px;
-      transition: opacity 2.5s ease-in-out;
+      margin-top: 28px;
+      transition: opacity 3s ease-in-out;
     }
 
     #whatsapp a {
       display: inline-block;
-      padding: 16px 32px;
-      border-radius: 40px;
-      background: #25D366;
+      padding: 14px 30px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #25D366, #1da851);
       color: white;
       text-decoration: none;
-      font-size: 1.2em;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      font-size: 1.1em;
+      box-shadow: 0 0 25px rgba(0,0,0,0.5);
     }
 
-    #whatsapp a:hover {
-      transform: scale(1.05);
+    /* Mobile Optimierung */
+    @media (max-width: 600px) {
+      .line {
+        font-size: 1.5em;
+        margin: 18px 0;
+      }
+
+      #startButton {
+        font-size: 1.3em;
+        padding: 14px 26px;
+      }
     }
   </style>
 </head>
@@ -114,13 +156,20 @@
 
     <!-- Kontakt -->
     <div id="contact">
-      <div id="phone">📞 +49&nbsp;172&nbsp;2706598</div>
+      <div id="phone">📞 +49&nbsp;160&nbsp;3429752</div>
       <div id="name">Anja</div>
+
+      <div id="location">
+        📍 78250 Tengen<br>
+        <a href="https://www.google.com/maps/search/?api=1&query=78250+Tengen" target="_blank">
+          Standort auf Google Maps öffnen
+        </a>
+      </div>
     </div>
 
     <!-- WhatsApp -->
     <div id="whatsapp">
-      <a href="https://wa.me/491722706598?text=Hallo%20Anja,%0Aich%20möchte%20gerne%20einen%20Termin%20für%20eine%20Klangschalen-Anwendung%20anfragen.%0A%0AName:%0ATelefon:%0AAdresse:"
+      <a href="https://wa.me/491603429752?text=Hallo%20Anja,%0Aich%20möchte%20gerne%20einen%20Termin%20für%20eine%20Klangschalen-Anwendung%20anfragen."
          target="_blank">
         💬 Termin anfragen via WhatsApp
       </a>
@@ -140,7 +189,7 @@
     const contact = document.getElementById("contact");
     const whatsapp = document.getElementById("whatsapp");
 
-    const displayDelay = 9000; // maximal meditativ
+    const displayDelay = 9000;
 
     startButton.addEventListener("click", () => {
       music.volume = 0;
@@ -161,7 +210,7 @@
       setTimeout(() => {
         lines.forEach((line, index) => {
           setTimeout(() => {
-            line.style.opacity = 1;
+            line.classList.add("show");
           }, index * displayDelay);
         });
 
@@ -172,10 +221,10 @@
         setTimeout(() => {
           whatsapp.style.opacity = 1;
         }, (lines.length + 1) * displayDelay);
-
       }, 3000);
     });
   </script>
 
 </body>
 </html>
+
