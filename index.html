@@ -14,335 +14,134 @@
   </script>
 
   <title>Klangwelten – Klangschalen & Meditation in Tengen</title>
-  <meta name="description" content="Klangschalen-Meditation und Klangreisen in 78250 Tengen. Tief entspannen, zur Ruhe kommen und neue Balance finden – mit Anja.">
-  <meta name="robots" content="index, follow">
 
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: "Helvetica Neue", Arial, sans-serif;
-      text-align: center;
-      overflow: hidden;
-      background: #000;
-    }
+    body { margin:0; padding:0; font-family:"Helvetica Neue", Arial, sans-serif; overflow:hidden; background:#000; text-align:center; }
 
-    /* Hintergrundbild (Variante 2) */
     #bg-image {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -1;
+      position:fixed; inset:0;
+      width:100%; height:100%;
+      object-fit:cover;
+      z-index:-1;
       animation: breath 18s ease-in-out infinite;
     }
-
-    @keyframes breath {
-      0%   { transform: scale(1); }
-      50%  { transform: scale(1.04); }
-      100% { transform: scale(1); }
-    }
+    @keyframes breath { 0%{transform:scale(1)} 50%{transform:scale(1.04)} 100%{transform:scale(1)} }
 
     .overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.55);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
+      position:absolute; inset:0;
+      background:rgba(0,0,0,0.55);
+      display:flex; flex-direction:column;
+      justify-content:center; align-items:center;
+      padding:20px;
     }
 
-    /* Gold + schwarze Umrandung */
-    .line, #phone, #name, #location, #startButton {
-      color: #f1e3b0;
-      text-shadow:
-        -1px -1px 2px #000,
-         1px -1px 2px #000,
-        -1px  1px 2px #000,
-         1px  1px 2px #000,
-         0 0 12px rgba(241,227,176,0.35);
+    .line,#phone,#name,#location,#startButton {
+      color:#f1e3b0;
+      text-shadow:-1px -1px 2px #000,1px -1px 2px #000,-1px 1px 2px #000,1px 1px 2px #000,0 0 12px rgba(241,227,176,0.35);
     }
 
-    /* Start Button */
     #startButton {
-      font-size: 1.6em;
-      padding: 16px 34px;
-      border-radius: 50px;
-      border: 1px solid #f1e3b0;
-      background: rgba(255,255,255,0.08);
-      cursor: pointer;
-      backdrop-filter: blur(6px);
-      animation: pulse 6s ease-in-out infinite;
-      transition: opacity 1.5s ease;
+      font-size:1.6em; padding:16px 34px; border-radius:50px;
+      border:1px solid #f1e3b0; background:rgba(255,255,255,0.08);
+      cursor:pointer; backdrop-filter:blur(6px);
+      animation:pulse 6s ease-in-out infinite;
+      transition:opacity 1.5s ease;
     }
+    @keyframes pulse {0%{transform:scale(1);opacity:.85}50%{transform:scale(1.04);opacity:1}100%{transform:scale(1);opacity:.85}}
+    #startButton.hidden {opacity:0;pointer-events:none;animation:none;}
 
-    @keyframes pulse {
-      0%   { transform: scale(1);    opacity: 0.85; }
-      50%  { transform: scale(1.04); opacity: 1; }
-      100% { transform: scale(1);    opacity: 0.85; }
-    }
-
-    #startButton.hidden {
-      opacity: 0;
-      pointer-events: none;
-      animation: none;
-    }
-
-    /* Zeilen */
     .line {
-      opacity: 0;
-      font-size: 2.1em;
-      max-width: 900px;
-      margin: 22px 0;
-      transition: opacity 2.8s ease, transform 2.8s ease;
-      transform: translateY(12px);
+      opacity:0;
+      font-size:2.1em;
+      max-width:900px;
+      margin:22px 0;
+      transition:opacity 2.5s ease, transform 2.5s ease;
+      transform:translateY(12px);
     }
+    .line.show {opacity:1; transform:translateY(0);}
+    .line.hide {opacity:0; transform:translateY(-6px);}
 
-    .line.show { opacity: 1; transform: translateY(0); }
-    .line.hide { opacity: 0; transform: translateY(-6px); }
-
-    /* Kontakt + WhatsApp */
-    #contact, #whatsapp {
-      opacity: 0;
-      margin-top: 34px;
-      transition: opacity 2.8s ease;
-    }
-
-    #phone { font-size: 1.35em; margin-bottom: 6px; }
-    #name { font-size: 1.15em; opacity: 0.9; }
-
-    #location { margin-top: 10px; font-size: 0.95em; opacity: 0.85; }
-    #location a { color: #f1e3b0; text-decoration: none; }
-    #location a:hover { text-decoration: underline; }
+    #contact,#whatsapp {opacity:0;margin-top:30px;transition:opacity 2.5s ease;}
 
     #whatsapp a {
-      display: inline-block;
-      padding: 14px 28px;
-      border-radius: 50px;
-      background: linear-gradient(135deg, #25D366, #1da851);
-      color: white;
-      text-decoration: none;
-      font-size: 1.05em;
-      box-shadow: 0 0 25px rgba(0,0,0,0.5);
-    }
-
-    /* Mobile */
-    @media (max-width: 600px) {
-      .overlay { padding: 12px; }
-      .line { font-size: 1.3em; margin: 12px 0; }
-      #startButton { font-size: 1.2em; padding: 12px 24px; }
-      #phone, #name, #location { font-size: 1em; }
-      #whatsapp a { padding: 10px 20px; font-size: 1em; }
+      display:inline-block;
+      padding:14px 28px;
+      border-radius:50px;
+      background:linear-gradient(135deg,#25D366,#1da851);
+      color:white;text-decoration:none;
     }
   </style>
 </head>
 
 <body>
-  <img id="bg-image" src="klangschalen.jpg" alt="Klangschalen Hintergrund">
+<img id="bg-image" src="klangschalen.jpg">
 
-  <div class="overlay">
-    <button id="startButton">✨ Spüre den Klang</button>
+<div class="overlay">
+  <button id="startButton">✨ Spüre den Klang</button>
 
-    <div class="line" data-text="Bist du im Einklang mit dir selbst?"></div>
-    <div class="line" data-text="Möchtest du mehr über die Wirkungsweise der Klangschalen erfahren?"></div>
-    <div class="line" data-text="Ich begleite dich achtsam in die Welt der Klänge."></div>
-    <div class="line" data-text="Erlebe tiefe Entspannung und neue Balance."></div>
+  <div class="line" data-text="Bist du im Einklang mit dir selbst?"></div>
+  <div class="line" data-text="Möchtest du mehr über die Wirkungsweise der Klangschalen erfahren?"></div>
+  <div class="line" data-text="Ich begleite dich achtsam in die Welt der Klänge."></div>
+  <div class="line" data-text="Erlebe tiefe Entspannung und neue Balance."></div>
 
-    <div id="contact">
-      <div id="phone">📞 +49&nbsp;160&nbsp;3429752</div>
-      <div id="name">Anja</div>
-      <div id="location">
-        📍 78250 Tengen<br>
-        <a href="https://www.google.com/maps/search/?api=1&query=78250+Tengen" target="_blank">
-          Standort auf Google Maps öffnen
-        </a>
-      </div>
-    </div>
-
-    <div id="whatsapp">
-      <a href="https://wa.me/491603429752?text=Hallo%20Anja,%0Aich%20möchte%20gerne%20einen%20Termin%20für%20eine%20Klangschalen-Anwendung%20anfragen.%0A%0AName:%0ATelefon:%0A"
-         target="_blank">
-        💬 Termin anfragen via WhatsApp
-      </a>
-    </div>
+  <div id="contact">
+    <div id="phone">📞 +49 160 3429752</div>
+    <div id="name">Anja</div>
+    <div id="location">📍 78250 Tengen</div>
   </div>
 
-  <audio id="bg-music" loop>
-    <source src="meditation.mp3" type="audio/mpeg">
-  </audio>
+  <div id="whatsapp">
+    <a href="https://wa.me/491603429752" target="_blank">💬 Termin anfragen via WhatsApp</a>
+  </div>
+</div>
 
-  <script>
-    const startButton = document.getElementById("startButton");
-    const music = document.getElementById("bg-music");
-    const lines = Array.from(document.querySelectorAll(".line"));
-    const contact = document.getElementById("contact");
-    const whatsapp = document.getElementById("whatsapp");
+<audio id="bg-music" loop>
+  <source src="meditation.mp3" type="audio/mpeg">
+</audio>
 
-    // Meditatives Timing (Basis)
-    let DISPLAY_DELAY = 9000;  // Zeit pro Zeile
-    const HIDE_AFTER  = 6500;  // wann die Zeile wieder ausblendet (innerhalb DISPLAY_DELAY)
-    const START_PAUSE = 1400;  // kurze Pause nach Klick auf Start
+<script>
+const lines = document.querySelectorAll(".line");
+const startButton = document.getElementById("startButton");
+const music = document.getElementById("bg-music");
+const contact = document.getElementById("contact");
+const whatsapp = document.getElementById("whatsapp");
 
-    // Klick -> nächste Zeile schneller
-    const SPEEDUP_FACTOR = 0.35; // 35% der Wartezeit, wenn geklickt
-    let running = false;
+let index = -1;
+let running = false;
+let timeout;
 
-    // Timer-Verwaltung für "skip/accelerate"
-    let timers = [];
-    let currentIndex = -1;
+function ensurePunctuation(t){
+  const last=t.slice(-1);
+  return [".","?","!"].includes(last)?t:t+".";
+}
 
-    function clearAllTimers() {
-      timers.forEach(t => clearTimeout(t));
-      timers = [];
-    }
+lines.forEach(l=>l.textContent=ensurePunctuation(l.dataset.text));
 
-    function ensurePunctuation(text) {
-      const t = (text || "").trim();
-      if (!t) return t;
-      const last = t.slice(-1);
-      if ([".", "?", "!", "…"].includes(last)) return t;
-      return t + ".";
-    }
+function showNext(){
+  if(index>=0) lines[index].classList.replace("show","hide");
+  index++;
+  if(index < lines.length){
+    lines[index].classList.add("show");
+    timeout = setTimeout(showNext,8000);
+  } else {
+    contact.style.opacity=1;
+    whatsapp.style.opacity=1;
+  }
+}
 
-    function setLineTexts() {
-      lines.forEach(line => {
-        const raw = line.getAttribute("data-text") || "";
-        line.textContent = ensurePunctuation(raw);
-      });
-    }
+document.addEventListener("click",()=>{
+  if(!running || index>=lines.length) return;
+  clearTimeout(timeout);
+  setTimeout(showNext,1000); // 👉 1 Sekunde bis nächste Zeile
+});
 
-    function resetScene() {
-      lines.forEach(l => l.classList.remove("show", "hide"));
-      contact.style.opacity = 0;
-      whatsapp.style.opacity = 0;
-      currentIndex = -1;
-    }
-
-    function showLine(i) {
-      // vorherige ausblenden
-      if (i > 0) {
-        lines[i - 1].classList.remove("show");
-        lines[i - 1].classList.add("hide");
-      }
-
-      currentIndex = i;
-
-      // aktuelle einblenden
-      lines[i].classList.remove("hide");
-      lines[i].classList.add("show");
-
-      // automatische Ausblendung
-      timers.push(setTimeout(() => {
-        lines[i].classList.remove("show");
-        lines[i].classList.add("hide");
-      }, HIDE_AFTER));
-    }
-
-    function scheduleLoop() {
-      clearAllTimers();
-      resetScene();
-
-      // Zeilen planen
-      lines.forEach((_, i) => {
-        timers.push(setTimeout(() => showLine(i), i * DISPLAY_DELAY));
-      });
-
-      // Kontakt / WhatsApp nach den Zeilen
-      timers.push(setTimeout(() => contact.style.opacity = 1, lines.length * DISPLAY_DELAY));
-      timers.push(setTimeout(() => whatsapp.style.opacity = 1, (lines.length + 1) * DISPLAY_DELAY));
-
-      // Loop restart
-      timers.push(setTimeout(scheduleLoop, (lines.length + 2) * DISPLAY_DELAY));
-    }
-
-    function accelerateToNext() {
-      if (!running) return;
-
-      // Wenn wir noch keine Zeile zeigen, ignoriere
-      if (currentIndex < 0) return;
-
-      // Sofort zur nächsten Zeile springen (falls vorhanden),
-      // oder Kontakt/WhatsApp einblenden, wenn schon letzte Zeile
-      const nextIndex = currentIndex + 1;
-
-      clearAllTimers(); // restliche Wartezeiten entfernen
-
-      // wenn noch Zeilen übrig: nächste schneller einblenden
-      if (nextIndex < lines.length) {
-        // vorherige sofort ausblenden
-        lines[currentIndex].classList.remove("show");
-        lines[currentIndex].classList.add("hide");
-
-        // kurze, sanfte Mini-Pause (schneller)
-        const quick = Math.max(700, DISPLAY_DELAY * SPEEDUP_FACTOR);
-
-        timers.push(setTimeout(() => {
-          showLine(nextIndex);
-
-          // danach wieder normal weiterplanen ab nextIndex+1
-          const baseOffset = quick;
-
-          for (let i = nextIndex + 1; i < lines.length; i++) {
-            const when = baseOffset + (i - (nextIndex + 1) + 1) * DISPLAY_DELAY;
-            timers.push(setTimeout(() => showLine(i), when));
-          }
-
-          // Kontakt/WhatsApp & Loop wieder ansetzen
-          const totalAfter = baseOffset + (lines.length - (nextIndex + 1) + 1) * DISPLAY_DELAY;
-
-          timers.push(setTimeout(() => contact.style.opacity = 1, totalAfter));
-          timers.push(setTimeout(() => whatsapp.style.opacity = 1, totalAfter + DISPLAY_DELAY));
-          timers.push(setTimeout(scheduleLoop, totalAfter + (2 * DISPLAY_DELAY)));
-
-        }, quick));
-
-      } else {
-        // letzte Zeile war dran -> direkt Kontakt/WhatsApp
-        contact.style.opacity = 1;
-        whatsapp.style.opacity = 1;
-
-        // Loop nach kurzer Zeit neu starten
-        timers.push(setTimeout(scheduleLoop, 4000));
-      }
-    }
-
-    function startMusic() {
-      // sanftes Fade-In
-      music.volume = 0;
-      music.play().catch(() => {});
-      let v = 0;
-      const fade = setInterval(() => {
-        v += 0.02;
-        music.volume = Math.min(v, 1);
-        if (v >= 1) clearInterval(fade);
-      }, 200);
-    }
-
-    // Start
-    setLineTexts();
-
-    startButton.addEventListener("click", (e) => {
-      e.stopPropagation();
-      if (running) return;
-
-      running = true;
-      startButton.classList.add("hidden");
-      startMusic();
-
-      setTimeout(() => {
-        scheduleLoop();
-      }, START_PAUSE);
-    });
-
-    // Klick irgendwo auf die Seite -> nächste Zeile schneller
-    document.addEventListener("click", () => {
-      accelerateToNext();
-    }, { passive: true });
-  </script>
+startButton.onclick=()=>{
+  running=true;
+  startButton.classList.add("hidden");
+  music.play();
+  showNext();
+};
+</script>
 </body>
 </html>
 
