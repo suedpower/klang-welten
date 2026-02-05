@@ -17,20 +17,16 @@
 
   <style>
     body{
-      margin:0;
-      padding:0;
+      margin:0; padding:0;
       font-family:"Helvetica Neue", Arial, sans-serif;
       overflow:hidden;
       background:#000;
       text-align:center;
     }
 
-    /* Hintergrundbild (Mobile-fest) */
     #bg-image{
-      position:fixed;
-      inset:0;
-      width:100%;
-      height:100%;
+      position:fixed; inset:0;
+      width:100%; height:100%;
       object-fit:cover;
       z-index:-2;
       animation: breath 18s ease-in-out infinite;
@@ -41,15 +37,12 @@
       100%{transform:scale(1)}
     }
 
-    /* dunkle, ruhige Überlagerung */
     .overlay{
-      position:fixed;
-      inset:0;
+      position:fixed; inset:0;
       background:rgba(0,0,0,0.58);
       z-index:-1;
     }
 
-    /* Gold + schwarze Umrandung */
     .gold{
       color:#f1e3b0;
       text-shadow:
@@ -60,7 +53,6 @@
          0 0 12px rgba(241,227,176,0.35);
     }
 
-    /* Gold-Glow nur für Überschriften */
     .glowTitle{
       color:#f1e3b0;
       text-shadow:
@@ -72,62 +64,40 @@
          0 0 36px rgba(241,227,176,0.25);
     }
 
-    /* Hamburger Menü */
+    /* Menü */
     #menuToggle{
-      position:fixed;
-      top:16px;
-      right:16px;
-      width:52px;
-      height:52px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-
-      font-size:34px;
-      cursor:pointer;
-      z-index:9999;
-      user-select:none;
-
+      position:fixed; top:16px; right:16px;
+      width:52px; height:52px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:34px; cursor:pointer;
+      z-index:9999; user-select:none;
       background: rgba(0,0,0,0.45);
       border: 1px solid rgba(241,227,176,0.65);
-      border-radius: 999px;
+      border-radius:999px;
       backdrop-filter: blur(6px);
     }
-
     #menuPanel{
-      position:fixed;
-      top:0;
-      right:-290px;
-      width:250px;
-      height:100%;
+      position:fixed; top:0; right:-290px;
+      width:250px; height:100%;
       background:rgba(0,0,0,0.78);
       backdrop-filter: blur(10px);
       z-index:9998;
-      transition:right 0.45s ease;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      padding:26px;
-      box-sizing:border-box;
+      transition:right .45s ease;
+      display:flex; flex-direction:column; justify-content:center;
+      padding:26px; box-sizing:border-box;
     }
     #menuPanel.open{ right:0; }
     #menuPanel a{
-      display:block;
-      text-decoration:none;
-      margin:14px 0;
-      font-size:1.2em;
+      display:block; text-decoration:none;
+      margin:14px 0; font-size:1.2em;
+      cursor:pointer;
     }
 
-    /* Layout: zentriert, ruhig */
     .center{
-      position:fixed;
-      inset:0;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      padding:20px;
-      box-sizing:border-box;
+      position:fixed; inset:0;
+      display:flex; flex-direction:column;
+      justify-content:center; align-items:center;
+      padding:20px; box-sizing:border-box;
     }
 
     /* Start Button */
@@ -141,6 +111,7 @@
       backdrop-filter: blur(6px);
       animation:pulse 6s ease-in-out infinite;
       transition:opacity 1.2s ease, transform 1.2s ease;
+      z-index:5;
     }
     @keyframes pulse{
       0%{transform:scale(1);opacity:.85}
@@ -148,22 +119,19 @@
       100%{transform:scale(1);opacity:.85}
     }
     #startButton.hidden{
-      opacity:0;
-      pointer-events:none;
-      animation:none;
+      opacity:0; pointer-events:none; animation:none;
       transform:scale(0.98);
     }
 
-    /* Sections */
+    /* Bereiche: wir steuern Display direkt per JS */
     .section{
-      display:none;
       max-width:900px;
       width:100%;
       line-height:1.7;
+      display:none;
     }
-    .section.active{ display:block; }
 
-    /* Start-Sequenz Zeilen */
+    /* Zeilen */
     .line{
       opacity:0;
       font-size:2.1em;
@@ -175,14 +143,13 @@
     .line.show{ opacity:1; transform:translateY(0); }
     .line.hide{ opacity:0; transform:translateY(-6px); }
 
-    /* Kontakt + WhatsApp */
+    /* Kontakt/WhatsApp */
     #contactWrap, #whatsWrap{
       opacity:0;
       transition:opacity 2.5s ease;
       margin-top:18px;
       text-align:center;
     }
-
     .whatsapp{
       display:inline-block;
       padding:14px 26px;
@@ -195,31 +162,30 @@
       font-size:1.05em;
     }
 
-    /* Kapitel (Einblendung nach WhatsApp) */
+    /* Kapitel */
     .chapter{
       opacity:0;
-      transform: translateY(10px);
-      transition: opacity 2.5s ease, transform 2.5s ease;
-      max-width: 900px;
+      transform:translateY(10px);
+      transition:opacity 2.5s ease, transform 2.5s ease;
+      max-width:900px;
       width:100%;
-      text-align: left;
-      line-height: 1.6;
-      font-size: 1.05em;
-      margin-top: 26px;
-      pointer-events: none;
+      text-align:left;
+      line-height:1.6;
+      font-size:1.05em;
+      margin-top:26px;
+      pointer-events:none;
     }
     .chapter.show{
       opacity:1;
-      transform: translateY(0);
-      pointer-events: auto;
+      transform:translateY(0);
+      pointer-events:auto;
     }
 
-    /* Mobile */
     @media(max-width:600px){
       .center{ padding:12px; }
-      .line{ font-size:1.35em; margin:12px 0; }
       #menuToggle{ top:10px; right:10px; }
       #startButton{ font-size:1.2em; padding:12px 22px; }
+      .line{ font-size:1.35em; margin:12px 0; }
       .chapter{ font-size:1em; }
     }
   </style>
@@ -229,8 +195,7 @@
   <img id="bg-image" src="klangschalen.jpg" alt="Klangschalen Hintergrund">
   <div class="overlay"></div>
 
-  <!-- Menü -->
-  <div id="menuToggle" class="gold" aria-label="Menü öffnen">☰</div>
+  <div id="menuToggle" class="gold">☰</div>
   <nav id="menuPanel">
     <a class="gold" href="#" data-section="start">Start</a>
     <a class="gold" href="#" data-section="klangschalen">Klangschalen</a>
@@ -241,13 +206,13 @@
     <button id="startButton" class="gold">✨ Spüre den Klang</button>
 
     <!-- START -->
-    <div id="section-start" class="section active">
+    <div id="section-start" class="section">
       <div class="line gold" data-text="Bist du im Einklang mit dir selbst?"></div>
       <div class="line gold" data-text="Möchtest du mehr über die Wirkungsweise der Klangschalen erfahren?"></div>
       <div class="line gold" data-text="Ich begleite dich achtsam in die Welt der Klänge"></div>
       <div class="line gold" data-text="Erlebe tiefe Entspannung und neue Balance"></div>
 
-      <div id="contactWrap" class="gold" style="margin-top:18px;">
+      <div id="contactWrap" class="gold">
         <div style="font-size:1.15em;">📞 +49 160 3429752</div>
         <div style="margin-top:6px;opacity:.92;">Anja</div>
         <div style="margin-top:10px;font-size:.95em;opacity:.85;">
@@ -260,11 +225,10 @@
 
       <div id="whatsWrap">
         <a class="whatsapp"
-          href="https://wa.me/491603429752?text=Hallo%20Anja,%0Aich%20m%C3%B6chte%20gerne%20einen%20Termin%20f%C3%BCr%20eine%20Klangschalen-Anwendung%20anfragen.%0A%0AName:%0ATelefon:%0A"
-          target="_blank">💬 Termin anfragen via WhatsApp</a>
+           href="https://wa.me/491603429752?text=Hallo%20Anja,%0Aich%20m%C3%B6chte%20gerne%20einen%20Termin%20f%C3%BCr%20eine%20Klangschalen-Anwendung%20anfragen.%0A%0AName:%0ATelefon:%0A"
+           target="_blank">💬 Termin anfragen via WhatsApp</a>
       </div>
 
-      <!-- Kapitel (werden erst nach WhatsApp eingeblendet) -->
       <div id="chapterWrap">
         <div class="chapter gold" id="ch1">
           <h3 class="glowTitle" style="margin:0 0 10px 0;font-size:1.25em;">Alles ist Schwingung</h3>
@@ -277,28 +241,23 @@
 
         <div class="chapter gold" id="ch2">
           <h3 class="glowTitle" style="margin:0 0 10px 0;font-size:1.25em;">Klang und Resonanz</h3>
-
           <p style="margin:0 0 12px 0;">
             Durch unsere 5 Sinne (Sehen, Hören, Riechen, Schmecken, Tasten) nehmen wir in erster Linie bewusst unsere Umgebung wahr.
             Durch weitere 5 Sinne (Übersinnliche Wahrnehmung, Temperatursinn, Schmerzempfinden, Gleichgewichtssinn, Körperempfindung)
             gehen wir auf die unbewusste Wahrnehmung. Diese beiden Bewusstseinselemente und natürlich noch vieles mehr, machen uns Menschen aus.
           </p>
-
           <p style="margin:0 0 12px 0;">
             Klang erfasst die ganze Person in ihrer Einheit. Der Begriff "Person" kommt aus der lateinischen Sprache und heisst eigentlich
             per=durch und sonare = klingen, also durchklingen...
           </p>
-
           <p style="margin:0 0 12px 0;">
             Klänge können unser Bewusstsein beeinflussen und verändern. Die Schallwellen der Klänge werden in Nervenimpulse umgewandelt und dem Gehirn
             zugeführt. Das Gehirn schickt diese Impulse an den richtigen Ort im Körper und harmonisiert dort die Energien.
           </p>
-
           <p style="margin:0 0 12px 0;">
             Wir können diese Klänge aber auch mit unserem Körper, der Haut, dem Gewebe und den Knochen wahrnehmen und spüren. Wie Wassertropfen,
             die in unbewegtes Wasser fallen, eine kreisförmige Welle auslösen, pflanzen sich die Schallwellen in unserem Körper sehr gut fort.
           </p>
-
           <p style="margin:0;">
             Wir bestehen zu 70-80 % aus Wasser. So entsteht in unserem Körperinnern durch Klang eine zarte Massage auf molekularer Ebene.
             Der Körper geht in eine Resonanz mit den Klängen und beginnt mitzuschwingen.
@@ -335,31 +294,32 @@
     </div>
   </div>
 
-  <!-- Musik -->
   <audio id="bg-music" loop>
-    <source src="meditation.mp3" type="audio/mpeg">
+    <source src="meditation.mp3" type="audio/mpeg" />
   </audio>
 
   <script>
-    // ----- Menü -----
+    // --- Menü UI ---
     const menuToggle = document.getElementById("menuToggle");
     const menuPanel  = document.getElementById("menuPanel");
     menuToggle.addEventListener("click",(e)=>{e.stopPropagation();menuPanel.classList.toggle("open")});
     document.addEventListener("click",()=>menuPanel.classList.remove("open"),{passive:true});
 
-    // Sections
-    const sections = {
-      start: document.getElementById("section-start"),
-      klangschalen: document.getElementById("section-klangschalen"),
-      kontakt: document.getElementById("section-kontakt")
-    };
+    // --- Bereiche robust steuern (kein active-Fehler möglich) ---
+    const secStart = document.getElementById("section-start");
+    const secKlang = document.getElementById("section-klangschalen");
+    const secKontakt = document.getElementById("section-kontakt");
 
-    function showSection(name){
-      Object.keys(sections).forEach(k => sections[k].classList.remove("active"));
-      sections[name].classList.add("active");
+    function showOnly(which){
+      secStart.style.display   = (which === "start") ? "block" : "none";
+      secKlang.style.display   = (which === "klangschalen") ? "block" : "none";
+      secKontakt.style.display = (which === "kontakt") ? "block" : "none";
     }
 
-    // ----- Audio -----
+    // Default: Start sichtbar (Button sichtbar)
+    showOnly("start");
+
+    // --- Audio ---
     const audio = document.getElementById("bg-music");
 
     function fadeInAudio(){
@@ -373,7 +333,7 @@
       }, 200);
     }
 
-    function fadeOutAudio(ms=700){
+    function fadeOutAudio(ms=650){
       return new Promise((resolve)=>{
         if(!audio || audio.paused) return resolve();
         const steps=20;
@@ -392,7 +352,7 @@
       });
     }
 
-    // ----- Start Sequenz -----
+    // --- Start Sequenz ---
     const startButton = document.getElementById("startButton");
     const lines = Array.from(document.querySelectorAll("#section-start .line"));
     const contactWrap = document.getElementById("contactWrap");
@@ -403,7 +363,7 @@
     let ended = false;
     let timer = null;
 
-    // Desktop/Mobile Timing
+    // Timing
     const isMobile = window.matchMedia("(max-width: 600px)").matches;
     const DISPLAY_TIME = isMobile ? 9000 : 11000;
     const FIRST_LINE_EXTRA = isMobile ? 5000 : 8000;
@@ -422,7 +382,7 @@
       timer = null;
     }
 
-    // ----- Kapitel (nach WhatsApp) -----
+    // Kapitel
     let chapterIndex = 0;
     let chapterTimer = null;
     const CHAPTER_TIME = 20000;
@@ -439,21 +399,15 @@
 
     function showChapter(i){
       clearTimeout(chapterTimer);
-
-      const chapters = [
-        document.getElementById("ch1"),
-        document.getElementById("ch2")
-      ].filter(Boolean);
-
+      const chapters = [document.getElementById("ch1"), document.getElementById("ch2")].filter(Boolean);
       chapters.forEach(c => c.classList.remove("show"));
 
-      if (i < chapters.length) {
+      if(i < chapters.length){
         chapters[i].classList.add("show");
         chapterIndex = i;
-        chapterTimer = setTimeout(() => showChapter(i + 1), CHAPTER_TIME);
+        chapterTimer = setTimeout(()=>showChapter(i+1), CHAPTER_TIME);
       } else {
-        // Ende: letztes Kapitel bleibt sichtbar
-        if (chapters.length) chapters[chapters.length - 1].classList.add("show");
+        if(chapters.length) chapters[chapters.length-1].classList.add("show");
       }
     }
 
@@ -482,40 +436,16 @@
       if(idx < lines.length){
         lines[idx].classList.remove("hide");
         lines[idx].classList.add("show");
-
         const delay = (idx === 0) ? (DISPLAY_TIME + FIRST_LINE_EXTRA) : DISPLAY_TIME;
         timer = setTimeout(showNext, delay);
       } else {
-        // Ende der Zeilen: Kontakt + WhatsApp einblenden, KEIN Loop
         contactWrap.style.opacity = 1;
         whatsWrap.style.opacity = 1;
         ended = true;
-
-        // Kapitel starten
         clearChapters();
         showChapter(0);
       }
     }
-
-    // Klick: erst Kapitel weiter, sonst Zeilen schneller
-    document.addEventListener("click", ()=>{
-      const ch1 = document.getElementById("ch1");
-      const ch2 = document.getElementById("ch2");
-      const chapterShowing =
-        (ch1 && ch1.classList.contains("show")) ||
-        (ch2 && ch2.classList.contains("show"));
-
-      if (chapterShowing) {
-        showChapter(chapterIndex + 1);
-        return;
-      }
-
-      if(!running || ended) return;
-      if(!sections.start.classList.contains("active")) return;
-
-      clearSeq();
-      timer = setTimeout(showNext, CLICK_NEXT_DELAY);
-    }, {passive:true});
 
     // Start Button
     startButton.addEventListener("click",(e)=>{
@@ -538,7 +468,30 @@
       showNext();
     });
 
-    // Menü-Link Switch + Audio aus + Start resetten bei Rückkehr
+    // Klick: Kapitel weiter, sonst Zeilen schneller
+    document.addEventListener("click", ()=>{
+      // nur wenn Start sichtbar ist
+      const startVisible = (secStart.style.display !== "none");
+      if(!startVisible) return;
+
+      const ch1 = document.getElementById("ch1");
+      const ch2 = document.getElementById("ch2");
+      const chapterShowing =
+        (ch1 && ch1.classList.contains("show")) ||
+        (ch2 && ch2.classList.contains("show"));
+
+      if(chapterShowing){
+        showChapter(chapterIndex + 1);
+        return;
+      }
+
+      if(!running || ended) return;
+
+      clearSeq();
+      timer = setTimeout(showNext, CLICK_NEXT_DELAY);
+    }, {passive:true});
+
+    // Menü Navigation (ohne Seitenwechsel)
     document.querySelectorAll("[data-section]").forEach(link=>{
       link.addEventListener("click", async (e)=>{
         e.preventDefault();
@@ -547,11 +500,11 @@
 
         await fadeOutAudio(650);
 
-        showSection(target);
-        if (target === "start") {
+        showOnly(target);
+
+        if(target === "start"){
           resetStartView();
         } else {
-          // beim Weggehen: Sequenz/Kapitel stoppen (damit nichts im Hintergrund weiterläuft)
           clearSeq();
           clearChapters();
         }
