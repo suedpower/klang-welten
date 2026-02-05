@@ -14,19 +14,25 @@
   </script>
 
   <title>Klangwelten – Klangschalen & Meditation in Tengen</title>
+  <meta name="description" content="Klangwelten – Klangschalen & Meditation in 78250 Tengen. Entspannung, Klang und innere Balance – mit Anja.">
+  <meta name="robots" content="index, follow">
 
   <style>
     body{
-      margin:0; padding:0;
+      margin:0;
+      padding:0;
       font-family:"Helvetica Neue", Arial, sans-serif;
       overflow:hidden;
       background:#000;
       text-align:center;
     }
 
+    /* Hintergrundbild (Mobile-fest) */
     #bg-image{
-      position:fixed; inset:0;
-      width:100%; height:100%;
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
       object-fit:cover;
       z-index:-2;
       animation: breath 18s ease-in-out infinite;
@@ -37,12 +43,15 @@
       100%{transform:scale(1)}
     }
 
+    /* dunkle, ruhige Überlagerung */
     .overlay{
-      position:fixed; inset:0;
+      position:fixed;
+      inset:0;
       background:rgba(0,0,0,0.58);
       z-index:-1;
     }
 
+    /* Gold + schwarze Umrandung */
     .gold{
       color:#f1e3b0;
       text-shadow:
@@ -53,6 +62,7 @@
          0 0 12px rgba(241,227,176,0.35);
     }
 
+    /* Gold-Glow nur für Überschriften */
     .glowTitle{
       color:#f1e3b0;
       text-shadow:
@@ -64,44 +74,68 @@
          0 0 36px rgba(241,227,176,0.25);
     }
 
-    /* Menü */
+    /* Hamburger Menü */
     #menuToggle{
-      position:fixed; top:16px; right:16px;
-      width:52px; height:52px;
-      display:flex; align-items:center; justify-content:center;
-      font-size:34px; cursor:pointer;
-      z-index:9999; user-select:none;
+      position:fixed;
+      top:16px;
+      right:16px;
+      width:52px;
+      height:52px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      font-size:34px;
+      cursor:pointer;
+      z-index:9999;
+      user-select:none;
+
       background: rgba(0,0,0,0.45);
       border: 1px solid rgba(241,227,176,0.65);
-      border-radius:999px;
+      border-radius: 999px;
       backdrop-filter: blur(6px);
     }
+
     #menuPanel{
-      position:fixed; top:0; right:-290px;
-      width:250px; height:100%;
+      position:fixed;
+      top:0;
+      right:-290px;
+      width:250px;
+      height:100%;
       background:rgba(0,0,0,0.78);
       backdrop-filter: blur(10px);
       z-index:9998;
-      transition:right .45s ease;
-      display:flex; flex-direction:column; justify-content:center;
-      padding:26px; box-sizing:border-box;
+      transition:right 0.45s ease;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      padding:26px;
+      box-sizing:border-box;
     }
     #menuPanel.open{ right:0; }
     #menuPanel a{
-      display:block; text-decoration:none;
-      margin:14px 0; font-size:1.2em;
+      display:block;
+      text-decoration:none;
+      margin:14px 0;
+      font-size:1.2em;
       cursor:pointer;
     }
 
+    /* Layout: zentriert, ruhig */
     .center{
-      position:fixed; inset:0;
-      display:flex; flex-direction:column;
-      justify-content:center; align-items:center;
-      padding:20px; box-sizing:border-box;
+      position:fixed;
+      inset:0;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      padding:20px;
+      box-sizing:border-box;
     }
 
-    /* Start Button */
+    /* Start Button (immer sichtbar, außer aktiv "hidden") */
     #startButton{
+      display:inline-block;
       font-size:1.6em;
       padding:16px 34px;
       border-radius:50px;
@@ -119,11 +153,13 @@
       100%{transform:scale(1);opacity:.85}
     }
     #startButton.hidden{
-      opacity:0; pointer-events:none; animation:none;
+      opacity:0;
+      pointer-events:none;
+      animation:none;
       transform:scale(0.98);
     }
 
-    /* Bereiche: wir steuern Display direkt per JS */
+    /* Bereiche: robust per JS (style.display) */
     .section{
       max-width:900px;
       width:100%;
@@ -143,13 +179,14 @@
     .line.show{ opacity:1; transform:translateY(0); }
     .line.hide{ opacity:0; transform:translateY(-6px); }
 
-    /* Kontakt/WhatsApp */
+    /* Kontakt + WhatsApp */
     #contactWrap, #whatsWrap{
       opacity:0;
       transition:opacity 2.5s ease;
       margin-top:18px;
       text-align:center;
     }
+
     .whatsapp{
       display:inline-block;
       padding:14px 26px;
@@ -162,30 +199,31 @@
       font-size:1.05em;
     }
 
-    /* Kapitel */
+    /* Kapitel (nach WhatsApp) */
     .chapter{
       opacity:0;
-      transform:translateY(10px);
-      transition:opacity 2.5s ease, transform 2.5s ease;
-      max-width:900px;
+      transform: translateY(10px);
+      transition: opacity 2.5s ease, transform 2.5s ease;
+      max-width: 900px;
       width:100%;
-      text-align:left;
-      line-height:1.6;
-      font-size:1.05em;
-      margin-top:26px;
-      pointer-events:none;
+      text-align: left;
+      line-height: 1.6;
+      font-size: 1.05em;
+      margin-top: 26px;
+      pointer-events: none;
     }
     .chapter.show{
       opacity:1;
-      transform:translateY(0);
-      pointer-events:auto;
+      transform: translateY(0);
+      pointer-events: auto;
     }
 
+    /* Mobile */
     @media(max-width:600px){
       .center{ padding:12px; }
+      .line{ font-size:1.35em; margin:12px 0; }
       #menuToggle{ top:10px; right:10px; }
       #startButton{ font-size:1.2em; padding:12px 22px; }
-      .line{ font-size:1.35em; margin:12px 0; }
       .chapter{ font-size:1em; }
     }
   </style>
@@ -195,7 +233,8 @@
   <img id="bg-image" src="klangschalen.jpg" alt="Klangschalen Hintergrund">
   <div class="overlay"></div>
 
-  <div id="menuToggle" class="gold">☰</div>
+  <!-- Menü -->
+  <div id="menuToggle" class="gold" aria-label="Menü öffnen">☰</div>
   <nav id="menuPanel">
     <a class="gold" href="#" data-section="start">Start</a>
     <a class="gold" href="#" data-section="klangschalen">Klangschalen</a>
@@ -203,6 +242,7 @@
   </nav>
 
   <div class="center">
+    <!-- Button ist IMMER im DOM -->
     <button id="startButton" class="gold">✨ Spüre den Klang</button>
 
     <!-- START -->
@@ -294,6 +334,7 @@
     </div>
   </div>
 
+  <!-- Musik -->
   <audio id="bg-music" loop>
     <source src="meditation.mp3" type="audio/mpeg" />
   </audio>
@@ -302,12 +343,15 @@
     // --- Menü UI ---
     const menuToggle = document.getElementById("menuToggle");
     const menuPanel  = document.getElementById("menuPanel");
-    menuToggle.addEventListener("click",(e)=>{e.stopPropagation();menuPanel.classList.toggle("open")});
-    document.addEventListener("click",()=>menuPanel.classList.remove("open"),{passive:true});
+    menuToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      menuPanel.classList.toggle("open");
+    });
+    document.addEventListener("click", () => menuPanel.classList.remove("open"), { passive:true });
 
-    // --- Bereiche robust steuern (kein active-Fehler möglich) ---
-    const secStart = document.getElementById("section-start");
-    const secKlang = document.getElementById("section-klangschalen");
+    // --- Bereiche (stabil per display) ---
+    const secStart   = document.getElementById("section-start");
+    const secKlang   = document.getElementById("section-klangschalen");
     const secKontakt = document.getElementById("section-kontakt");
 
     function showOnly(which){
@@ -315,9 +359,6 @@
       secKlang.style.display   = (which === "klangschalen") ? "block" : "none";
       secKontakt.style.display = (which === "kontakt") ? "block" : "none";
     }
-
-    // Default: Start sichtbar (Button sichtbar)
-    showOnly("start");
 
     // --- Audio ---
     const audio = document.getElementById("bg-music");
@@ -333,17 +374,17 @@
       }, 200);
     }
 
-    function fadeOutAudio(ms=650){
-      return new Promise((resolve)=>{
-        if(!audio || audio.paused) return resolve();
-        const steps=20;
-        const stepTime=Math.max(20, Math.floor(ms/steps));
-        const startVol = (typeof audio.volume==="number") ? audio.volume : 1;
-        let i=0;
-        const t=setInterval(()=>{
+    function fadeOutAudio(ms = 650){
+      return new Promise((resolve) => {
+        if (!audio || audio.paused) return resolve();
+        const steps = 20;
+        const stepTime = Math.max(20, Math.floor(ms / steps));
+        const startVol = (typeof audio.volume === "number") ? audio.volume : 1;
+        let i = 0;
+        const t = setInterval(() => {
           i++;
-          audio.volume = Math.max(0, startVol*(1-i/steps));
-          if(i>=steps){
+          audio.volume = Math.max(0, startVol * (1 - i / steps));
+          if (i >= steps) {
             clearInterval(t);
             audio.pause();
             resolve();
@@ -370,11 +411,13 @@
     const CLICK_NEXT_DELAY = 1000;
 
     function ensurePunctuation(t){
-      const s=(t||"").trim();
-      if(!s) return s;
-      const last=s.slice(-1);
-      return [".","?","!","…"].includes(last) ? s : (s+".");
+      const s = (t || "").trim();
+      if (!s) return s;
+      const last = s.slice(-1);
+      return [".","?","!","…"].includes(last) ? s : (s + ".");
     }
+
+    // Zeilentexte setzen (Punkte ergänzen)
     lines.forEach(l => l.textContent = ensurePunctuation(l.getAttribute("data-text")));
 
     function clearSeq(){
@@ -402,12 +445,12 @@
       const chapters = [document.getElementById("ch1"), document.getElementById("ch2")].filter(Boolean);
       chapters.forEach(c => c.classList.remove("show"));
 
-      if(i < chapters.length){
+      if (i < chapters.length) {
         chapters[i].classList.add("show");
         chapterIndex = i;
-        chapterTimer = setTimeout(()=>showChapter(i+1), CHAPTER_TIME);
+        chapterTimer = setTimeout(() => showChapter(i + 1), CHAPTER_TIME);
       } else {
-        if(chapters.length) chapters[chapters.length-1].classList.add("show");
+        if (chapters.length) chapters[chapters.length - 1].classList.add("show");
       }
     }
 
@@ -424,55 +467,35 @@
     }
 
     function showNext(){
-      if(ended) return;
+      if (ended) return;
 
-      if(idx >= 0 && idx < lines.length){
+      if (idx >= 0 && idx < lines.length) {
         lines[idx].classList.remove("show");
         lines[idx].classList.add("hide");
       }
 
       idx++;
 
-      if(idx < lines.length){
+      if (idx < lines.length) {
         lines[idx].classList.remove("hide");
         lines[idx].classList.add("show");
+
         const delay = (idx === 0) ? (DISPLAY_TIME + FIRST_LINE_EXTRA) : DISPLAY_TIME;
         timer = setTimeout(showNext, delay);
       } else {
         contactWrap.style.opacity = 1;
         whatsWrap.style.opacity = 1;
         ended = true;
+
         clearChapters();
         showChapter(0);
       }
     }
 
-    // Start Button
-    startButton.addEventListener("click",(e)=>{
-      e.stopPropagation();
-      if(running) return;
-
-      running = true;
-      startButton.classList.add("hidden");
-      fadeInAudio();
-
-      // sauber starten
-      clearSeq();
-      clearChapters();
-      idx = -1;
-      ended = false;
-      contactWrap.style.opacity = 0;
-      whatsWrap.style.opacity = 0;
-      lines.forEach(l => l.classList.remove("show","hide"));
-
-      showNext();
-    });
-
-    // Klick: Kapitel weiter, sonst Zeilen schneller
-    document.addEventListener("click", ()=>{
-      // nur wenn Start sichtbar ist
+    // Klick: Kapitel weiter, sonst Zeilen schneller (nur wenn Start angezeigt)
+    document.addEventListener("click", () => {
       const startVisible = (secStart.style.display !== "none");
-      if(!startVisible) return;
+      if (!startVisible) return;
 
       const ch1 = document.getElementById("ch1");
       const ch2 = document.getElementById("ch2");
@@ -480,20 +503,41 @@
         (ch1 && ch1.classList.contains("show")) ||
         (ch2 && ch2.classList.contains("show"));
 
-      if(chapterShowing){
+      if (chapterShowing) {
         showChapter(chapterIndex + 1);
         return;
       }
 
-      if(!running || ended) return;
+      if (!running || ended) return;
 
       clearSeq();
       timer = setTimeout(showNext, CLICK_NEXT_DELAY);
-    }, {passive:true});
+    }, { passive:true });
 
-    // Menü Navigation (ohne Seitenwechsel)
-    document.querySelectorAll("[data-section]").forEach(link=>{
-      link.addEventListener("click", async (e)=>{
+    // Button startet Musik + Sequenz
+    startButton.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (running) return;
+
+      running = true;
+      startButton.classList.add("hidden");
+      fadeInAudio();
+
+      clearSeq();
+      clearChapters();
+      idx = -1;
+      ended = false;
+
+      contactWrap.style.opacity = 0;
+      whatsWrap.style.opacity = 0;
+      lines.forEach(l => l.classList.remove("show","hide"));
+
+      showNext();
+    });
+
+    // Menü Navigation (keine separaten Seiten)
+    document.querySelectorAll("[data-section]").forEach(link => {
+      link.addEventListener("click", async (e) => {
         e.preventDefault();
         const target = link.getAttribute("data-section");
         menuPanel.classList.remove("open");
@@ -502,13 +546,19 @@
 
         showOnly(target);
 
-        if(target === "start"){
+        if (target === "start") {
           resetStartView();
         } else {
           clearSeq();
           clearChapters();
         }
       });
+    });
+
+    // Harter Startzustand beim Laden: Start + Button sicher sichtbar
+    document.addEventListener("DOMContentLoaded", () => {
+      showOnly("start");
+      resetStartView();
     });
   </script>
 </body>
