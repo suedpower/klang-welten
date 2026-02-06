@@ -1,173 +1,525 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Klangwelten – Klangschalen & Meditation in Tengen</title>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XBM9TYXKX2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XBM9TYXKX2');
+  </script>
 
-<style>
-body{
-  margin:0;
-  font-family:"Helvetica Neue", Arial, sans-serif;
-  overflow-x:hidden;
-  overflow-y:auto;
-  background:#000;
-  text-align:center;
-}
+  <title>Klangwelten – Klangschalen & Meditation in Tengen</title>
+  <meta name="description" content="Klangschalen-Meditation und Klangschalen-Anwendungen in 78250 Tengen. Tief entspannen, zur Ruhe kommen und neue Balance finden – mit Anja.">
+  <meta name="robots" content="index, follow">
 
-#bg-image{
-  position:fixed; inset:0;
-  width:100%; height:100%;
-  object-fit:cover;
-  z-index:-2;
-  animation:breath 18s ease-in-out infinite;
-}
-@keyframes breath{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
+  <style>
+    body{
+      margin:0; padding:0;
+      font-family:"Helvetica Neue", Arial, sans-serif;
+      overflow-x:hidden;
+      overflow-y:auto;
+      background:#000;
+      text-align:center;
+      min-height:100vh;
+    }
 
-.overlay{position:fixed; inset:0; background:rgba(0,0,0,0.58); z-index:-1;}
+    /* Hintergrundbild */
+    #bg-image{
+      position:fixed; inset:0;
+      width:100%; height:100%;
+      object-fit:cover;
+      z-index:-2;
+      animation:breath 18s ease-in-out infinite;
+    }
+    @keyframes breath{
+      0%{transform:scale(1)}
+      50%{transform:scale(1.04)}
+      100%{transform:scale(1)}
+    }
 
-.gold{
-  color:#f1e3b0;
-  text-shadow:-1px -1px 2px #000,1px -1px 2px #000,-1px 1px 2px #000,1px 1px 2px #000,0 0 12px rgba(241,227,176,0.35);
-}
+    /* Overlay */
+    .overlay{
+      position:fixed; inset:0;
+      background:rgba(0,0,0,0.58);
+      z-index:-1;
+    }
 
-#menuToggle{position:fixed; top:16px; right:16px; font-size:34px; cursor:pointer; z-index:9999;}
-#menuPanel{
-  position:fixed; top:0; right:-290px; width:250px; height:100%;
-  background:rgba(0,0,0,0.78); backdrop-filter:blur(10px);
-  z-index:9998; transition:right .45s ease;
-  display:flex; flex-direction:column; justify-content:center; padding:26px;
-}
-#menuPanel.open{right:0;}
-#menuPanel a{display:block; margin:14px 0; font-size:1.2em; text-decoration:none;}
+    /* Gold */
+    .gold{
+      color:#f1e3b0;
+      text-shadow:
+        -1px -1px 2px #000,
+         1px -1px 2px #000,
+        -1px  1px 2px #000,
+         1px  1px 2px #000,
+         0 0 12px rgba(241,227,176,0.35);
+    }
 
-.center{
-  position:fixed; inset:0;
-  display:flex; flex-direction:column;
-  justify-content:center; align-items:center;
-  padding:20px; z-index:1;
-}
+    /* Menü */
+    #menuToggle{
+      position:fixed;
+      top:16px;
+      right:16px;
+      width:52px;
+      height:52px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:34px;
+      cursor:pointer;
+      z-index:9999;
+      user-select:none;
+      background: rgba(0,0,0,0.45);
+      border: 1px solid rgba(241,227,176,0.65);
+      border-radius: 999px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
 
-#startButton{
-  font-size:1.6em; padding:16px 34px; border-radius:50px;
-  border:1px solid #f1e3b0; background:rgba(255,255,255,0.08);
-  cursor:pointer; animation:pulse 6s ease-in-out infinite;
-}
-@keyframes pulse{0%{transform:scale(1);opacity:.85}50%{transform:scale(1.04);opacity:1}100%{transform:scale(1);opacity:.85}}
-#startButton.hidden{opacity:0; pointer-events:none;}
+    #menuPanel{
+      position:fixed;
+      top:0;
+      right:-290px;
+      width:250px;
+      height:100%;
+      background:rgba(0,0,0,0.78);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index:9998;
+      transition:right 0.45s ease;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      padding:26px;
+      box-sizing:border-box;
+    }
+    #menuPanel.open{ right:0; }
+    #menuPanel a{
+      display:block;
+      text-decoration:none;
+      margin:14px 0;
+      font-size:1.2em;
+      cursor:pointer;
+    }
 
-.section{display:none; max-width:900px; width:100%;}
-.section.active{display:block;}
+    /* Layout */
+    .center{
+      position:fixed;
+      inset:0;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      padding:20px;
+      box-sizing:border-box;
+      z-index:1;
+    }
 
-.line{opacity:0; font-size:2em; margin:14px 0; transition:opacity 2s ease;}
-.line.show{opacity:1;}
+    /* Start Button */
+    #startButton{
+      display:inline-block;
+      font-size:1.6em;
+      padding:16px 34px;
+      border-radius:50px;
+      border:1px solid #f1e3b0;
+      background:rgba(255,255,255,0.08);
+      cursor:pointer;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      animation:pulse 6s ease-in-out infinite;
+      transition:opacity 1.2s ease, transform 1.2s ease;
+      position:relative;
+      z-index:10;
+    }
+    @keyframes pulse{
+      0%{transform:scale(1);opacity:.85}
+      50%{transform:scale(1.04);opacity:1}
+      100%{transform:scale(1);opacity:.85}
+    }
+    #startButton.hidden{
+      opacity:0;
+      pointer-events:none;
+      animation:none;
+      transform:scale(0.98);
+    }
 
-#contactWrap,#whatsWrap{opacity:0; transition:opacity 2s ease; margin-top:16px;}
+    /* Bereiche */
+    .section{
+      display:none;
+      max-width:900px;
+      width:100%;
+      font-size:1.25em;
+      line-height:1.55;
+      margin-top:14px;
+    }
+    .section.active{ display:block; }
 
-.whatsapp{
-  display:inline-block; padding:14px 26px; border-radius:50px;
-  background:linear-gradient(135deg,#25D366,#1da851); color:#fff;
-  text-decoration:none; margin-top:16px;
-}
+    /* Zeilen */
+    .line{
+      opacity:0;
+      font-size:2.1em;
+      margin:18px 0;
+      transition:opacity 2.5s ease, transform 2.5s ease;
+      transform:translateY(10px);
+      text-align:center;
+    }
+    .line.show{ opacity:1; transform:translateY(0); }
+    .line.hide{ opacity:0; transform:translateY(-6px); }
 
-/* Langer Text unter Start */
-.startLongText{
-  max-width:900px; margin-top:40px;
-  text-align:left; line-height:1.65;
-  display:none; /* ← WICHTIG */
-}
-.startLongText h3{text-align:center; font-size:1.35em;}
-.startLongText p{margin:0 0 14px 0;}
+    /* Kontakt/WhatsApp */
+    #contactWrap, #whatsWrap{
+      opacity:0;
+      transition:opacity 2.5s ease;
+      margin-top:18px;
+      text-align:center;
+    }
 
-@media(max-width:600px){
-  .line{font-size:1.3em;}
-  #startButton{font-size:1.2em;}
-}
-</style>
+    .whatsapp{
+      display:inline-block;
+      padding:14px 26px;
+      border-radius:50px;
+      background:linear-gradient(135deg,#25D366,#1da851);
+      color:#fff;
+      text-decoration:none;
+      margin-top:16px;
+      box-shadow:0 0 25px rgba(0,0,0,0.5);
+      font-size:1.05em;
+    }
+
+    /* Langer Text unter Start (standardmäßig AUS) */
+    #startLongText{
+      display:none;              /* <- wichtig: beim Laden unsichtbar */
+      max-width:900px;
+      margin-top:40px;
+      text-align:left;
+      line-height:1.65;
+      font-size:1.05em;
+    }
+    #startLongText h3{
+      margin:0 0 12px 0;
+      font-size:1.35em;
+      text-align:center;
+      font-weight:700;
+    }
+    #startLongText p{
+      margin:0 0 14px 0;
+    }
+
+    @media (max-width:600px){
+      .center{ padding:12px; }
+      .line{ font-size:1.35em; margin:12px 0; }
+      #menuToggle{ top:10px; right:10px; }
+      #startButton{ font-size:1.2em; padding:12px 22px; }
+      .section{ font-size:1.05em; }
+      #startLongText{ font-size:1em; }
+      #startLongText h3{ font-size:1.2em; }
+    }
+  </style>
 </head>
 
 <body>
-<img id="bg-image" src="klangschalen.jpg">
-<div class="overlay"></div>
+  <img id="bg-image" src="klangschalen.jpg" alt="Klangschalen Hintergrund">
+  <div class="overlay"></div>
 
-<div id="menuToggle" class="gold">☰</div>
-<nav id="menuPanel">
-  <a class="gold" href="#" data-section="start">Start</a>
-  <a class="gold" href="#" data-section="klangschalen">Klangschalen</a>
-  <a class="gold" href="#" data-section="kontakt">Kontakt</a>
-</nav>
+  <!-- Menü -->
+  <div id="menuToggle" class="gold" aria-label="Menü öffnen">☰</div>
+  <nav id="menuPanel">
+    <a class="gold" href="#start" data-section="start">Start</a>
+    <a class="gold" href="#klangschalen" data-section="klangschalen">Klangschalen</a>
+    <a class="gold" href="#kontakt" data-section="kontakt">Kontakt</a>
+  </nav>
 
-<div class="center">
-<button id="startButton" class="gold">✨ Spüre den Klang</button>
+  <div class="center">
+    <button id="startButton" class="gold" type="button">✨ Spüre den Klang</button>
 
-<div id="section-start" class="section active">
-  <div class="line gold" data-text="Bist du im Einklang mit dir selbst?"></div>
-  <div class="line gold" data-text="Möchtest du mehr über die Wirkungsweise der Klangschalen erfahren?"></div>
-  <div class="line gold" data-text="Ich begleite dich achtsam in die Welt der Klänge"></div>
-  <div class="line gold" data-text="Erlebe tiefe Entspannung und neue Balance"></div>
+    <!-- START -->
+    <div id="section-start" class="section active">
+      <div class="line gold" data-text="Bist du im Einklang mit dir selbst?"></div>
+      <div class="line gold" data-text="Möchtest du mehr über die Wirkungsweise der Klangschalen erfahren?"></div>
+      <div class="line gold" data-text="Ich begleite dich achtsam in die Welt der Klänge"></div>
+      <div class="line gold" data-text="Erlebe tiefe Entspannung und neue Balance"></div>
 
-  <div id="contactWrap" class="gold">📞 +49 160 3429752<br>Anja<br>📍 78250 Tengen</div>
-  <div id="whatsWrap"><a class="whatsapp" href="https://wa.me/491603429752">💬 Termin anfragen via WhatsApp</a></div>
+      <div id="contactWrap" class="gold" style="margin-top:18px;">
+        <div style="font-size:1.15em;">📞 +49 160 3429752</div>
+        <div style="margin-top:6px;opacity:.92;">Anja</div>
+        <div style="margin-top:10px;font-size:.95em;opacity:.85;">
+          📍 78250 Tengen<br>
+          <a class="gold" style="text-decoration:none;" href="https://www.google.com/maps/search/?api=1&query=78250+Tengen" target="_blank" rel="noopener">
+            Standort auf Google Maps öffnen
+          </a>
+        </div>
+      </div>
 
-  <!-- Langer Text -->
-  <div id="startLongText" class="startLongText gold">
-    <h3>Alles ist Schwingung</h3>
-    <p>Schwingung ist Leben und Leben ist Bewegung. Jedes Lebewesen besteht aus Atomen, um deren Kern Elektronen kreisen...</p>
+      <div id="whatsWrap">
+        <a class="whatsapp"
+           href="https://wa.me/491603429752?text=Hallo%20Anja,%0Aich%20m%C3%B6chte%20gerne%20einen%20Termin%20f%C3%BCr%20eine%20Klangschalen-Anwendung%20anfragen.%0A%0AName:%0ATelefon:%0A"
+           target="_blank" rel="noopener">💬 Termin anfragen via WhatsApp</a>
+      </div>
 
-    <h3>Klang und Resonanz</h3>
-    <p>Durch unsere 5 Sinne (Sehen, Hören, Riechen, Schmecken, Tasten)...</p>
-    <p>Klang erfasst die ganze Person in ihrer Einheit...</p>
-    <p>Klänge können unser Bewusstsein beeinflussen...</p>
-    <p>Wir können diese Klänge aber auch mit unserem Körper wahrnehmen...</p>
-    <p>Wir bestehen zu 70–80 % aus Wasser...</p>
+      <!-- Langer Text: NUR wenn Menü "Start" geklickt wurde -->
+      <div id="startLongText" class="gold">
+        <h3>Alles ist Schwingung</h3>
+        <p>
+          Schwingung ist Leben und Leben ist Bewegung. Jedes Lebewesen besteht aus Atomen, um deren Kern Elektronen kreisen.
+          Jede Kreisbewegung dieser Elektronen ist eine Schwingung, die ein Energiefeld hat. Diese Energiefelder lassen sich messen
+          und aufzeigen diversen Messgeräten und mit der Aurafotografie.
+        </p>
+
+        <h3 style="margin-top:26px;">Klang und Resonanz</h3>
+        <p>
+          Durch unsere 5 Sinne (Sehen, Hören, Riechen, Schmecken, Tasten) nehmen wir in erster Linie bewusst unsere Umgebung wahr.
+          Durch weitere 5 Sinne (Übersinnliche Wahrnehmung, Temperatursinn, Schmerzempfingen, Gleichgewichtssinn, Körperempfindung)
+          gehen wir auf die unbewusste Wahrnehmung. Diese beiden Bewusstseinselemente und natürlich noch vieles mehr, machen uns Menschen aus.
+        </p>
+        <p>
+          Klang erfasst die ganze Person in ihrer Einheit. Der Begriff "Person" kommt aus der lateinischen Sprache und heisst eigentlich
+          per=durch und sonare = klingen, also durchklingen...
+        </p>
+        <p>
+          Klänge können unser Bewusstsein beeinflussen und verändern. Die Schallwellen der Klänge werden in Nervenimpulse umgewandelt
+          und dem Gehirn zugeführt. Das Gehirn schickt diese Impulse an den richtigen Ort im Körper und harmonisiert dort die Energien.
+        </p>
+        <p>
+          Wir können diese Klänge aber auch mit unserem Körper, der Haut, dem Gewebe und den Knochen wahrnehmen und spüren.
+          Wie Wassertropfen, die in unbewegtes Wasser fallen, eine kreisförmige Welle auslösen, pflanzen sich die Schallwellen
+          in unserem Körper sehr gut fort.
+        </p>
+        <p>
+          Wir bestehen zu 70-80 % aus Wasser. So entsteht in unserem Körperinnern durch Klang eine zarte Massage auf molekularer Ebene.
+          Der Körper geht in eine Resonanz mit den Klängen und beginnt mitzuschwingen.
+        </p>
+      </div>
+    </div>
+
+    <!-- KLANGSCHALEN -->
+    <div id="section-klangschalen" class="section">
+      <div class="gold" style="font-size:1.4em; margin-bottom:10px;">Klangschalen</div>
+      <div class="gold" style="opacity:0.95;">
+        Klangschalen erzeugen feine Schwingungen, die Körper und Geist zur Ruhe einladen können.<br><br>
+        Viele Menschen erleben ein Gefühl von Entspannung, innerer Weite und mehr Balance.<br><br>
+        Wenn du möchtest, erzähle ich dir gerne, wie eine Klangschalen-Anwendung abläuft und was sie bewirken kann.
+      </div>
+      <div style="margin-top:18px;">
+        <a class="whatsapp" href="https://wa.me/491603429752" target="_blank" rel="noopener">💬 Termin anfragen via WhatsApp</a>
+      </div>
+    </div>
+
+    <!-- KONTAKT -->
+    <div id="section-kontakt" class="section">
+      <div class="gold" style="font-size:1.4em; margin-bottom:10px;">Kontakt</div>
+      <div class="gold" style="opacity:0.95;">
+        📞 +49 160 3429752<br>
+        Anja<br>
+        📍 78250 Tengen<br><br>
+        <a class="gold" style="text-decoration:none;" href="https://www.google.com/maps/search/?api=1&query=78250+Tengen" target="_blank" rel="noopener">
+          Standort auf Google Maps öffnen
+        </a>
+      </div>
+      <div style="margin-top:18px;">
+        <a class="whatsapp" href="https://wa.me/491603429752" target="_blank" rel="noopener">💬 Termin anfragen via WhatsApp</a>
+      </div>
+    </div>
   </div>
-</div>
 
-<div id="section-klangschalen" class="section gold">Infos zu Klangschalen...</div>
-<div id="section-kontakt" class="section gold">Kontaktinfos...</div>
-</div>
+  <!-- Musik -->
+  <audio id="bg-music" loop>
+    <source src="meditation.mp3" type="audio/mpeg">
+  </audio>
 
-<script>
-const menuToggle=document.getElementById("menuToggle");
-const menuPanel=document.getElementById("menuPanel");
-menuToggle.onclick=()=>menuPanel.classList.toggle("open");
-document.onclick=()=>menuPanel.classList.remove("open");
+  <script>
+    // --- Menü UI ---
+    const menuToggle = document.getElementById("menuToggle");
+    const menuPanel  = document.getElementById("menuPanel");
 
-const sections={
-  start:document.getElementById("section-start"),
-  klangschalen:document.getElementById("section-klangschalen"),
-  kontakt:document.getElementById("section-kontakt")
-};
+    menuToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      menuPanel.classList.toggle("open");
+    });
+    document.addEventListener("click", () => menuPanel.classList.remove("open"), { passive:true });
 
-const startLongText=document.getElementById("startLongText");
+    // --- Sections ---
+    const sections = {
+      start: document.getElementById("section-start"),
+      klangschalen: document.getElementById("section-klangschalen"),
+      kontakt: document.getElementById("section-kontakt")
+    };
 
-function showSection(name){
-  Object.values(sections).forEach(s=>s.classList.remove("active"));
-  sections[name].classList.add("active");
-  startLongText.style.display=(name==="start")?"block":"none";
-}
+    function showSection(name){
+      Object.keys(sections).forEach(k => sections[k].classList.remove("active"));
+      sections[name].classList.add("active");
+    }
 
-document.querySelectorAll("[data-section]").forEach(link=>{
-  link.onclick=e=>{
-    e.preventDefault();
-    showSection(link.dataset.section);
-  }
-});
+    // --- Audio ---
+    const audio = document.getElementById("bg-music");
+    function fadeInAudio(){
+      audio.volume = 0;
+      audio.play().catch(()=>{});
+      let v = 0;
+      const t = setInterval(() => {
+        v = Math.min(1, v + 0.02);
+        audio.volume = v;
+        if (v >= 1) clearInterval(t);
+      }, 200);
+    }
+    function fadeOutAudio(ms = 650){
+      return new Promise((resolve) => {
+        if (!audio || audio.paused) return resolve();
+        const steps = 20;
+        const stepTime = Math.max(20, Math.floor(ms / steps));
+        const startVol = (typeof audio.volume === "number") ? audio.volume : 1;
+        let i = 0;
+        const t = setInterval(() => {
+          i++;
+          audio.volume = Math.max(0, startVol * (1 - i / steps));
+          if (i >= steps) {
+            clearInterval(t);
+            audio.pause();
+            resolve();
+          }
+        }, stepTime);
+      });
+    }
 
-const lines=document.querySelectorAll(".line");
-const contactWrap=document.getElementById("contactWrap");
-const whatsWrap=document.getElementById("whatsWrap");
-const startButton=document.getElementById("startButton");
+    // --- Start Sequenz ---
+    const startButton = document.getElementById("startButton");
+    const lines = Array.from(document.querySelectorAll("#section-start .line"));
+    const contactWrap = document.getElementById("contactWrap");
+    const whatsWrap = document.getElementById("whatsWrap");
 
-let i=0;
-startButton.onclick=()=>{
-  startButton.classList.add("hidden");
-  let interval=setInterval(()=>{
-    if(i<lines.length){lines[i].classList.add("show"); i++;}
-    else{contactWrap.style.opacity=1; whatsWrap.style.opacity=1; clearInterval(interval);}
-  },2000);
-};
-</script>
+    let idx = -1;
+    let running = false;
+    let ended = false;
+    let timer = null;
+
+    const isMobile = window.matchMedia("(max-width: 600px)").matches;
+    const DISPLAY_TIME = isMobile ? 9000 : 11000;
+    const FIRST_LINE_EXTRA = isMobile ? 5000 : 8000;
+    const CLICK_NEXT_DELAY = 1000;
+
+    function ensurePunctuation(t){
+      const s = (t || "").trim();
+      if (!s) return s;
+      const last = s.slice(-1);
+      return [".","?","!","…"].includes(last) ? s : (s + ".");
+    }
+    lines.forEach(l => l.textContent = ensurePunctuation(l.getAttribute("data-text")));
+
+    function clearSeq(){
+      clearTimeout(timer);
+      timer = null;
+    }
+
+    function resetStartView(){
+      clearSeq();
+      idx = -1;
+      running = false;
+      ended = false;
+      lines.forEach(l => l.classList.remove("show","hide"));
+      contactWrap.style.opacity = 0;
+      whatsWrap.style.opacity = 0;
+      startButton.classList.remove("hidden");
+    }
+
+    function showNext(){
+      if (ended) return;
+
+      if (idx >= 0 && idx < lines.length) {
+        lines[idx].classList.remove("show");
+        lines[idx].classList.add("hide");
+      }
+
+      idx++;
+
+      if (idx < lines.length) {
+        lines[idx].classList.remove("hide");
+        lines[idx].classList.add("show");
+
+        const delay = (idx === 0) ? (DISPLAY_TIME + FIRST_LINE_EXTRA) : DISPLAY_TIME;
+        timer = setTimeout(showNext, delay);
+      } else {
+        contactWrap.style.opacity = 1;
+        whatsWrap.style.opacity = 1;
+        ended = true;
+      }
+    }
+
+    document.addEventListener("click", () => {
+      if (!sections.start.classList.contains("active")) return;
+      if (!running || ended) return;
+
+      clearSeq();
+      timer = setTimeout(showNext, CLICK_NEXT_DELAY);
+    }, { passive:true });
+
+    startButton.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (running) return;
+
+      running = true;
+      startButton.classList.add("hidden");
+      fadeInAudio();
+
+      clearSeq();
+      idx = -1;
+      ended = false;
+
+      contactWrap.style.opacity = 0;
+      whatsWrap.style.opacity = 0;
+      lines.forEach(l => l.classList.remove("show","hide"));
+
+      showNext();
+    });
+
+    // --- Langer Text: nur bei Menü-Klick auf Start ---
+    const startLongText = document.getElementById("startLongText");
+    function setStartLongTextVisible(v){
+      if (!startLongText) return;
+      startLongText.style.display = v ? "block" : "none";
+    }
+
+    // Wichtig: beim Laden immer AUS
+    setStartLongTextVisible(false);
+
+    // Menü Navigation
+    document.querySelectorAll("[data-section]").forEach(link => {
+      link.addEventListener("click", async (e) => {
+        e.preventDefault();
+        const target = link.getAttribute("data-section");
+        menuPanel.classList.remove("open");
+
+        await fadeOutAudio(650);
+
+        showSection(target);
+
+        if (target === "start") {
+          // NUR hier: Text EIN
+          setStartLongTextVisible(true);
+          resetStartView();
+        } else {
+          // bei anderen Menüpunkten: Text AUS
+          setStartLongTextVisible(false);
+          clearSeq();
+        }
+      });
+    });
+
+    // Harter Startzustand: Start + Button sichtbar, langer Text bleibt AUS
+    window.addEventListener("DOMContentLoaded", () => {
+      showSection("start");
+      resetStartView();
+      setStartLongTextVisible(false);
+    });
+
+    // Wenn Browser-Seite „wiederherstellt“ (Laptop Back/Forward Cache)
+    window.addEventListener("pageshow", () => {
+      // nicht automatisch Text einblenden – bleibt aus, bis Menü Start geklickt wird
+      setStartLongTextVisible(false);
+    });
+  </script>
 </body>
 </html>
