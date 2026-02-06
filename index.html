@@ -74,6 +74,7 @@
       cursor:pointer;
       z-index:9999;
       user-select:none;
+
       background: rgba(0,0,0,0.45);
       border: 1px solid rgba(241,227,176,0.65);
       border-radius: 999px;
@@ -157,7 +158,7 @@
     }
     .section.active{ display:block; }
 
-    /* Zeilen (werden per JS display:none gesetzt, wenn Menü-Text angezeigt wird) */
+    /* Zeilen */
     .line{
       opacity:0;
       font-size:2.1em;
@@ -192,7 +193,7 @@
     /* Scroll-Textbox (Start + Klangschalen identisch) */
     .scrollText{
       display:none;                 /* per JS */
-      margin-top:10px;
+      margin-top:0;                 /* <- startet höher */
       text-align:left;
       line-height:1.5;
       font-size:0.95em;
@@ -227,7 +228,6 @@
   <!-- Menü -->
   <div id="menuToggle" class="gold" aria-label="Menü öffnen">☰</div>
   <nav id="menuPanel">
-    <!-- ✅ UMBENANNT: Start -> Alles ist Schwingung -->
     <a class="gold" href="#alles-ist-schwingung" data-section="start">Alles ist Schwingung</a>
     <a class="gold" href="#klangschalen" data-section="klangschalen">Klangschalen</a>
     <a class="gold" href="#kontakt" data-section="kontakt">Kontakt</a>
@@ -236,7 +236,7 @@
   <div class="center">
     <button id="startButton" class="gold" type="button">✨ Spüre den Klang</button>
 
-    <!-- START (intern bleibt es "start", damit nichts kaputt geht) -->
+    <!-- START (intern bleibt "start") -->
     <div id="section-start" class="section active">
       <div class="line gold" data-text="Bist du im Einklang mit dir selbst?"></div>
       <div class="line gold" data-text="Möchtest du mehr über die Wirkungsweise der Klangschalen erfahren?"></div>
@@ -262,7 +262,6 @@
            target="_blank" rel="noopener">💬 Termin anfragen via WhatsApp</a>
       </div>
 
-      <!-- Start Scrolltext -->
       <div id="startLongText" class="gold scrollText">
         <h3>Alles ist Schwingung</h3>
         <p>
@@ -361,7 +360,6 @@
     // --- Menü UI ---
     const menuToggle = document.getElementById("menuToggle");
     const menuPanel  = document.getElementById("menuPanel");
-
     menuToggle.addEventListener("click", (e) => {
       e.stopPropagation();
       menuPanel.classList.toggle("open");
@@ -374,7 +372,6 @@
       klangschalen: document.getElementById("section-klangschalen"),
       kontakt: document.getElementById("section-kontakt")
     };
-
     function showOnly(which){
       Object.keys(sections).forEach(k => {
         if (k === which) sections[k].classList.add("active");
@@ -384,7 +381,6 @@
 
     // --- Audio ---
     const audio = document.getElementById("bg-music");
-
     function fadeInAudio(){
       audio.volume = 0;
       audio.play().catch(()=>{});
@@ -395,7 +391,6 @@
         if (v >= 1) clearInterval(t);
       }, 200);
     }
-
     function fadeOutAudio(ms = 650){
       return new Promise((resolve) => {
         if (!audio || audio.paused) return resolve();
@@ -426,7 +421,6 @@
     let ended = false;
     let timer = null;
 
-    // Flags für Scrolltexte
     let startMenuClicked = false;
     let klangMenuClicked = false;
 
@@ -442,9 +436,16 @@
       klangLongText.style.display = (klangMenuClicked ? "block" : "none");
     }
 
-    // Platzfresser-Zeilen ausblenden, wenn man nur lesen will
     function setLinesVisible(v){
       lines.forEach(l => { l.style.display = v ? "block" : "none"; });
+    }
+
+    // ✅ NEU: im Lesemodus alles, was Platz frisst, wirklich entfernen
+    function setStartReadingLayout(on){
+      // Button + Kontakt + WhatsApp komplett raus, damit Text ganz oben startet
+      startButton.style.display = on ? "none" : "inline-block";
+      contactWrap.style.display = on ? "none" : "block";
+      whatsWrap.style.display = on ? "none" : "block";
     }
 
     const isMobile = window.matchMedia("(max-width: 600px)").matches;
@@ -475,8 +476,9 @@
       whatsWrap.style.opacity = 0;
       startButton.classList.remove("hidden");
 
-      // Wenn Menü (Alles ist Schwingung) geklickt wurde: Zeilen weg, Text sichtbar
+      // Lesemodus: Zeilen weg + Button/Kontakt/Whats weg
       setLinesVisible(!startMenuClicked);
+      setStartReadingLayout(startMenuClicked);
 
       setStartLongVisible();
     }
@@ -516,6 +518,10 @@
       e.stopPropagation();
       if (running) return;
 
+      // Sequenzmodus
+      startMenuClicked = false;
+      resetStartView();
+
       running = true;
       startButton.classList.add("hidden");
       fadeInAudio();
@@ -524,17 +530,15 @@
       idx = -1;
       ended = false;
 
+      // sicher: Kontakt/Whats wieder da (opacity steuert Sichtbarkeit)
+      contactWrap.style.display = "block";
+      whatsWrap.style.display = "block";
+
       contactWrap.style.opacity = 0;
       whatsWrap.style.opacity = 0;
       lines.forEach(l => l.classList.remove("show","hide"));
 
-      // Button-Start = kein Lesetext
-      startMenuClicked = false;
-      setStartLongVisible();
-
-      // Zeilen müssen wieder da sein
       setLinesVisible(true);
-
       showNext();
     });
 
@@ -548,7 +552,6 @@
         menuPanel.classList.remove("open");
 
         await fadeOutAudio(650);
-
         showOnly(target);
 
         if (target === "start") {
@@ -559,28 +562,36 @@
         } else if (target === "klangschalen") {
           klangMenuClicked = true;
           startMenuClicked = false;
-          setLinesVisible(true);     // falls man vom Lesen kommt
           setStartLongVisible();
           setKlangLongVisible();
+
+          // Start wieder normal (Button/Kontakt zurück)
+          setStartReadingLayout(false);
+          setLinesVisible(true);
+
           clearSeq();
         } else {
           startMenuClicked = false;
           klangMenuClicked = false;
-          setLinesVisible(true);
           setStartLongVisible();
           setKlangLongVisible();
+
+          setStartReadingLayout(false);
+          setLinesVisible(true);
+
           clearSeq();
         }
       });
     });
 
-    // Initial: Start aktiv, Scrolltexte aus
+    // Initial: Start aktiv, Lesetext aus
     window.addEventListener("DOMContentLoaded", () => {
       showOnly("start");
       startMenuClicked = false;
       klangMenuClicked = false;
       setStartLongVisible();
       setKlangLongVisible();
+      setStartReadingLayout(false);
       setLinesVisible(true);
       resetStartView();
     });
@@ -591,9 +602,11 @@
       klangMenuClicked = false;
       setStartLongVisible();
       setKlangLongVisible();
+      setStartReadingLayout(false);
       setLinesVisible(true);
       resetStartView();
     });
   </script>
 </body>
 </html>
+
