@@ -22,7 +22,7 @@
       margin:0;
       padding:0;
       font-family:"Helvetica Neue", Arial, sans-serif;
-      overflow:hidden;              /* Seite bleibt „wie vorher“ ruhig/fixed */
+      overflow:hidden;
       background:#000;
       text-align:center;
     }
@@ -43,7 +43,7 @@
       100%{transform:scale(1)}
     }
 
-    /* dunkle Überlagerung */
+    /* dunkle, ruhige Überlagerung */
     .overlay{
       position:fixed;
       inset:0;
@@ -76,6 +76,7 @@
       cursor:pointer;
       z-index:9999;
       user-select:none;
+
       background: rgba(0,0,0,0.45);
       border: 1px solid rgba(241,227,176,0.65);
       border-radius: 999px;
@@ -109,15 +110,15 @@
       cursor:pointer;
     }
 
-    /* Layout */
+    /* Layout: START soll oben beginnen */
     .center{
       position:fixed;
       inset:0;
       display:flex;
       flex-direction:column;
-      justify-content:center;
+      justify-content:flex-start;         /* <- wichtig: oben statt Mitte */
       align-items:center;
-      padding:20px;
+      padding:120px 20px 20px 20px;       /* <- Abstand nach oben */
       box-sizing:border-box;
       z-index:1;
     }
@@ -191,17 +192,17 @@
       font-size:1.05em;
     }
 
-    /* ✅ Langer Text – kleiner + eigener Scrollbereich */
+    /* ✅ Langer Text: kleiner + oben + scrollbar */
     #startLongText{
-      display:none;               /* NUR bei Menü „Start“-Klick */
+      display:none;                 /* nur bei Menü-Klick Start */
       margin-top:10px;
       text-align:left;
       line-height:1.5;
       font-size:0.95em;
 
-      max-height:38vh;            /* Höhe begrenzen */
-      overflow-y:auto;            /* Scrollbar */
-      padding-right:10px;         /* Platz für Scrollbar */
+      max-height:42vh;              /* Scrollbereich */
+      overflow-y:auto;
+      padding-right:10px;
       box-sizing:border-box;
     }
     #startLongText h3{
@@ -210,18 +211,19 @@
       text-align:center;
       font-weight:700;
     }
-    #startLongText p{ margin:0 0 10px 0; }
+    #startLongText p{
+      margin:0 0 10px 0;
+    }
 
     /* Mobile */
     @media(max-width:600px){
-      .center{ padding:12px; }
+      .center{ padding:100px 12px 16px 12px; }
       .line{ font-size:1.35em; margin:12px 0; }
       #menuToggle{ top:10px; right:10px; }
       #startButton{ font-size:1.2em; padding:12px 22px; }
       #startLongText{
         font-size:0.9em;
         max-height:45vh;
-        margin-top:8px;
       }
       #startLongText h3{ font-size:1.1em; }
     }
@@ -250,7 +252,7 @@
       <div class="line gold" data-text="Ich begleite dich achtsam in die Welt der Klänge"></div>
       <div class="line gold" data-text="Erlebe tiefe Entspannung und neue Balance"></div>
 
-      <div id="contactWrap" class="gold">
+      <div id="contactWrap" class="gold" style="margin-top:18px;">
         <div style="font-size:1.15em;">📞 +49 160 3429752</div>
         <div style="margin-top:6px;opacity:.92;">Anja</div>
         <div style="margin-top:10px;font-size:.95em;opacity:.85;">
@@ -267,7 +269,7 @@
            target="_blank" rel="noopener">💬 Termin anfragen via WhatsApp</a>
       </div>
 
-      <!-- Langer Text (nur bei Menü-Start-Klick sichtbar) -->
+      <!-- ✅ Vollständiger Text -->
       <div id="startLongText" class="gold">
         <h3>Alles ist Schwingung</h3>
         <p>
@@ -279,7 +281,7 @@
         <h3 style="margin-top:18px;">Klang und Resonanz</h3>
         <p>
           Durch unsere 5 Sinne (Sehen, Hören, Riechen, Schmecken, Tasten) nehmen wir in erster Linie bewusst unsere Umgebung wahr.
-          Durch weitere 5 Sinne (Übersinnliche Wahrnehmung, Temperatursinn, Schmerzempfinden, Gleichgewichtssinn, Körperempfindung)
+          Durch weitere 5 Sinne (Übersinnliche Wahrnehmung, Temperatursinn, Schmerzempfingen, Gleichgewichtssinn, Körperempfindung)
           gehen wir auf die unbewusste Wahrnehmung. Diese beiden Bewusstseinselemente und natürlich noch vieles mehr, machen uns Menschen aus.
         </p>
         <p>
@@ -339,7 +341,6 @@
     // --- Menü UI ---
     const menuToggle = document.getElementById("menuToggle");
     const menuPanel  = document.getElementById("menuPanel");
-
     menuToggle.addEventListener("click", (e) => {
       e.stopPropagation();
       menuPanel.classList.toggle("open");
@@ -360,7 +361,6 @@
 
     // --- Audio ---
     const audio = document.getElementById("bg-music");
-
     function fadeInAudio(){
       audio.volume = 0;
       audio.play().catch(()=>{});
@@ -371,7 +371,6 @@
         if (v >= 1) clearInterval(t);
       }, 200);
     }
-
     function fadeOutAudio(ms = 650){
       return new Promise((resolve) => {
         if (!audio || audio.paused) return resolve();
@@ -502,7 +501,7 @@
         showSection(target);
 
         if (target === "start") {
-          setStartLongTextVisible(true);  // nur hier EIN
+          setStartLongTextVisible(true);   // nur hier EIN
           resetStartView();
         } else {
           setStartLongTextVisible(false);
