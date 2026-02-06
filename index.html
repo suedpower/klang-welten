@@ -43,7 +43,7 @@
       100%{transform:scale(1)}
     }
 
-    /* dunkle, ruhige Überlagerung */
+    /* dunkle Überlagerung */
     .overlay{
       position:fixed;
       inset:0;
@@ -51,7 +51,7 @@
       z-index:-1;
     }
 
-    /* Gold + schwarze Umrandung */
+    /* Gold */
     .gold{
       color:#f1e3b0;
       text-shadow:
@@ -62,7 +62,7 @@
          0 0 12px rgba(241,227,176,0.35);
     }
 
-    /* Hamburger Menü */
+    /* Menü */
     #menuToggle{
       position:fixed;
       top:16px;
@@ -76,7 +76,6 @@
       cursor:pointer;
       z-index:9999;
       user-select:none;
-
       background: rgba(0,0,0,0.45);
       border: 1px solid rgba(241,227,176,0.65);
       border-radius: 999px;
@@ -110,15 +109,15 @@
       cursor:pointer;
     }
 
-    /* Layout: START soll oben beginnen */
+    /* Layout: oben beginnen */
     .center{
       position:fixed;
       inset:0;
       display:flex;
       flex-direction:column;
-      justify-content:flex-start;         /* <- wichtig: oben statt Mitte */
+      justify-content:flex-start;
       align-items:center;
-      padding:120px 20px 20px 20px;       /* <- Abstand nach oben */
+      padding:120px 20px 20px 20px;
       box-sizing:border-box;
       z-index:1;
     }
@@ -192,28 +191,25 @@
       font-size:1.05em;
     }
 
-    /* ✅ Langer Text: kleiner + oben + scrollbar */
-    #startLongText{
-      display:none;                 /* nur bei Menü-Klick Start */
+    /* Scroll-Textbox (Start + Klangschalen identisch) */
+    .scrollText{
+      display:none;                 /* per JS */
       margin-top:10px;
       text-align:left;
       line-height:1.5;
       font-size:0.95em;
-
-      max-height:42vh;              /* Scrollbereich */
+      max-height:42vh;
       overflow-y:auto;
       padding-right:10px;
       box-sizing:border-box;
     }
-    #startLongText h3{
+    .scrollText h3{
       margin:10px 0 8px 0;
       font-size:1.15em;
       text-align:center;
       font-weight:700;
     }
-    #startLongText p{
-      margin:0 0 10px 0;
-    }
+    .scrollText p{ margin:0 0 10px 0; }
 
     /* Mobile */
     @media(max-width:600px){
@@ -221,11 +217,8 @@
       .line{ font-size:1.35em; margin:12px 0; }
       #menuToggle{ top:10px; right:10px; }
       #startButton{ font-size:1.2em; padding:12px 22px; }
-      #startLongText{
-        font-size:0.9em;
-        max-height:45vh;
-      }
-      #startLongText h3{ font-size:1.1em; }
+      .scrollText{ font-size:0.9em; max-height:45vh; }
+      .scrollText h3{ font-size:1.1em; }
     }
   </style>
 </head>
@@ -257,7 +250,9 @@
         <div style="margin-top:6px;opacity:.92;">Anja</div>
         <div style="margin-top:10px;font-size:.95em;opacity:.85;">
           📍 78250 Tengen<br>
-          <a class="gold" style="text-decoration:none;" href="https://www.google.com/maps/search/?api=1&query=78250+Tengen" target="_blank" rel="noopener">
+          <a class="gold" style="text-decoration:none;"
+             href="https://www.google.com/maps/search/?api=1&query=78250+Tengen"
+             target="_blank" rel="noopener">
             Standort auf Google Maps öffnen
           </a>
         </div>
@@ -269,8 +264,8 @@
            target="_blank" rel="noopener">💬 Termin anfragen via WhatsApp</a>
       </div>
 
-      <!-- ✅ Vollständiger Text -->
-      <div id="startLongText" class="gold">
+      <!-- Start Scrolltext -->
+      <div id="startLongText" class="gold scrollText">
         <h3>Alles ist Schwingung</h3>
         <p>
           Schwingung ist Leben und Leben ist Bewegung. Jedes Lebewesen besteht aus Atomen, um deren Kern Elektronen kreisen.
@@ -306,12 +301,38 @@
 
     <!-- KLANGSCHALEN -->
     <div id="section-klangschalen" class="section">
-      <div class="gold" style="font-size:1.25em;line-height:1.6;text-align:center;">
-        Klangschalen erzeugen feine Schwingungen, die Körper und Geist zur Ruhe einladen können.
-        Viele Menschen erleben Entspannung, einen ruhigeren Atem und ein Gefühl von innerer Balance.
-        <div style="margin-top:18px;">
-          <a class="whatsapp" href="https://wa.me/491603429752" target="_blank" rel="noopener">💬 Termin anfragen via WhatsApp</a>
-        </div>
+      <!-- Klangschalen Scrolltext (ersetzt den bisherigen Inhalt komplett) -->
+      <div id="klangLongText" class="gold scrollText">
+        <h3>Planetenklangschalen</h3>
+        <p>
+          Wir alle kennen die Wirkung des Mondes auf unsere Weltmeere. Auch die Wirkung der Planeten auf uns Menschen, auf die Tiere
+          und die Natur ist seit Jahrtausenden bekannt. Der Schweizer Mathematiker und Musiktherapeut Hans Cousto entdeckte jedoch in den
+          70er Jahren die mathematischen Zusammenhänge zwischen astronomischen Gegebenheiten und den therapeutisch wirkenden Frequenzen von
+          Tönen und Farben neu.
+        </p>
+
+        <h3 style="margin-top:18px;">Einsatz und Wirkung von Planetenklangschalen</h3>
+        <p>
+          Ist der Körper krank, ist es immer ein Zeichen von einer Disharmonie oder dem Verlust der Ganzheit. Werden wir wieder gesund,
+          sind wir wieder ganz. Versetzt man nun eine blockierte Körperstelle in Vibration, wird diese angeregt und kann ihre eigene Harmonie
+          wieder finden.
+        </p>
+        <p>
+          Dasselbe passiert auf der Seelen und Geistebene. Es können sich Probleme transformieren oder durch die Ausschüttung von Botenstoffen
+          (Neurotransmittern) kann der Stoffwechsel reguliert werden, was wiederum Blockaden löst.
+        </p>
+        <p>
+          Die Klangschale schwingt aber auch in ihrer Umgebung, also in der Aura. Das heisst, sie transformiert gleichzeitig die Umgebungsschwingung
+          und reguliert das Störfeld. Die Energie fliesst wieder. Darum ist die Klangschale auch eine ausgezeichnete Diagnosehilfe.
+        </p>
+        <p>
+          Klangschalen können ein Zuviel an Energie entladen oder ein Zuwenig aufladen und zuführen. Dies alles geschieht in einer Klangmassage
+          oder Klangtherapie.
+        </p>
+      </div>
+
+      <div style="margin-top:18px; text-align:center;">
+        <a class="whatsapp" href="https://wa.me/491603429752" target="_blank" rel="noopener">💬 Termin anfragen via WhatsApp</a>
       </div>
     </div>
 
@@ -322,7 +343,9 @@
         📞 +49 160 3429752<br>
         Anja<br>
         📍 78250 Tengen<br><br>
-        <a class="gold" style="text-decoration:none;" href="https://www.google.com/maps/search/?api=1&query=78250+Tengen" target="_blank" rel="noopener">
+        <a class="gold" style="text-decoration:none;"
+           href="https://www.google.com/maps/search/?api=1&query=78250+Tengen"
+           target="_blank" rel="noopener">
           Standort auf Google Maps öffnen
         </a>
       </div>
@@ -341,10 +364,12 @@
     // --- Menü UI ---
     const menuToggle = document.getElementById("menuToggle");
     const menuPanel  = document.getElementById("menuPanel");
+
     menuToggle.addEventListener("click", (e) => {
       e.stopPropagation();
       menuPanel.classList.toggle("open");
     });
+
     document.addEventListener("click", () => menuPanel.classList.remove("open"), { passive:true });
 
     // --- Sections ---
@@ -354,13 +379,16 @@
       kontakt: document.getElementById("section-kontakt")
     };
 
-    function showSection(name){
-      Object.keys(sections).forEach(k => sections[k].classList.remove("active"));
-      sections[name].classList.add("active");
+    function showOnly(which){
+      Object.keys(sections).forEach(k => {
+        if (k === which) sections[k].classList.add("active");
+        else sections[k].classList.remove("active");
+      });
     }
 
     // --- Audio ---
     const audio = document.getElementById("bg-music");
+
     function fadeInAudio(){
       audio.volume = 0;
       audio.play().catch(()=>{});
@@ -371,6 +399,7 @@
         if (v >= 1) clearInterval(t);
       }, 200);
     }
+
     function fadeOutAudio(ms = 650){
       return new Promise((resolve) => {
         if (!audio || audio.paused) return resolve();
@@ -401,6 +430,22 @@
     let ended = false;
     let timer = null;
 
+    // Flags für Scrolltexte
+    let startMenuClicked = false;
+    let klangMenuClicked = false;
+
+    const startLongText = document.getElementById("startLongText");
+    const klangLongText = document.getElementById("klangLongText");
+
+    function setStartLongVisible(){
+      if (!startLongText) return;
+      startLongText.style.display = (startMenuClicked ? "block" : "none");
+    }
+    function setKlangLongVisible(){
+      if (!klangLongText) return;
+      klangLongText.style.display = (klangMenuClicked ? "block" : "none");
+    }
+
     const isMobile = window.matchMedia("(max-width: 600px)").matches;
     const DISPLAY_TIME = isMobile ? 9000 : 11000;
     const FIRST_LINE_EXTRA = isMobile ? 5000 : 8000;
@@ -428,6 +473,7 @@
       contactWrap.style.opacity = 0;
       whatsWrap.style.opacity = 0;
       startButton.classList.remove("hidden");
+      setStartLongVisible();
     }
 
     function showNext(){
@@ -460,6 +506,7 @@
       timer = setTimeout(showNext, CLICK_NEXT_DELAY);
     }, { passive:true });
 
+    // Start-Button: Sequenz + Musik; Start-Scrolltext aus
     startButton.addEventListener("click", (e) => {
       e.stopPropagation();
       if (running) return;
@@ -476,50 +523,63 @@
       whatsWrap.style.opacity = 0;
       lines.forEach(l => l.classList.remove("show","hide"));
 
+      startMenuClicked = false;
+      setStartLongVisible();
+
       showNext();
     });
-
-    // --- Langer Text: nur bei Menü-Klick auf Start ---
-    const startLongText = document.getElementById("startLongText");
-    function setStartLongTextVisible(v){
-      if (!startLongText) return;
-      startLongText.style.display = v ? "block" : "none";
-    }
-
-    // beim Laden immer AUS
-    setStartLongTextVisible(false);
 
     // Menü Navigation
     document.querySelectorAll("[data-section]").forEach(link => {
       link.addEventListener("click", async (e) => {
         e.preventDefault();
+        e.stopPropagation();
+
         const target = link.getAttribute("data-section");
         menuPanel.classList.remove("open");
 
         await fadeOutAudio(650);
 
-        showSection(target);
+        showOnly(target);
 
         if (target === "start") {
-          setStartLongTextVisible(true);   // nur hier EIN
+          startMenuClicked = true;
+          klangMenuClicked = false;
+          setKlangLongVisible();
+          setStartLongVisible();
           resetStartView();
+        } else if (target === "klangschalen") {
+          klangMenuClicked = true;
+          startMenuClicked = false;
+          setStartLongVisible();
+          setKlangLongVisible();
+          clearSeq();
         } else {
-          setStartLongTextVisible(false);
+          startMenuClicked = false;
+          klangMenuClicked = false;
+          setStartLongVisible();
+          setKlangLongVisible();
           clearSeq();
         }
       });
     });
 
-    // Startzustand: Start + Button sichtbar, langer Text bleibt AUS
+    // Initial: Start aktiv, Scrolltexte aus
     window.addEventListener("DOMContentLoaded", () => {
-      showSection("start");
+      showOnly("start");
+      startMenuClicked = false;
+      klangMenuClicked = false;
+      setStartLongVisible();
+      setKlangLongVisible();
       resetStartView();
-      setStartLongTextVisible(false);
     });
 
-    // Back/Forward Cache: nicht automatisch einblenden
+    // Back/Forward Cache: Scrolltexte aus
     window.addEventListener("pageshow", () => {
-      setStartLongTextVisible(false);
+      startMenuClicked = false;
+      klangMenuClicked = false;
+      setStartLongVisible();
+      setKlangLongVisible();
     });
   </script>
 </body>
