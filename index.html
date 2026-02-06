@@ -190,10 +190,10 @@
       font-size:1.05em;
     }
 
-    /* Scroll-Textbox (Start + Klangschalen identisch) */
+    /* Scroll-Textbox (Start + Klangschalen + Klangschalenmassage identisch) */
     .scrollText{
       display:none;                 /* per JS */
-      margin-top:0;                 /* <- startet höher */
+      margin-top:0;                 /* startet hoch */
       text-align:left;
       line-height:1.5;
       font-size:0.95em;
@@ -201,6 +201,7 @@
       overflow-y:auto;
       padding-right:10px;
       box-sizing:border-box;
+      white-space:normal;
     }
     .scrollText h3{
       margin:10px 0 8px 0;
@@ -209,6 +210,11 @@
       font-weight:700;
     }
     .scrollText p{ margin:0 0 10px 0; }
+    .scrollText ul{
+      margin:0 0 10px 18px;
+      padding:0;
+    }
+    .scrollText li{ margin:0 0 6px 0; }
 
     @media(max-width:600px){
       .center{ padding:100px 12px 16px 12px; }
@@ -230,6 +236,7 @@
   <nav id="menuPanel">
     <a class="gold" href="#alles-ist-schwingung" data-section="start">Alles ist Schwingung</a>
     <a class="gold" href="#klangschalen" data-section="klangschalen">Klangschalen</a>
+    <a class="gold" href="#klangschalenmassage" data-section="klangschalenmassage">Klangschalenmassage</a>
     <a class="gold" href="#kontakt" data-section="kontakt">Kontakt</a>
   </nav>
 
@@ -332,6 +339,77 @@
       </div>
     </div>
 
+    <!-- KLANGSCHALENMASSAGE -->
+    <div id="section-klangschalenmassage" class="section">
+      <div id="massageLongText" class="gold scrollText">
+        <h3>🌿 Sanfte Schwingungen für innere Ruhe – Klangschalenanwendung</h3>
+
+        <p>
+          In unserer oft schnellen und lauten Welt sehnen sich viele Menschen nach einem Moment der Stille, nach einem Raum, in dem sie einfach sein dürfen.
+          Die Arbeit mit Klangschalen schenkt genau diesen Raum.
+        </p>
+        <p>
+          Die feinen Töne und Schwingungen laden dazu ein, den Alltag loszulassen, tiefer zu atmen und wieder in Kontakt mit sich selbst zu kommen.
+          Viele Menschen empfinden die Klänge wie eine sanfte Umarmung – beruhigend, tragend und ordnend zugleich.
+        </p>
+        <p>
+          Mein Anliegen ist es, dich dabei zu begleiten, wieder mehr Harmonie zwischen Körper, Geist und deinem inneren Empfinden zu erleben.
+        </p>
+
+        <h3>🌿 Was geschieht bei einer Klangschalenanwendung?</h3>
+        <p>
+          Während du bequem liegst, werden unterschiedlich große Klangschalen auf deinem Körper oder in deiner Nähe positioniert.
+          Durch ein behutsames Anschlagen beginnen sie zu klingen und in feinen Schwingungen zu vibrieren.
+        </p>
+        <p>
+          Diese Schwingungen breiten sich im Körper aus und werden nicht nur gehört, sondern auch gespürt.
+          Viele beschreiben dieses Gefühl als wohltuend, lösend und gleichzeitig sehr tiefgehend.
+        </p>
+        <p>
+          Anders als bei einer klassischen Massage wird dein Körper nicht durch Druck bearbeitet – die Wirkung entsteht allein über Klang und Schwingung.
+          Dadurch kann eine besonders achtsame und sanfte Form der Entspannung entstehen.
+        </p>
+
+        <h3>✨ Wie Klangschalen wirken können</h3>
+        <p>
+          Die ruhigen Klänge helfen vielen Menschen, gedanklich zur Ruhe zu kommen. Sorgen und innere Unruhe treten in den Hintergrund,
+          während sich ein Gefühl von Weite und innerer Klarheit ausbreiten darf.
+        </p>
+        <p>
+          Auf körperlicher Ebene wird die Anwendung oft als tief entspannend erlebt. Spannungen können sich lösen, der Atem wird ruhiger,
+          und der Körper darf in einen Zustand des Loslassens finden.
+        </p>
+        <p>Viele Menschen berichten nach einer Sitzung von:</p>
+        <ul>
+          <li>einem Gefühl innerer Ruhe und Geborgenheit</li>
+          <li>mehr Gelassenheit im Alltag</li>
+          <li>einem entspannteren Körpergefühl</li>
+          <li>erholsamerem Schlaf</li>
+          <li>einem klareren Kopf</li>
+          <li>gesteigerter Achtsamkeit für sich selbst</li>
+          <li>neuer Kraft und innerer Balance</li>
+        </ul>
+        <p>
+          Manche empfinden die Klänge auch als unterstützend bei stressbedingten Beschwerden oder in Phasen innerer Anspannung.
+        </p>
+
+        <h3>🧘 Eine Einladung zum Innehalten</h3>
+        <p>
+          Klangarbeit ist eine sehr behutsame Methode. Sie möchte nichts erzwingen, sondern lädt dich ein, dich selbst wieder bewusster wahrzunehmen.
+          In diesem geschützten Raum darf dein Nervensystem zur Ruhe kommen und dein Körper eigene Wege der Regeneration finden.
+        </p>
+
+        <h3>⚠️ Wichtiger Hinweis</h3>
+        <p>
+          Die Klangschalenanwendung dient der Entspannung und Förderung des Wohlbefindens. Sie ersetzt keine medizinische oder psychotherapeutische Behandlung.
+        </p>
+      </div>
+
+      <div style="margin-top:18px; text-align:center;">
+        <a class="whatsapp" href="https://wa.me/491603429752" target="_blank" rel="noopener">💬 Termin anfragen via WhatsApp</a>
+      </div>
+    </div>
+
     <!-- KONTAKT -->
     <div id="section-kontakt" class="section">
       <div class="gold" style="font-size:1.35em;margin-bottom:10px;">Kontakt</div>
@@ -370,6 +448,7 @@
     const sections = {
       start: document.getElementById("section-start"),
       klangschalen: document.getElementById("section-klangschalen"),
+      klangschalenmassage: document.getElementById("section-klangschalenmassage"),
       kontakt: document.getElementById("section-kontakt")
     };
     function showOnly(which){
@@ -423,9 +502,11 @@
 
     let startMenuClicked = false;
     let klangMenuClicked = false;
+    let massageMenuClicked = false;
 
     const startLongText = document.getElementById("startLongText");
     const klangLongText = document.getElementById("klangLongText");
+    const massageLongText = document.getElementById("massageLongText");
 
     function setStartLongVisible(){
       if (!startLongText) return;
@@ -435,14 +516,17 @@
       if (!klangLongText) return;
       klangLongText.style.display = (klangMenuClicked ? "block" : "none");
     }
+    function setMassageLongVisible(){
+      if (!massageLongText) return;
+      massageLongText.style.display = (massageMenuClicked ? "block" : "none");
+    }
 
     function setLinesVisible(v){
       lines.forEach(l => { l.style.display = v ? "block" : "none"; });
     }
 
-    // ✅ NEU: im Lesemodus alles, was Platz frisst, wirklich entfernen
+    // im Lesemodus alles, was Platz frisst, entfernen
     function setStartReadingLayout(on){
-      // Button + Kontakt + WhatsApp komplett raus, damit Text ganz oben startet
       startButton.style.display = on ? "none" : "inline-block";
       contactWrap.style.display = on ? "none" : "block";
       whatsWrap.style.display = on ? "none" : "block";
@@ -476,7 +560,6 @@
       whatsWrap.style.opacity = 0;
       startButton.classList.remove("hidden");
 
-      // Lesemodus: Zeilen weg + Button/Kontakt/Whats weg
       setLinesVisible(!startMenuClicked);
       setStartReadingLayout(startMenuClicked);
 
@@ -520,6 +603,10 @@
 
       // Sequenzmodus
       startMenuClicked = false;
+      klangMenuClicked = false;
+      massageMenuClicked = false;
+      setKlangLongVisible();
+      setMassageLongVisible();
       resetStartView();
 
       running = true;
@@ -530,7 +617,6 @@
       idx = -1;
       ended = false;
 
-      // sicher: Kontakt/Whats wieder da (opacity steuert Sichtbarkeit)
       contactWrap.style.display = "block";
       whatsWrap.style.display = "block";
 
@@ -557,15 +643,32 @@
         if (target === "start") {
           startMenuClicked = true;
           klangMenuClicked = false;
+          massageMenuClicked = false;
           setKlangLongVisible();
+          setMassageLongVisible();
           resetStartView();
         } else if (target === "klangschalen") {
           klangMenuClicked = true;
           startMenuClicked = false;
+          massageMenuClicked = false;
+
           setStartLongVisible();
+          setMassageLongVisible();
           setKlangLongVisible();
 
-          // Start wieder normal (Button/Kontakt zurück)
+          setStartReadingLayout(false);
+          setLinesVisible(true);
+
+          clearSeq();
+        } else if (target === "klangschalenmassage") {
+          massageMenuClicked = true;
+          startMenuClicked = false;
+          klangMenuClicked = false;
+
+          setStartLongVisible();
+          setKlangLongVisible();
+          setMassageLongVisible();
+
           setStartReadingLayout(false);
           setLinesVisible(true);
 
@@ -573,8 +676,11 @@
         } else {
           startMenuClicked = false;
           klangMenuClicked = false;
+          massageMenuClicked = false;
+
           setStartLongVisible();
           setKlangLongVisible();
+          setMassageLongVisible();
 
           setStartReadingLayout(false);
           setLinesVisible(true);
@@ -584,24 +690,32 @@
       });
     });
 
-    // Initial: Start aktiv, Lesetext aus
+    // Initial: Start aktiv, Lesetexte aus
     window.addEventListener("DOMContentLoaded", () => {
       showOnly("start");
       startMenuClicked = false;
       klangMenuClicked = false;
+      massageMenuClicked = false;
+
       setStartLongVisible();
       setKlangLongVisible();
+      setMassageLongVisible();
+
       setStartReadingLayout(false);
       setLinesVisible(true);
       resetStartView();
     });
 
-    // Back/Forward Cache: Scrolltexte aus
+    // Back/Forward Cache: Lesetexte aus
     window.addEventListener("pageshow", () => {
       startMenuClicked = false;
       klangMenuClicked = false;
+      massageMenuClicked = false;
+
       setStartLongVisible();
       setKlangLongVisible();
+      setMassageLongVisible();
+
       setStartReadingLayout(false);
       setLinesVisible(true);
       resetStartView();
@@ -609,4 +723,3 @@
   </script>
 </body>
 </html>
-
