@@ -43,7 +43,6 @@
       100%{transform:scale(1)}
     }
 
-    /* dunkle Überlagerung */
     .overlay{
       position:fixed;
       inset:0;
@@ -51,7 +50,6 @@
       z-index:-1;
     }
 
-    /* Gold */
     .gold{
       color:#f1e3b0;
       text-shadow:
@@ -159,7 +157,7 @@
     }
     .section.active{ display:block; }
 
-    /* Zeilen */
+    /* Zeilen (werden per JS display:none gesetzt, wenn Menü-Text angezeigt wird) */
     .line{
       opacity:0;
       font-size:2.1em;
@@ -211,7 +209,6 @@
     }
     .scrollText p{ margin:0 0 10px 0; }
 
-    /* Mobile */
     @media(max-width:600px){
       .center{ padding:100px 12px 16px 12px; }
       .line{ font-size:1.35em; margin:12px 0; }
@@ -230,7 +227,8 @@
   <!-- Menü -->
   <div id="menuToggle" class="gold" aria-label="Menü öffnen">☰</div>
   <nav id="menuPanel">
-    <a class="gold" href="#start" data-section="start">Start</a>
+    <!-- ✅ UMBENANNT: Start -> Alles ist Schwingung -->
+    <a class="gold" href="#alles-ist-schwingung" data-section="start">Alles ist Schwingung</a>
     <a class="gold" href="#klangschalen" data-section="klangschalen">Klangschalen</a>
     <a class="gold" href="#kontakt" data-section="kontakt">Kontakt</a>
   </nav>
@@ -238,7 +236,7 @@
   <div class="center">
     <button id="startButton" class="gold" type="button">✨ Spüre den Klang</button>
 
-    <!-- START -->
+    <!-- START (intern bleibt es "start", damit nichts kaputt geht) -->
     <div id="section-start" class="section active">
       <div class="line gold" data-text="Bist du im Einklang mit dir selbst?"></div>
       <div class="line gold" data-text="Möchtest du mehr über die Wirkungsweise der Klangschalen erfahren?"></div>
@@ -301,7 +299,6 @@
 
     <!-- KLANGSCHALEN -->
     <div id="section-klangschalen" class="section">
-      <!-- Klangschalen Scrolltext (ersetzt den bisherigen Inhalt komplett) -->
       <div id="klangLongText" class="gold scrollText">
         <h3>Planetenklangschalen</h3>
         <p>
@@ -369,7 +366,6 @@
       e.stopPropagation();
       menuPanel.classList.toggle("open");
     });
-
     document.addEventListener("click", () => menuPanel.classList.remove("open"), { passive:true });
 
     // --- Sections ---
@@ -446,6 +442,11 @@
       klangLongText.style.display = (klangMenuClicked ? "block" : "none");
     }
 
+    // Platzfresser-Zeilen ausblenden, wenn man nur lesen will
+    function setLinesVisible(v){
+      lines.forEach(l => { l.style.display = v ? "block" : "none"; });
+    }
+
     const isMobile = window.matchMedia("(max-width: 600px)").matches;
     const DISPLAY_TIME = isMobile ? 9000 : 11000;
     const FIRST_LINE_EXTRA = isMobile ? 5000 : 8000;
@@ -473,6 +474,10 @@
       contactWrap.style.opacity = 0;
       whatsWrap.style.opacity = 0;
       startButton.classList.remove("hidden");
+
+      // Wenn Menü (Alles ist Schwingung) geklickt wurde: Zeilen weg, Text sichtbar
+      setLinesVisible(!startMenuClicked);
+
       setStartLongVisible();
     }
 
@@ -506,7 +511,7 @@
       timer = setTimeout(showNext, CLICK_NEXT_DELAY);
     }, { passive:true });
 
-    // Start-Button: Sequenz + Musik; Start-Scrolltext aus
+    // Start-Button: Sequenz + Musik; Lesetext aus
     startButton.addEventListener("click", (e) => {
       e.stopPropagation();
       if (running) return;
@@ -523,8 +528,12 @@
       whatsWrap.style.opacity = 0;
       lines.forEach(l => l.classList.remove("show","hide"));
 
+      // Button-Start = kein Lesetext
       startMenuClicked = false;
       setStartLongVisible();
+
+      // Zeilen müssen wieder da sein
+      setLinesVisible(true);
 
       showNext();
     });
@@ -546,17 +555,18 @@
           startMenuClicked = true;
           klangMenuClicked = false;
           setKlangLongVisible();
-          setStartLongVisible();
           resetStartView();
         } else if (target === "klangschalen") {
           klangMenuClicked = true;
           startMenuClicked = false;
+          setLinesVisible(true);     // falls man vom Lesen kommt
           setStartLongVisible();
           setKlangLongVisible();
           clearSeq();
         } else {
           startMenuClicked = false;
           klangMenuClicked = false;
+          setLinesVisible(true);
           setStartLongVisible();
           setKlangLongVisible();
           clearSeq();
@@ -571,6 +581,7 @@
       klangMenuClicked = false;
       setStartLongVisible();
       setKlangLongVisible();
+      setLinesVisible(true);
       resetStartView();
     });
 
@@ -580,6 +591,8 @@
       klangMenuClicked = false;
       setStartLongVisible();
       setKlangLongVisible();
+      setLinesVisible(true);
+      resetStartView();
     });
   </script>
 </body>
