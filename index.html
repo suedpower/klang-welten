@@ -1,195 +1,389 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XBM9TYXKX2"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-XBM9TYXKX2');
-</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Klangwelten – Klangschalen & Meditation in Tengen</title>
 <meta name="description" content="Klangwelten – Klangschalen & Meditation in 78250 Tengen. Entspannung, Klang und innere Balance – mit Anja.">
-<meta name="robots" content="index, follow">
 
 <style>
-body {margin:0; padding:0; font-family:"Helvetica Neue",Arial,sans-serif; background:#000; color:#f1e3b0; overflow:hidden; text-align:center;}
-#bg-image {position:fixed; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2; animation:breath 18s ease-in-out infinite;}
-@keyframes breath {0%{transform:scale(1);}50%{transform:scale(1.04);}100%{transform:scale(1);}}
-.overlay {position:fixed; inset:0; background:rgba(0,0,0,0.58); z-index:-1;}
-.gold {color:#f1e3b0; text-shadow:-1px -1px 2px #000,1px -1px 2px #000,-1px 1px 2px #000,1px 1px 2px #000,0 0 12px rgba(241,227,176,0.35);}
-#menuToggle {position:fixed; top:16px; right:16px; width:52px; height:52px; display:flex; align-items:center; justify-content:center; font-size:34px; cursor:pointer; z-index:9999; user-select:none; background: rgba(0,0,0,0.45); border:1px solid rgba(241,227,176,0.65); border-radius:999px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);}
-#menuPanel {position:fixed; top:0; right:-290px; width:250px; height:100%; background:rgba(0,0,0,0.78); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index:9998; transition:right 0.45s ease; display:flex; flex-direction:column; justify-content:center; padding:26px; box-sizing:border-box;}
-#menuPanel.open {right:0;}
-#menuPanel a {display:block; text-decoration:none; margin:14px 0; font-size:1.2em; cursor:pointer;}
-.center {position:fixed; inset:0; display:flex; flex-direction:column; justify-content:flex-start; align-items:center; padding:120px 20px 20px 20px; box-sizing:border-box; z-index:1; overflow-y:auto;}
-#startButton {display:inline-block; font-size:1.6em; padding:16px 34px; border-radius:50px; border:1px solid #f1e3b0; background:rgba(255,255,255,0.08); cursor:pointer; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); animation:pulse 6s ease-in-out infinite; transition:opacity 1.2s ease, transform 1.2s ease; z-index:10; position:relative;}
-@keyframes pulse {0%{transform:scale(1);opacity:.85}50%{transform:scale(1.04);opacity:1}100%{transform:scale(1);opacity:.85}}
-#startButton.hidden {opacity:0; pointer-events:none; animation:none; transform:scale(0.98);}
-.section {max-width:900px; width:100%; line-height:1.7; display:none; text-align:left; padding:0 10px; box-sizing:border-box;}
-.section.active {display:block;}
-.scrollText {display:block; margin-top:18px; max-height:60vh; overflow-y:auto; font-size:0.95em; line-height:1.5;}
-.scrollText h3 {margin:10px 0 8px 0; font-size:1.15em; text-align:center; font-weight:700;}
-.scrollText p {margin:0 0 10px 0;}
-.scrollText ul {margin:0 0 10px 18px; padding:0;}
-.scrollText li {margin:0 0 6px 0;}
-.whatsapp {display:inline-block; padding:14px 26px; border-radius:50px; background:linear-gradient(135deg,#25D366,#1da851); color:#fff; text-decoration:none; margin-top:16px; box-shadow:0 0 25px rgba(0,0,0,0.5); font-size:1.05em;}
-@media(max-width:600px){.center{padding:100px 12px 16px 12px;} #startButton{font-size:1.2em; padding:12px 22px;}}
+
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:black;
+color:#f1e3b0;
+overflow:hidden;
+text-align:center;
+}
+
+/* Hintergrund */
+
+#bg-image{
+position:fixed;
+inset:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-2;
+animation:breath 18s ease-in-out infinite;
+}
+
+@keyframes breath{
+0%{transform:scale(1)}
+50%{transform:scale(1.04)}
+100%{transform:scale(1)}
+}
+
+.overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.6);
+z-index:-1;
+}
+
+/* Menü */
+
+#menuToggle{
+position:fixed;
+top:16px;
+right:16px;
+width:50px;
+height:50px;
+font-size:34px;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+background:rgba(0,0,0,0.4);
+border-radius:50%;
+border:1px solid #f1e3b0;
+}
+
+#menuPanel{
+position:fixed;
+top:0;
+right:-260px;
+width:240px;
+height:100%;
+background:rgba(0,0,0,0.85);
+transition:right .4s;
+padding:30px;
+box-sizing:border-box;
+z-index:9998;
+display:flex;
+flex-direction:column;
+justify-content:center;
+}
+
+#menuPanel.open{
+right:0;
+}
+
+#menuPanel a{
+color:#f1e3b0;
+text-decoration:none;
+margin:14px 0;
+font-size:20px;
+}
+
+/* Layout */
+
+.center{
+position:fixed;
+inset:0;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:flex-start;
+padding-top:120px;
+}
+
+/* Start Button */
+
+#startButton{
+font-size:26px;
+padding:16px 34px;
+border-radius:50px;
+border:1px solid #f1e3b0;
+background:rgba(255,255,255,0.1);
+cursor:pointer;
+animation:pulse 6s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(1)}
+50%{transform:scale(1.05)}
+100%{transform:scale(1)}
+}
+
+/* Text Zeilen */
+
+.line{
+opacity:0;
+font-size:2em;
+margin:14px 0;
+transition:opacity 2s;
+}
+
+.line.show{
+opacity:1;
+}
+
+/* Sections */
+
+.section{
+display:none;
+max-width:900px;
+}
+
+.section.active{
+display:block;
+}
+
+/* Scrollbox */
+
+.scrollText{
+text-align:left;
+line-height:1.6;
+font-size:17px;
+max-height:45vh;
+overflow-y:auto;
+padding-right:10px;
+}
+
+/* transparenter Scrollbalken */
+
+.scrollText::-webkit-scrollbar{
+width:6px;
+}
+
+.scrollText::-webkit-scrollbar-track{
+background:transparent;
+}
+
+.scrollText::-webkit-scrollbar-thumb{
+background:rgba(241,227,176,0.4);
+border-radius:10px;
+}
+
+.whatsapp{
+display:inline-block;
+padding:14px 26px;
+border-radius:40px;
+background:#25D366;
+color:white;
+text-decoration:none;
+margin-top:20px;
+}
+
 </style>
 </head>
 
 <body>
-<img id="bg-image" src="klangschalen.jpg" alt="Klangschalen Hintergrund">
+
+<img id="bg-image" src="klangschalen.jpg">
 <div class="overlay"></div>
 
-<div id="menuToggle" class="gold" aria-label="Menü öffnen">☰</div>
+<div id="menuToggle">☰</div>
+
 <nav id="menuPanel">
-<a class="gold" href="#" data-section="start">Alles ist Schwingung</a>
-<a class="gold" href="#" data-section="klangschalen">Klangschalen</a>
-<a class="gold" href="#" data-section="klangschalenmassage">Klangschalenmassage</a>
-<a class="gold" href="#" data-section="uebermich">Über mich</a>
-<a class="gold" href="#" data-section="kontakt">Kontakt</a>
+<a data-section="start">Alles ist Schwingung</a>
+<a data-section="klang">Klangschalen</a>
+<a data-section="massage">Klangschalenmassage</a>
+<a data-section="ueber">Über mich</a>
+<a data-section="kontakt">Kontakt</a>
 </nav>
 
 <div class="center">
-<button id="startButton" class="gold" type="button">✨ Spüre den Klang</button>
+
+<button id="startButton">✨ Spüre den Klang</button>
 
 <!-- START -->
+
 <div id="section-start" class="section active">
-<div class="scrollText gold">
+
+<div class="line">Bist du im Einklang mit dir selbst?</div>
+<div class="line">Möchtest du mehr über die Wirkungsweise der Klangschalen erfahren?</div>
+<div class="line">Ich begleite dich achtsam in die Welt der Klänge</div>
+<div class="line">Erlebe tiefe Entspannung und neue Balance</div>
+
+<div style="margin-top:30px">
+
+📞 +49 160 3429752<br>
+Anja<br>
+📍 78250 Tengen
+
+<br><br>
+
+<a class="whatsapp" href="https://wa.me/491603429752">Termin via WhatsApp</a>
+
+</div>
+
+<div class="scrollText">
+
 <h3>Alles ist Schwingung</h3>
+
 <p>Alles im Leben ist in Bewegung. Nichts ist starr, nichts ist wirklich still – selbst wenn es für uns so erscheint.</p>
+
 <p>Jedes Lebewesen besteht aus unzähligen kleinsten Teilchen, die sich ständig bewegen. Diese feinen Bewegungen erzeugen Schwingungen – und jede Schwingung trägt Energie in sich. So entsteht ein lebendiges Energiefeld, das uns umgibt und durchdringt.</p>
+
 <p>Vielleicht hast du schon erlebt, wie sich die Stimmung in einem Raum sofort verändert, wenn ein bestimmter Mensch ihn betritt. Oder wie Musik dich augenblicklich berühren und in eine andere innere Welt führen kann. All das sind Ausdrucksformen von Schwingung.</p>
+
 <p>Moderne Messmethoden können Energiefelder sichtbar machen – doch viel wichtiger ist das, was wir selbst spüren. Unser Körper reagiert fein und sensibel auf jede Form von Schwingung.</p>
 
 <h3>Klang und Resonanz</h3>
-<p>Wir nehmen unsere Welt bewusst über unsere Sinne wahr – durch Sehen, Hören, Riechen, Schmecken und Tasten. Gleichzeitig wirken in uns viele weitere Wahrnehmungsebenen: Gleichgewicht, Temperaturempfinden, Körpergefühl, Schmerzempfinden und intuitive Wahrnehmungen.</p>
-<p>Klang erfasst die ganze Person in ihrer Einheit. Das Wort „Person“ stammt aus dem Lateinischen: per sonare – „durchklingen“. Klang berührt nicht nur das Ohr, er erreicht den ganzen Menschen. Er durchdringt uns sanft und kann ordnend wirken.</p>
-<p>Schallwellen werden in Nervenimpulse umgewandelt und vom Gehirn verarbeitet. Gleichzeitig spüren wir die Schwingungen auch im Körper – über Haut, Gewebe und Knochen. Da unser Körper großteils aus Wasser besteht, können sich Klänge besonders gut ausbreiten, ähnlich wie Kreise im Wasser.</p>
+
+<p>Wir nehmen unsere Welt bewusst über unsere Sinne wahr – durch Sehen, Hören, Riechen, Schmecken und Tasten. Gleichzeitig wirken in uns viele weitere Wahrnehmungsebenen: unser Gleichgewicht, unser Temperaturempfinden, unser Körpergefühl, Schmerzempfinden und auch intuitive, feine Wahrnehmungen.</p>
+
+<p>All das zusammen macht uns als Mensch aus.</p>
+
+<p>Klang berührt nicht nur das Ohr – er erreicht den ganzen Menschen. Das Wort „Person“ stammt aus dem Lateinischen: per sonare – „durchklingen“.</p>
+
+<p>Da unser Körper zu einem grossen Teil aus Wasser besteht, können sich Klänge besonders gut ausbreiten.</p>
+
+<p>So kann Klang wie eine zarte innere Massage wirken – auf körperlicher wie auch auf seelischer Ebene.</p>
+
 </div>
+
 </div>
 
 <!-- KLANGSCHALEN -->
-<div id="section-klangschalen" class="section">
-<div class="scrollText gold">
+
+<div id="section-klang" class="section">
+
+<div class="scrollText">
+
 <h3>Planetenklangschalen</h3>
-<p>Viele von uns kennen die Kraft des Mondes – wie er die Gezeiten bewegt und Einfluss auf das Leben nimmt. Seit jeher beschäftigen sich Menschen mit den Wirkungen der Himmelskörper auf Natur und Mensch.</p>
-<p>Der Schweizer Mathematiker und Musiktherapeut Hans Cousto entdeckte in den 1970er-Jahren die Zusammenhänge zwischen planetarischen Bewegungen und bestimmten Tonfrequenzen. Planetenklangschalen sind auf diese Frequenzen gestimmt. Ihre Töne wirken tiefgehend und harmonisierend.</p>
+
+<p>Viele von uns kennen die Kraft des Mondes – wie er die Gezeiten bewegt und Einfluss auf das Leben auf der Erde nimmt.</p>
+
+<p>Der Schweizer Mathematiker und Musiktherapeut Hans Cousto entdeckte in den 1970er-Jahren die Zusammenhänge zwischen planetarischen Bewegungen und bestimmten Tonfrequenzen neu.</p>
 
 <h3>Einsatz und Wirkung</h3>
-<p>Wenn der Körper aus dem Gleichgewicht gerät, zeigt sich dies als Spannung oder Unruhe. Klangschalen erzeugen feine Vibrationen, die Körper, Geist und Aura harmonisieren. Schwingungen können Blockaden lösen, neue Klarheit schaffen und die innere Balance wieder herstellen.</p>
+
+<p>Wenn unser Körper aus dem Gleichgewicht gerät, zeigt sich das häufig als Spannung oder Unruhe.</p>
+
+<p>Durch das sanfte Anschlagen einer Klangschale entsteht eine feine Vibration.</p>
+
+<p>Diese Wirkung beschränkt sich nicht nur auf den Körper – viele Menschen erleben auch auf emotionaler Ebene Entspannung.</p>
+
+<p>Klangschalen können helfen, Spannung loszulassen oder neue Kraft aufzubauen.</p>
+
 </div>
-<div style="margin-top:18px; text-align:center;">
-<a class="whatsapp" href="https://wa.me/491603429752" target="_blank" rel="noopener">💬 Termin anfragen via WhatsApp</a>
-</div>
+
 </div>
 
-<!-- KLANGSCHALENMASSAGE -->
-<div id="section-klangschalenmassage" class="section">
-<div class="scrollText gold">
-<h3>🌿 Sanfte Schwingungen – Klangschalenanwendung</h3>
-<p>Die Arbeit mit Klangschalen schenkt einen Moment der Stille. Feine Töne laden dazu ein, loszulassen und tiefer zu atmen. Viele Menschen empfinden die Klänge wie eine sanfte Umarmung – beruhigend und tragend zugleich.</p>
+<!-- MASSAGE -->
 
-<h3>Was geschieht?</h3>
-<p>Während du bequem liegst, werden unterschiedlich große Klangschalen auf oder neben deinem Körper positioniert. Behutsames Anschlagen erzeugt Vibrationen, die im Körper spürbar sind. Anders als klassische Massage wirkt die Entspannung allein über Klang und Schwingung.</p>
+<div id="section-massage" class="section">
+<div class="scrollText">
 
-<h3>Wirkung</h3>
-<ul>
-<li>Gefühl innerer Ruhe und Geborgenheit</li>
-<li>Mehr Gelassenheit im Alltag</li>
-<li>Entspannteres Körpergefühl</li>
-<li>Erholsamer Schlaf</li>
-<li>Klarerer Kopf</li>
-<li>Gesteigerte Achtsamkeit</li>
-<li>Neue Kraft und innere Balance</li>
-</ul>
+<h3>Klangschalenmassage</h3>
 
-<h3>Einladung zum Innehalten</h3>
-<p>Klangarbeit ist behutsam und lädt ein, sich selbst wieder bewusster wahrzunehmen. Nervensystem und Körper finden eigene Wege der Regeneration.</p>
+<p>Während du bequem liegst, werden unterschiedlich große Klangschalen auf deinem Körper oder in deiner Nähe positioniert.</p>
 
-<h3>Hinweis</h3>
-<p>Die Klangschalenanwendung dient der Entspannung. Sie ersetzt keine medizinische oder psychotherapeutische Behandlung.</p>
-</div>
-<div style="margin-top:18px; text-align:center;">
-<a class="whatsapp" href="https://wa.me/491603429752" target="_blank" rel="noopener">💬 Termin anfragen via WhatsApp</a>
+<p>Die feinen Schwingungen breiten sich im Körper aus und können tief entspannen.</p>
+
 </div>
 </div>
 
 <!-- ÜBER MICH -->
-<div id="section-uebermich" class="section">
-<div class="scrollText gold">
+
+<div id="section-ueber" class="section">
+
+<div class="scrollText">
+
 <h3>Über mich</h3>
-<p>Mein Name ist Anja, ich bin 1977 geboren. Ich verbinde seit vielen Jahren Alternativmedizin mit Schulmedizin, um Menschen ganzheitlich zu unterstützen.</p>
-<p>Ich beschäftige mich intensiv mit sanften Methoden, insbesondere Klangschalenarbeit, die Körper und Seele harmonisieren und die Selbstheilungskräfte aktivieren.</p>
-<p>2025 habe ich die Ausbildung zur Klangschalenmasseurin erfolgreich abgeschlossen, um Menschen achtsam in Balance und Ruhe zu begleiten.</p>
+
+<p>Mein Name ist Anja, ich bin 1977 geboren.</p>
+
+<p>Ich beschäftige mich seit vielen Jahren mit sanften Methoden zur Förderung des Wohlbefindens.</p>
+
 </div>
-<div style="margin-top:18px; text-align:center;">
-<a class="whatsapp" href="https://wa.me/491603429752" target="_blank" rel="noopener">💬 Termin anfragen via WhatsApp</a>
-</div>
+
 </div>
 
 <!-- KONTAKT -->
+
 <div id="section-kontakt" class="section">
-<div class="scrollText gold">
+
+<div class="scrollText">
+
 <h3>Kontakt</h3>
-<p>📞 +49 160 3429752<br>Anja<br>📍 78250 Tengen</p>
-<p><a class="gold" href="https://www.google.com/maps/search/?api=1&query=78250+Tengen" target="_blank" rel="noopener">Standort auf Google Maps öffnen</a></p>
-<a class="whatsapp" href="https://wa.me/491603429752" target="_blank" rel="noopener">💬 Termin anfragen via WhatsApp</a>
+
+<p>📞 +49 160 3429752</p>
+
+<p>Anja</p>
+
+<p>📍 78250 Tengen</p>
+
+<a class="whatsapp" href="https://wa.me/491603429752">Termin via WhatsApp</a>
+
 </div>
+
 </div>
 
 </div>
 
-<audio id="bg-music" loop>
-<source src="meditation.mp3" type="audio/mpeg" />
+<audio id="bgmusic" loop>
+<source src="meditation.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-// Menü
-const menuToggle = document.getElementById("menuToggle");
-const menuPanel = document.getElementById("menuPanel");
-menuToggle.addEventListener("click", e=>{e.stopPropagation(); menuPanel.classList.toggle("open");});
-document.addEventListener("click", ()=>menuPanel.classList.remove("open"), {passive:true});
 
-// Sections
-const sections = {
-  start: document.getElementById("section-start"),
-  klangschalen: document.getElementById("section-klangschalen"),
-  klangschalenmassage: document.getElementById("section-klangschalenmassage"),
-  uebermich: document.getElementById("section-uebermich"),
-  kontakt: document.getElementById("section-kontakt")
-};
-function showOnly(which){Object.keys(sections).forEach(k=>{if(k===which) sections[k].classList.add("active"); else sections[k].classList.remove("active");});}
+const menuToggle=document.getElementById("menuToggle")
+const menuPanel=document.getElementById("menuPanel")
 
-// Audio
-const audio = document.getElementById("bg-music");
-function fadeInAudio(){audio.volume=0;audio.play().catch(()=>{}); let v=0; const t=setInterval(()=>{v=Math.min(1,v+0.02); audio.volume=v; if(v>=1) clearInterval(t);}, 200);}
-function fadeOutAudio(ms=650){return new Promise(resolve=>{if(!audio||audio.paused) return resolve(); let steps=20; let stepTime=Math.max(20,Math.floor(ms/steps)); let startVol=audio.volume||1; let i=0; let t=setInterval(()=>{i++; audio.volume=Math.max(0,startVol*(1-i/steps)); if(i>=steps){clearInterval(t); audio.pause(); resolve();}}, stepTime);});}
+menuToggle.onclick=()=>{
+menuPanel.classList.toggle("open")
+}
 
-// Menü Navigation
-document.querySelectorAll("[data-section]").forEach(link=>{
-  link.addEventListener("click", async e=>{
-    e.preventDefault(); e.stopPropagation();
-    const target = link.getAttribute("data-section");
-    menuPanel.classList.remove("open");
-    await fadeOutAudio(650);
-    showOnly(target);
-  });
-});
+document.querySelectorAll("#menuPanel a").forEach(link=>{
+link.onclick=()=>{
+const section=link.dataset.section
 
-// Start Button
-const startButton = document.getElementById("startButton");
-startButton.addEventListener("click", e=>{
-  e.stopPropagation(); startButton.classList.add("hidden"); fadeInAudio(); showOnly('start'); window.scrollTo({top:0, behavior:'smooth'});
-});
+document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"))
+
+document.getElementById("section-"+section).classList.add("active")
+
+menuPanel.classList.remove("open")
+}
+})
+
+const startButton=document.getElementById("startButton")
+const lines=document.querySelectorAll(".line")
+const audio=document.getElementById("bgmusic")
+
+let index=0
+
+startButton.onclick=()=>{
+
+audio.play()
+
+startButton.style.display="none"
+
+function show(){
+
+if(index<lines.length){
+
+lines[index].classList.add("show")
+
+index++
+
+setTimeout(show,4000)
+
+}
+
+}
+
+show()
+
+}
+
 </script>
 
 </body>
 </html>
-
