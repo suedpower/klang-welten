@@ -2,9 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Klangwelten – Klangschalen & Meditation</title>
+<title>Klang & Schwingung</title>
 
 <style>
 
@@ -12,350 +10,310 @@ body{
 margin:0;
 font-family:Arial, Helvetica, sans-serif;
 background:black;
-color:#f1e3b0;
+color:white;
 overflow:hidden;
-text-align:center;
 }
 
-/* Hintergrund */
-#bg-image{
+/* Startscreen */
+
+#startscreen{
 position:fixed;
-top:0;
-left:0;
 width:100%;
 height:100%;
-object-fit:cover;
-z-index:-2;
-animation:breath 18s ease-in-out infinite;
-}
-
-@keyframes breath{
-0%{transform:scale(1)}
-50%{transform:scale(1.04)}
-100%{transform:scale(1)}
-}
-
-.overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.6);
-z-index:-1;
-}
-
-/* Menü Button */
-
-#menuToggle{
-position:fixed;
-top:20px;
-right:20px;
-font-size:34px;
-cursor:pointer;
-z-index:999;
-}
-
-/* Menü Panel */
-
-#menuPanel{
-position:fixed;
-top:0;
-right:-260px;
-width:240px;
-height:100%;
-background:rgba(0,0,0,0.8);
-transition:right .4s;
+background:black;
 display:flex;
 flex-direction:column;
+align-items:center;
 justify-content:center;
+text-align:center;
+z-index:10;
 }
 
-#menuPanel.open{
-right:0;
+#startscreen h1{
+font-size:42px;
+margin-bottom:40px;
 }
 
-#menuPanel a{
-padding:14px;
-text-decoration:none;
-color:#f1e3b0;
-font-size:18px;
+#startButton{
+padding:18px 40px;
+font-size:22px;
+background:transparent;
+border:2px solid white;
+color:white; /* Button Text weiss */
 cursor:pointer;
+border-radius:30px;
+transition:0.3s;
 }
 
-/* Sections */
+#startButton:hover{
+background:white;
+color:black;
+}
 
-.section{
+/* Menü */
+
+#menu{
+position:fixed;
+top:20px;
+left:20px;
+z-index:5;
+display:none;
+}
+
+#menu ul{
+list-style:none;
+padding:0;
+margin:0;
+}
+
+#menu li{
+margin-bottom:12px;
+cursor:pointer;
+font-size:18px;
+opacity:0.8;
+}
+
+#menu li:hover{
+opacity:1;
+}
+
+/* Inhaltsbereich */
+
+.menu-content{
 display:none;
 position:absolute;
 top:120px;
 left:50%;
 transform:translateX(-50%);
-width:90%;
-max-width:900px;
-}
-
-.section.active{
-display:block;
-}
-
-/* Scrollbox */
-
-.scrollText{
-max-height:55vh;
+width:70%;
+max-height:70vh;
 overflow-y:auto;
-text-align:left;
+padding-right:20px;
 line-height:1.6;
-padding-right:10px;
 }
 
-/* transparenter scrollbar */
+.menu-content h1{
+margin-top:0;
+}
 
-.scrollText::-webkit-scrollbar{
+/* Scrollbar transparent */
+
+.menu-content::-webkit-scrollbar{
 width:6px;
 }
 
-.scrollText::-webkit-scrollbar-track{
-background:transparent;
-}
-
-.scrollText::-webkit-scrollbar-thumb{
-background:rgba(255,255,255,0.2);
+.menu-content::-webkit-scrollbar-thumb{
+background:rgba(255,255,255,0.3);
 border-radius:3px;
 }
 
-/* Startbutton */
-
-#startButton{
-margin-top:200px;
-font-size:24px;
-padding:16px 34px;
-border-radius:50px;
-border:1px solid #f1e3b0;
-background:rgba(255,255,255,0.08);
-cursor:pointer;
-}
-
-.line{
-font-size:30px;
-margin:16px;
-opacity:0;
-transition:opacity 2s;
-}
-
-.show{
-opacity:1;
-}
-
 </style>
-</head>
-
-<body>
-
-<img id="bg-image" src="klangschalen.jpg">
-<div class="overlay"></div>
-
-<div id="menuToggle">☰</div>
-
-<nav id="menuPanel">
-
-<a data-section="start">Start</a>
-<a data-section="schwingung">Alles ist Schwingung</a>
-<a data-section="klangschalen">Klangschalen</a>
-<a data-section="massage">Klangschalenmassage</a>
-<a data-section="ueber">Über mich</a>
-<a data-section="kontakt">Kontakt</a>
-
-</nav>
-
-<!-- START -->
-
-<div id="section-start" class="section active">
-
-<button id="startButton">✨ Spüre den Klang</button>
-
-<div id="lines">
-
-<div class="line">Bist du im Einklang mit dir selbst?</div>
-<div class="line">Möchtest du mehr über die Wirkungsweise der Klangschalen erfahren?</div>
-<div class="line">Ich begleite dich achtsam in die Welt der Klänge</div>
-<div class="line">Erlebe tiefe Entspannung und neue Balance</div>
-
-</div>
-
-</div>
-
-<!-- SCHWINGUNG -->
-
-<div id="section-schwingung" class="section">
-
-<div class="scrollText">
-
-<h3>Alles ist Schwingung</h3>
-
-<p>Alles im Leben ist in Bewegung. Nichts ist starr, nichts ist wirklich still – selbst wenn es für uns so erscheint.</p>
-
-<p>Jedes Lebewesen besteht aus unzähligen kleinsten Teilchen, die sich ständig bewegen. Diese feinen Bewegungen erzeugen Schwingungen – und jede Schwingung trägt Energie in sich.</p>
-
-<p>Vielleicht hast du schon erlebt, wie sich die Stimmung in einem Raum sofort verändert, wenn ein bestimmter Mensch ihn betritt.</p>
-
-<h3>Klang und Resonanz</h3>
-
-<p>Wir nehmen unsere Welt bewusst über unsere Sinne wahr – durch Sehen, Hören, Riechen, Schmecken und Tasten.</p>
-
-<p>Klang berührt nicht nur das Ohr – er erreicht den ganzen Menschen.</p>
-
-<p>Da unser Körper zu einem grossen Teil aus Wasser besteht, können sich Klänge besonders gut ausbreiten.</p>
-
-</div>
-
-</div>
-
-<!-- KLANGSCHALEN -->
-
-<div id="section-klangschalen" class="section">
-
-<div class="scrollText">
-
-<h3>Planetenklangschalen</h3>
-
-<p>Viele von uns kennen die Kraft des Mondes – wie er die Gezeiten bewegt.</p>
-
-<p>Der Schweizer Mathematiker und Musiktherapeut Hans Cousto entdeckte die Zusammenhänge zwischen Planeten und Tonfrequenzen.</p>
-
-<h3>Einsatz und Wirkung</h3>
-
-<p>Wenn unser Körper aus dem Gleichgewicht gerät, zeigt sich das häufig als Spannung oder Unruhe.</p>
-
-<p>Klangschalen können helfen, Energie auszugleichen und den Körper wieder in Harmonie zu bringen.</p>
-
-</div>
-
-</div>
-
-<!-- MASSAGE -->
-
-<div id="section-massage" class="section">
-
-<div class="scrollText">
-
-<h3>Sanfte Schwingungen für innere Ruhe</h3>
-
-<p>Die feinen Töne der Klangschalen laden dazu ein, den Alltag loszulassen.</p>
-
-<p>Während du bequem liegst, werden Klangschalen auf deinem Körper oder in deiner Nähe positioniert.</p>
-
-<p>Die Schwingungen breiten sich im Körper aus und werden nicht nur gehört, sondern auch gespürt.</p>
-
-</div>
-
-</div>
-
-<!-- ÜBER MICH -->
-
-<div id="section-ueber" class="section">
-
-<div class="scrollText">
-
-<h3>Über mich</h3>
-
-<p>Mein Name ist Anja, ich bin 1977 geboren.</p>
-
-<p>Mit offenem Herzen verbinde ich mein Interesse an Alternativmedizin mit der Wertschätzung für die Schulmedizin.</p>
-
-<p>Im Jahr 2025 habe ich meine Ausbildung zur Klangschalenmassage abgeschlossen.</p>
-
-</div>
-
-</div>
-
-<!-- KONTAKT -->
-
-<div id="section-kontakt" class="section">
-
-<div class="scrollText">
-
-<h3>Kontakt</h3>
-
-<p>📞 +49 160 3429752</p>
-
-<p>Anja</p>
-
-<p>📍 78250 Tengen</p>
-
-</div>
-
-</div>
-
-<audio id="bg-music" loop>
-<source src="meditation.mp3" type="audio/mpeg">
-</audio>
 
 <script>
 
-/* Menü */
-
-const toggle=document.getElementById("menuToggle")
-const panel=document.getElementById("menuPanel")
-
-toggle.onclick=()=>{
-
-panel.classList.toggle("open")
-
+function startSite(){
+document.getElementById("startscreen").style.display="none";
+document.getElementById("menu").style.display="block";
+document.body.style.overflow="auto";
 }
 
-/* Navigation */
+function showSection(id){
 
-document.querySelectorAll("#menuPanel a").forEach(link=>{
+let sections=document.querySelectorAll(".menu-content");
 
-link.onclick=()=>{
+sections.forEach(sec=>{
+sec.style.display="none";
+});
 
-let target=link.dataset.section
-
-document.querySelectorAll(".section").forEach(sec=>{
-sec.classList.remove("active")
-})
-
-document.getElementById("section-"+target).classList.add("active")
-
-panel.classList.remove("open")
-
-}
-
-})
-
-/* Start Animation */
-
-const button=document.getElementById("startButton")
-const lines=document.querySelectorAll(".line")
-const audio=document.getElementById("bg-music")
-
-button.onclick=()=>{
-
-button.style.display="none"
-
-audio.play()
-
-let i=0
-
-function show(){
-
-if(i<lines.length){
-
-lines[i].classList.add("show")
-i++
-
-setTimeout(show,4000)
-
-}
-
-}
-
-show()
+document.getElementById(id).style.display="block";
 
 }
 
 </script>
+
+</head>
+
+<body>
+
+<!-- Startscreen -->
+
+<div id="startscreen">
+
+<h1>Willkommen</h1>
+
+<button id="startButton" onclick="startSite()">
+Spüre den Klang
+</button>
+
+</div>
+
+<!-- Menü -->
+
+<div id="menu">
+<ul>
+
+<li onclick="showSection('schwingung')">Alles ist Schwingung</li>
+<li onclick="showSection('klangschalen')">Klangschalen</li>
+<li onclick="showSection('massage')">Klangschalenmassage</li>
+<li onclick="showSection('uebermich')">Über mich</li>
+
+</ul>
+</div>
+
+<!-- Inhalte -->
+
+<section id="schwingung" class="menu-content">
+
+<h1>Alles ist Schwingung</h1>
+
+<p>
+Alles im Leben ist in Bewegung.  
+Nichts ist starr, nichts ist wirklich still – selbst wenn es für uns so erscheint.
+</p>
+
+<p>
+Jedes Lebewesen besteht aus unzähligen kleinsten Teilchen, die sich ständig bewegen. Diese feinen Bewegungen erzeugen Schwingungen – und jede Schwingung trägt Energie in sich. So entsteht ein lebendiges Energiefeld, das uns umgibt und durchdringt.
+</p>
+
+<p>
+Vielleicht hast du schon erlebt, wie sich die Stimmung in einem Raum sofort verändert, wenn ein bestimmter Mensch ihn betritt. Oder wie Musik dich augenblicklich berühren und in eine andere innere Welt führen kann. All das sind Ausdrucksformen von Schwingung.
+</p>
+
+<p>
+Moderne Messmethoden können Energiefelder sichtbar machen – doch viel wichtiger ist das, was wir selbst spüren. Unser Körper reagiert fein und sensibel auf jede Form von Schwingung.
+</p>
+
+<h1>Klang und Resonanz</h1>
+
+<p>
+Wir nehmen unsere Welt bewusst über unsere Sinne wahr – durch Sehen, Hören, Riechen, Schmecken und Tasten. Gleichzeitig wirken in uns viele weitere Wahrnehmungsebenen: unser Gleichgewicht, unser Temperaturempfinden, unser Körpergefühl, Schmerzempfinden und auch intuitive, feine Wahrnehmungen.
+</p>
+
+<p>
+All das zusammen macht uns als Mensch aus.
+</p>
+
+<p>
+Klang berührt nicht nur das Ohr – er erreicht den ganzen Menschen. Das Wort „Person“ stammt aus dem Lateinischen: per sonare – „durchklingen“. Dieser Gedanke beschreibt sehr schön, was Klang bewirken kann: Er durchdringt uns auf sanfte Weise.
+</p>
+
+<p>
+Wenn wir Klänge hören, werden die Schallwellen in Nervenimpulse umgewandelt und vom Gehirn verarbeitet. Gleichzeitig können wir die Schwingungen auch direkt im Körper spüren – über die Haut, das Gewebe und sogar über die Knochen.
+</p>
+
+<p>
+Da unser Körper zu einem grossen Teil aus Wasser besteht, können sich Klänge besonders gut ausbreiten. Ähnlich wie wenn ein Tropfen ins Wasser fällt und sanfte Kreise zieht, entstehen auch in uns feine, sich ausbreitende Schwingungen.
+</p>
+
+<p>
+So kann Klang wie eine zarte innere Massage wirken – auf körperlicher wie auch auf seelischer Ebene. Der Körper kommt in Resonanz, beginnt mitzuschwingen und darf sich neu ordnen.
+</p>
+
+</section>
+
+<section id="klangschalen" class="menu-content">
+
+<h1>Planetenklangschalen</h1>
+
+<p>
+Viele von uns kennen die Kraft des Mondes – wie er die Gezeiten bewegt und Einfluss auf das Leben auf der Erde nimmt. Seit jeher beschäftigen sich Menschen mit den Wirkungen der Himmelskörper auf Natur und Mensch.
+</p>
+
+<p>
+Der Schweizer Mathematiker und Musiktherapeut Hans Cousto entdeckte in den 1970er-Jahren die Zusammenhänge zwischen planetarischen Bewegungen und bestimmten Tonfrequenzen neu. Er zeigte, dass sich astronomische Rhythmen in hörbare Klänge übertragen lassen.
+</p>
+
+<p>
+Planetenklangschalen sind auf solche berechneten Frequenzen gestimmt. Ihre Töne wirken oft besonders tiefgehend und harmonisierend.
+</p>
+
+<h1>Einsatz und Wirkung von Planetenklangschalen</h1>
+
+<p>
+Wenn unser Körper aus dem Gleichgewicht gerät, zeigt sich das häufig als Spannung, Unruhe oder Krankheit. Gesundheit bedeutet Ganzheit – ein stimmiges Zusammenspiel aller Ebenen.
+</p>
+
+<p>
+Durch das sanfte Anschlagen einer Klangschale entsteht eine feine Vibration. Wird eine blockierte oder verspannte Körperregion in Schwingung versetzt, kann sie angeregt werden, wieder in ihre eigene Harmonie zu finden.
+</p>
+
+<p>
+Diese Wirkung beschränkt sich nicht nur auf den Körper. Viele Menschen erleben, dass sich auch auf emotionaler oder gedanklicher Ebene etwas lösen darf. Klang kann ordnend wirken, beruhigen und neue Klarheit entstehen lassen.
+</p>
+
+<p>
+Die Schwingungen breiten sich nicht nur im Körper aus, sondern auch im Energiefeld – in der Aura. So kann sich nicht nur das innere Empfinden, sondern auch die Atmosphäre im Raum verändern.
+</p>
+
+<p>
+Klangschalen können unterstützend wirken – sie können helfen, ein Zuviel an Spannung loszulassen oder neue Kraft aufzubauen. In einer Klangmassage entsteht ein geschützter Raum, in dem sich Körper und Seele neu ausrichten dürfen.
+</p>
+
+</section>
+
+<section id="massage" class="menu-content">
+
+<h1>Sanfte Schwingungen für innere Ruhe – Klangschalenmassage</h1>
+
+<p>
+In unserer oft schnellen und lauten Welt sehnen sich viele Menschen nach einem Moment der Stille, nach einem Raum, in dem sie einfach sein dürfen. Die Arbeit mit Klangschalen schenkt genau diesen Raum.
+</p>
+
+<p>
+Die feinen Töne und Schwingungen laden dazu ein, den Alltag loszulassen, tiefer zu atmen und wieder in Kontakt mit sich selbst zu kommen. Viele Menschen empfinden die Klänge wie eine sanfte Umarmung – beruhigend, tragend und ordnend zugleich.
+</p>
+
+<p>
+Mein Anliegen ist es, dich dabei zu begleiten, wieder mehr Harmonie zwischen Körper, Geist und deinem inneren Empfinden zu erleben.
+</p>
+
+<h1>Was geschieht bei einer Klangschalenmassage?</h1>
+
+<p>
+Während du bequem liegst, werden unterschiedlich große Klangschalen auf deinem Körper oder in deiner Nähe positioniert. Durch ein behutsames Anschlagen beginnen sie zu klingen und in feinen Schwingungen zu vibrieren. Diese Schwingungen breiten sich im Körper aus und werden nicht nur gehört, sondern auch gespürt. Viele beschreiben dieses Gefühl als wohltuend, lösend und gleichzeitig sehr tiefgehend. Anders als bei einer klassischen Massage wird dein Körper nicht durch Druck bearbeitet – die Wirkung entsteht allein über Klang und Schwingung. Dadurch kann eine besonders achtsame und sanfte Form der Entspannung entstehen.
+</p>
+
+<h1>Wie Klangschalen wirken können</h1>
+
+<p>
+Die ruhigen Klänge helfen vielen Menschen, gedanklich zur Ruhe zu kommen. Sorgen und innere Unruhe treten in den Hintergrund, während sich ein Gefühl von Weite und innerer Klarheit ausbreiten darf. Auf körperlicher Ebene wird die Anwendung oft als tief entspannend erlebt. Spannungen können sich lösen, der Atem wird ruhiger, und der Körper darf in einen Zustand des Loslassens finden. Viele Menschen berichten nach einer Sitzung von: einem Gefühl innerer Ruhe und Geborgenheit mehr Gelassenheit im Alltag einem entspannteren Körpergefühl erholsamerem Schlaf einem klareren Kopf gesteigerter Achtsamkeit für sich selbst neuer Kraft und innerer Balance Manche empfinden die Klänge auch als unterstützend bei stressbedingten Beschwerden oder in Phasen innerer Anspannung.
+</p>
+
+<h1>Eine Einladung zum Innehalten</h1>
+
+<p>
+Klangarbeit ist eine sehr behutsame Methode. Sie möchte nichts erzwingen, sondern lädt dich ein, dich selbst wieder bewusster wahrzunehmen. In diesem geschützten Raum darf dein Nervensystem zur Ruhe kommen und dein Körper eigene Wege der Regeneration finden.
+</p>
+
+<h1>Wichtiger Hinweis</h1>
+
+<p>
+Die Klangschalenanwendung dient der Entspannung und Förderung des Wohlbefindens. Sie ersetzt keine medizinische oder psychotherapeutische Behandlung.
+</p>
+
+</section>
+
+<section id="uebermich" class="menu-content">
+
+<h1>Über mich</h1>
+
+<p>
+Mein Name ist Anja. Mit offenem Herzen und wachem Geist verbinde ich seit vielen Jahren mein Interesse an Alternativmedizin mit der Wertschätzung für die Allgemeinmedizin.
+</p>
+
+<p>
+Ich beschäftige mich intensiv mit sanften Methoden zur Aktivierung der Selbstheilungskräfte. Besonders fasziniert mich die Arbeit mit Klang und Schwingung.
+</p>
+
+<p>
+Im Jahr 2025 habe ich meine Ausbildung zur Klangschalenmassage erfolgreich abgeschlossen und begleite heute Menschen achtsam auf ihrem Weg zu mehr Balance und innerer Ruhe.
+</p>
+
+<p>
+Mein Name ist Anja, Jahrgang 1977.
+</p>
+
+</section>
 
 </body>
 </html>
