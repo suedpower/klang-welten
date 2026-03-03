@@ -339,10 +339,10 @@ lines.forEach(line => {
       startButton.classList.add('hidden');
 
       lines.forEach((line, i) => {
-        setTimeout(() => line.classList.add('show'), i*1600);
+        setTimeout(() => line.classList.add('show'), i*2500);
       });
-      setTimeout(()=>{startLongText.style.display='block';}, lines.length*1600 + 500);
-    });
+
+});
 
     // Menü öffnen
     menuToggle.addEventListener('click', () => menuPanel.classList.toggle('open'));
