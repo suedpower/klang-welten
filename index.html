@@ -177,18 +177,17 @@
 
     /* Scroll-Textbox (identisch für alle Textseiten) */
     .section.active .scrollText{
-  display:block;
-}
-      margin-top:0;
-      text-align:left;
-      line-height:1.5;
-      font-size:0.95em;
-      max-height:42vh;
-      overflow-y:auto;
-      padding-right:10px;
-      box-sizing:border-box;
-      white-space:normal;
-    }
+  display:none;
+  margin-top:0;
+  text-align:left;
+  line-height:1.5;
+  font-size:0.95em;
+  max-height:42vh;
+  overflow-y:auto;
+  padding-right:10px;
+  box-sizing:border-box;
+  white-space:normal;
+ }
     .scrollText::-webkit-scrollbar { width:6px; }
     .scrollText::-webkit-scrollbar-track { background:transparent; }
     .scrollText::-webkit-scrollbar-thumb { background:rgba(241,227,176,0.45); border-radius:3px; }
@@ -198,6 +197,66 @@
       font-size:1.15em;
       text-align:center;
       font-weight:700;
+/* Zeilen */
+.line{
+  opacity:0;
+  font-size:2.1em;
+  margin:14px 0;
+  transition:opacity 2.5s ease, transform 2.5s ease;
+  transform:translateY(10px);
+  text-align:center;
+  color:#f1e3b0;
+}
+
+.line.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.line.hide{
+  opacity:0;
+  transform:translateY(-6px);
+}
+
+
+/* Scroll-Textbox */
+.scrollText{
+  display:none;
+  margin-top:0;
+  text-align:left;
+  line-height:1.5;
+  font-size:0.95em;
+  max-height:42vh;
+  overflow-y:auto;
+  padding-right:10px;
+  box-sizing:border-box;
+  white-space:normal;
+}
+
+/* Nur aktive Section zeigt Text */
+.section.active .scrollText{
+  display:block;
+}
+
+.scrollText::-webkit-scrollbar{
+  width:6px;
+}
+
+.scrollText::-webkit-scrollbar-track{
+  background:transparent;
+}
+
+.scrollText::-webkit-scrollbar-thumb{
+  background:rgba(241,227,176,0.45);
+  border-radius:3px;
+}
+
+.scrollText h3{
+  margin:10px 0 8px 0;
+  font-size:1.15em;
+  text-align:center;
+  font-weight:700;
+}
     }
     .scrollText p{ margin:0 0 10px 0; }
     .scrollText ul{
