@@ -329,6 +329,10 @@
     const sections = document.querySelectorAll('.section');
     const startLongText = document.getElementById('startLongText');
 
+lines.forEach(line => {
+  line.textContent = line.dataset.text;
+});
+
     // Musik & Startanimation
     startButton.addEventListener('click', async () => {
       try { await audio.play(); } catch(e){ console.log('Autoplay blockiert'); }
