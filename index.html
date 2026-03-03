@@ -390,10 +390,11 @@ menuLinks.forEach(link=>{
     const target = link.dataset.section;
 
     // Animation langsam ausblenden
-    lines.forEach(line=>{
-      line.classList.remove('show');
-      line.classList.add('hide');
-    });
+   lines.forEach(line=>{
+  line.classList.remove('show');
+  line.classList.add('hide');
+  line.style.display = "none";   // DAS IST DER WICHTIGE TEIL
+});
 
     startButton.classList.add('hidden');
 
