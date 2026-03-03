@@ -175,50 +175,6 @@
     .line.hide{ opacity:0; transform:translateY(-6px); }
 
     /* Scroll-Textbox (identisch für alle Textseiten) */
-    .section.active .scrollText{
-  display:none;
-  margin-top:0;
-  text-align:left;
-  line-height:1.5;
-  font-size:0.95em;
-  max-height:42vh;
-  overflow-y:auto;
-  padding-right:10px;
-  box-sizing:border-box;
-  white-space:normal;
- }
-    .scrollText::-webkit-scrollbar { width:6px; }
-    .scrollText::-webkit-scrollbar-track { background:transparent; }
-    .scrollText::-webkit-scrollbar-thumb { background:rgba(241,227,176,0.45); border-radius:3px; }
-
-    .scrollText h3{
-      margin:10px 0 8px 0;
-      font-size:1.15em;
-      text-align:center;
-      font-weight:700;
-/* Zeilen */
-.line{
-  opacity:0;
-  font-size:2.1em;
-  margin:14px 0;
-  transition:opacity 2.5s ease, transform 2.5s ease;
-  transform:translateY(10px);
-  text-align:center;
-  color:#f1e3b0;
-}
-
-.line.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-.line.hide{
-  opacity:0;
-  transform:translateY(-6px);
-}
-
-
-/* Scroll-Textbox */
 .scrollText{
   display:none;
   margin-top:0;
@@ -268,8 +224,7 @@
 .scrollText li{
   margin:0 0 6px 0;
 }
-
-    @media(max-width:600px){
+       @media(max-width:600px){
       .center{ padding:100px 12px 16px 12px; }
       .line{ font-size:1.35em; margin:12px 0; }
       #menuToggle{ top:10px; right:10px; }
@@ -360,24 +315,38 @@
       </div>
     </div>
 
-    <!-- ÜBER MICH -->
-    <div id="section-uebermich" class="section">
-      <div class="scrollText">
-        <h3>Über mich</h3>
-        <p>Ich heisse Anja. Mit offenem Herzen und wachem Geist verbinde ich seit vielen Jahren mein Interesse an Alternativmedizin mit der Wertschätzung für die Allgemeinmedizin.</p>
-        <p>Ich beschäftige mich intensiv mit sanften Methoden zur Aktivierung der Selbstheilungskräfte. Besonders fasziniert mich die Arbeit mit Klang und Schwingung.</p>
-        <p>Im Jahr 2025 habe ich meine Ausbildung zur Klangschalenmassage erfolgreich abgeschlossen und begleite heute Menschen achtsam auf ihrem Weg zu mehr Balance und innerer Ruhe.</p>
-        <div style="margin-top:18px; text-align:center;">
-          <a class="whatsapp" href="https://wa.me/491603429752" target="_blank" rel="noopener">💬 Termin anfragen bei Anja via WhatsApp</a>
-          <div style="margin-top:6px;opacity:.92;">📍 78250 Tengen</div>
-          <div>Email: <a href="mailto:anja@example.com" style="color:#f1e3b0">anja@example.com</a></div>
-          <div>📞 +49 160 3429752</div>
-          <a class="googlemaps" href="https://goo.gl/maps/your-map-link" target="_blank">🌐 Google Maps</a>
-        </div>
-      </div>
+   <!-- ÜBER MICH -->
+<div id="section-uebermich" class="section">
+  <div class="scrollText">
+    <h3>Über mich</h3>
+    <p>Ich heisse Anja. Mit offenem Herzen und wachem Geist verbinde ich seit vielen Jahren mein Interesse an Alternativmedizin mit der Wertschätzung für die Allgemeinmedizin.</p>
+    <p>Ich beschäftige mich intensiv mit sanften Methoden zur Aktivierung der Selbstheilungskräfte. Besonders fasziniert mich die Arbeit mit Klang und Schwingung.</p>
+    <p>Im Jahr 2025 habe ich meine Ausbildung zur Klangschalenmassage erfolgreich abgeschlossen und begleite heute Menschen achtsam auf ihrem Weg zu mehr Balance und innerer Ruhe.</p>
+  </div>
+</div>
+
+<!-- KONTAKT -->
+<div id="section-kontakt" class="section">
+  <div class="scrollText">
+    <h3>Kontakt</h3>
+    <p>Ich freue mich auf deine Nachricht.</p>
+
+    <div style="margin-top:18px; text-align:center;">
+      <a class="whatsapp" href="https://wa.me/491603429752" target="_blank" rel="noopener">
+        💬 Termin anfragen bei Anja via WhatsApp
+      </a>
+
+      <div style="margin-top:8px;">📍 78250 Tengen</div>
+      <div>📧 <a href="mailto:anja@example.com" style="color:#f1e3b0">anja@example.com</a></div>
+      <div>📞 +49 160 3429752</div>
+      <a class="googlemaps" href="https://goo.gl/maps/your-map-link" target="_blank">
+        🌐 Google Maps
+      </a>
     </div>
   </div>
+</div>
 
+</div>
   <!-- Audio -->
   <audio id="backgroundAudio" loop>
     <source src="meditation.mp3" type="audio/mpeg">
