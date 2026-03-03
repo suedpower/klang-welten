@@ -118,7 +118,7 @@
       flex-direction:column;
       justify-content:flex-start;
       align-items:center;
-      padding:120px 20px 20px 20px;
+      padding:60px 20px 20px 20px;
       box-sizing:border-box;
       z-index:1;
     }
@@ -319,51 +319,65 @@
     <source src="meditation.mp3" type="audio/mpeg">
   </audio>
 
-  <script>
-    const startButton = document.getElementById('startButton');
-    const audio = document.getElementById('backgroundAudio');
-    const lines = document.querySelectorAll('.line');
-    const menuToggle = document.getElementById('menuToggle');
-    const menuPanel = document.getElementById('menuPanel');
-    const menuLinks = document.querySelectorAll('#menuPanel a');
-    const sections = document.querySelectorAll('.section');
-    const startLongText = document.getElementById('startLongText');
+ <script>
+const startButton = document.getElementById('startButton');
+const audio = document.getElementById('backgroundAudio');
+const lines = document.querySelectorAll('.line');
+const menuToggle = document.getElementById('menuToggle');
+const menuPanel = document.getElementById('menuPanel');
+const menuLinks = document.querySelectorAll('#menuPanel a');
+const sections = document.querySelectorAll('.section');
+const startLongText = document.getElementById('startLongText');
 
+// Text aus data-text einsetzen
 lines.forEach(line => {
   line.textContent = line.dataset.text;
 });
 
-    // Musik & Startanimation
-    startButton.addEventListener('click', async () => {
-      try { await audio.play(); } catch(e){ console.log('Autoplay blockiert'); }
-      startButton.classList.add('hidden');
+// Start: Scrolltext zunächst verstecken
+startLongText.style.display = "none";
 
-      lines.forEach((line, i) => {
-        setTimeout(() => line.classList.add('show'), i*2500);
-      });
+// Musik & Startanimation
+startButton.addEventListener('click', () => {
+  audio.play().catch(() => {});
+  startButton.classList.add('hidden');
 
+  lines.forEach((line, i) => {
+    setTimeout(() => line.classList.add('show'), i * 2500);
+  });
 });
 
-    // Menü öffnen
-    menuToggle.addEventListener('click', () => menuPanel.classList.toggle('open'));
+// Menü öffnen
+menuToggle.addEventListener('click', () => 
+  menuPanel.classList.toggle('open')
+);
 
-    // Menüpunkte klicken
-    menuLinks.forEach(link=>{
-      link.addEventListener('click', e=>{
-        e.preventDefault();
-        const target = link.dataset.section;
-        sections.forEach(s=>s.classList.remove('active'));
-        const section = document.getElementById('section-'+target);
-        if(section){ section.classList.add('active'); }
- 	if(target === "start"){
+// Menüpunkte klicken
+menuLinks.forEach(link=>{
+  link.addEventListener('click', e=>{
+    e.preventDefault();
+    const target = link.dataset.section;
+
+    // Alle Sections deaktivieren
+    sections.forEach(s=>{
+      s.classList.remove('active');
+    });
+
+    // Gewählte Section aktivieren
+    const section = document.getElementById('section-'+target);
+    if(section){
+      section.classList.add('active');
+    }
+
+    // Scrolltext nur bei Start anzeigen
+    if(target === "start"){
       startLongText.style.display = "block";
     } else {
       startLongText.style.display = "none";
     }
-        menuPanel.classList.remove('open');
-        window.scrollTo(0,0);
-      });
-    });
-  </script>
-</body>
-</html>
+
+    menuPanel.classList.remove('open');
+    window.scrollTo(0,0);
+  });
+});
+</script>
