@@ -236,8 +236,8 @@
     <div id="section-start" class="section active">
       <div class="line" data-text="Bist du im Einklang mit dir selbst?"></div>
       <div class="line" data-text="Möchtest du mehr über die Wirkungsweise der Klangschalen erfahren?"></div>
-      <div class="line" data-text="Ich begleite dich achtsam in die Welt der Klänge"></div>
-      <div class="line" data-text="Erlebe tiefe Entspannung und neue Balance"></div>
+      <div class="line" data-text="Ich begleite dich achtsam in die Welt der Klänge."></div>
+      <div class="line" data-text="Erlebe tiefe Entspannung und neue Balance."></div>
 
       <div id="startLongText" class="scrollText">
         <h3>Alles ist Schwingung</h3>
@@ -355,6 +355,11 @@ lines.forEach(line => {
         sections.forEach(s=>s.classList.remove('active'));
         const section = document.getElementById('section-'+target);
         if(section){ section.classList.add('active'); }
+ 	if(target === "start"){
+      startLongText.style.display = "block";
+    } else {
+      startLongText.style.display = "none";
+    }
         menuPanel.classList.remove('open');
         window.scrollTo(0,0);
       });
