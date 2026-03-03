@@ -22,7 +22,7 @@
       margin:0;
       padding:0;
       font-family:"Helvetica Neue", Arial, sans-serif;
-      overflow:hidden;
+      overflow-x:hidden;
       background:#000;
       text-align:center;
     }
@@ -176,8 +176,9 @@
     .line.hide{ opacity:0; transform:translateY(-6px); }
 
     /* Scroll-Textbox (identisch für alle Textseiten) */
-    .scrollText{
-      display:none;
+    .section.active .scrollText{
+  display:block;
+}
       margin-top:0;
       text-align:left;
       line-height:1.5;
@@ -335,7 +336,6 @@ lines.forEach(line => {
 });
 
 // Start: Scrolltext zunächst verstecken
-startLongText.style.display = "none";
 
 // Musik & Startanimation
 startButton.addEventListener('click', () => {
@@ -358,22 +358,20 @@ menuLinks.forEach(link=>{
     e.preventDefault();
     const target = link.dataset.section;
 
-    // Alle Sections deaktivieren
-    sections.forEach(s=>{
-      s.classList.remove('active');
+    // Animation langsam ausblenden
+    lines.forEach(line=>{
+      line.classList.remove('show');
+      line.classList.add('hide');
     });
 
-    // Gewählte Section aktivieren
+    startButton.classList.add('hidden');
+
+    // Sections umschalten
+    sections.forEach(s=> s.classList.remove('active'));
+
     const section = document.getElementById('section-'+target);
     if(section){
       section.classList.add('active');
-    }
-
-    // Scrolltext nur bei Start anzeigen
-    if(target === "start"){
-      startLongText.style.display = "block";
-    } else {
-      startLongText.style.display = "none";
     }
 
     menuPanel.classList.remove('open');
